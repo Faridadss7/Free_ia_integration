@@ -1,0 +1,288 @@
+<template>
+  <style>
+    @font-face { font-family: "Inter"; font-weight: 400; font-style: normal; font-display: block; src: url("assets/fonts/Inter-400.woff2") format("woff2"); }
+    @font-face { font-family: "Inter"; font-weight: 700; font-style: normal; font-display: block; src: url("assets/fonts/Inter-700.woff2") format("woff2"); }
+    @font-face { font-family: "JetBrains Mono"; font-weight: 400; font-style: normal; font-display: block; src: url("assets/fonts/JetBrainsMono-400.woff2") format("woff2"); }
+    @font-face { font-family: "JetBrains Mono"; font-weight: 500; font-style: normal; font-display: block; src: url("assets/fonts/JetBrainsMono-700.woff2") format("woff2"); }
+
+    #root {
+      width: 1920px;
+      height: 1080px;
+      position: relative;
+      overflow: hidden;
+      container-type: size;
+    }
+
+    .clip {
+      position: absolute;
+      will-change: transform, opacity;
+    }
+
+    .stage-ground {
+      inset: 0;
+      background: #030712;
+    }
+
+    .constellation-wrap {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+    }
+
+    .constellation-node {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #0ea5e9;
+      box-shadow: 0 0 20px rgba(14, 165, 233, 0.6);
+      top: 50%;
+      left: 50%;
+    }
+
+    .lockup-stage {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      /* Shift the wordmark lockup into the upper-center band (~0.42x height) */
+      padding-bottom: 180px;
+    }
+
+    .lockup-content {
+      text-align: center;
+      opacity: 0;
+    }
+
+    .brand-wordmark {
+      font-family: "Inter", sans-serif;
+      font-size: 7.3cqw;
+      font-weight: 400;
+      line-height: 1.02;
+      letter-spacing: -0.022em;
+      color: #f8fafc;
+      margin: 0;
+    }
+
+    .spike-mark {
+      display: inline-block;
+      color: #0ea5e9;
+      margin-right: 0.2em;
+      font-size: 1em;
+    }
+
+    .terminal-stage {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding-top: 380px;
+    }
+
+    .terminal-pill {
+      background: #151718;
+      border: 1px solid rgba(248, 250, 252, 0.14);
+      border-radius: 8px;
+      padding: 16px 28px;
+      position: relative;
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    .terminal-text {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 1.67cqw;
+      font-weight: 400;
+      line-height: 1.6;
+      color: #f8fafc;
+      white-space: nowrap;
+    }
+
+    .terminal-prompt {
+      color: #0ea5e9;
+    }
+
+    .terminal-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.4em;
+      background: #0ea5e9;
+      vertical-align: text-bottom;
+      margin-left: 2px;
+      opacity: 0;
+    }
+
+    .voltage-glow {
+      position: absolute;
+      inset: -300px;
+      background: radial-gradient(circle at center, rgba(14, 165, 233, 0.25) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+    }
+
+    .terminal-pill-wrap {
+      position: relative;
+      z-index: 2;
+    }
+  </style>
+
+  <div id="root" data-composition-id="08-final-cta" data-duration="6.165" data-width="1920" data-height="1080">
+    <!-- Full-bleed ink background -->
+    <div class="clip stage-ground" data-start="0" data-duration="6.165" data-track-index="0"></div>
+
+    <!-- Scene 1: Constellation converge to lockup (0.0-2.2s) -->
+    <div class="clip constellation-wrap" data-start="0" data-duration="2.5" data-track-index="1">
+      <div class="constellation-node" id="node-1" data-target-x="-420" data-target-y="-280"></div>
+      <div class="constellation-node" id="node-2" data-target-x="420" data-target-y="-280"></div>
+      <div class="constellation-node" id="node-3" data-target-x="-360" data-target-y="240"></div>
+      <div class="constellation-node" id="node-4" data-target-x="360" data-target-y="240"></div>
+      <div class="constellation-node" id="node-5" data-target-x="0" data-target-y="-360"></div>
+      <div class="constellation-node" id="node-6" data-target-x="0" data-target-y="320"></div>
+    </div>
+
+    <!-- Lockup stage (emerges 1.6s, holds until end) -->
+    <div class="clip lockup-stage" data-start="1.6" data-duration="4.565" data-track-index="2">
+      <div class="lockup-content" id="lockup">
+        <h1 class="brand-wordmark">
+          <span class="spike-mark" id="spike">✱</span><span id="brand-text">Free-IA-Integration</span>
+        </h1>
+      </div>
+    </div>
+
+    <!-- Scene 2: Terminal pill (2.2-6.165s) -->
+    <div class="clip terminal-stage" data-start="2.2" data-duration="3.965" data-track-index="3">
+      <div class="voltage-glow" id="voltage-glow"></div>
+      <div class="terminal-pill-wrap">
+        <div class="terminal-pill" id="terminal-pill">
+          <div class="terminal-text">
+            <span class="terminal-prompt">&gt;</span>
+            <span id="typed-text"></span><span class="terminal-cursor" id="cursor"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+    window.__timelines["08-final-cta"] = tl;
+
+    // Scene 1 (0.0-2.2s): Constellation converge and bloom into lockup
+
+    // Start nodes at their spread positions, then converge to center
+    const nodes = document.querySelectorAll('.constellation-node');
+    nodes.forEach((node, i) => {
+      const targetX = Number(node.dataset.targetX);
+      const targetY = Number(node.dataset.targetY);
+
+      // Converge from spread positions inward to center (center-outward-expansion reversed)
+      tl.fromTo(node,
+        { xPercent: -50, yPercent: -50, x: targetX, y: targetY, scale: 1, opacity: 1 },
+        { x: 0, y: 0, scale: 0.4, opacity: 0, duration: 1.0, ease: "power2.in" },
+        0.5 + i * 0.05
+      );
+    });
+
+    // Lockup bloom-in (1.6-2.2s) - emerges as nodes converge
+    tl.fromTo("#lockup",
+      { opacity: 0, scale: 0.85 },
+      { opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" },
+      1.6
+    );
+
+    // Spike mark emphasis
+    tl.fromTo("#spike",
+      { opacity: 0, scale: 0.92 },
+      { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" },
+      1.8
+    );
+
+    // Scene 2 (2.2-4.2s): Terminal pill springs in and text types on
+
+    // Voltage glow blooms in
+    tl.fromTo("#voltage-glow",
+      { opacity: 0, scale: 0.8 },
+      { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" },
+      2.2
+    );
+
+    // Terminal pill spring entrance
+    tl.fromTo("#terminal-pill",
+      { scale: 0, opacity: 0, y: 12 },
+      { scale: 1, opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+      2.3
+    );
+
+    // Type text on — seek-safe smooth-slice driver (no tl.call; substring computed from driver time)
+    const command = " free-ai launch";
+    const typedTextEl = document.getElementById("typed-text");
+    const cursorEl = document.getElementById("cursor");
+
+    const TYPE_START = 2.7;
+    const TYPE_DUR = command.length * 0.08; // ~1.2s
+
+    const typeLen = { v: 0 };
+    tl.fromTo(typeLen,
+      { v: 0 },
+      {
+        v: command.length,
+        duration: TYPE_DUR,
+        ease: "none",
+        onUpdate: () => {
+          typedTextEl.textContent = command.substring(0, Math.floor(typeLen.v));
+        }
+      },
+      TYPE_START
+    );
+
+    // Cursor blink — deterministic sin square wave over the caret's live window (2.6 -> fade at ~4.965)
+    const BLINK_START = 2.6;
+    const BLINK_DUR = 3.565; // through to end of frame
+    const BLINK_CYCLES = 5;  // whole number: lands cleanly, ~0.71s period
+
+    const cursorPhase = { p: 0 };
+    tl.fromTo(cursorPhase,
+      { p: 0 },
+      {
+        p: BLINK_CYCLES * Math.PI * 2,
+        duration: BLINK_DUR,
+        ease: "none",
+        onUpdate: () => {
+          cursorEl.style.opacity = Math.sin(cursorPhase.p) > 0 ? "1" : "0";
+        }
+      },
+      BLINK_START
+    );
+
+    // Scene 3 (4.2-6.165s): Glow peak and fade to black
+
+    // Ambient glow breathe (bounded, finite)
+    const glowPhase = { p: 0 };
+    const BREATHE_CYCLES = 2;
+    const voltageGlow = document.getElementById("voltage-glow");
+
+    tl.to(glowPhase, {
+      p: BREATHE_CYCLES * Math.PI * 2,
+      duration: 1.5,
+      ease: "none",
+      onUpdate: () => {
+        const s = Math.sin(glowPhase.p);
+        const opacity = 0.25 + s * 0.08;
+        const scale = 1 + s * 0.02;
+        voltageGlow.style.opacity = String(Math.max(0, opacity));
+        voltageGlow.style.transform = `scale(${scale})`;
+      }
+    }, 4.2);
+
+    // Final fade to black (the exit - allowed only on the final frame)
+    tl.to([".lockup-stage", ".terminal-stage"], {
+      opacity: 0,
+      duration: 1.2,
+      ease: "power2.in"
+    }, 4.965);
+  </script>
+</template>

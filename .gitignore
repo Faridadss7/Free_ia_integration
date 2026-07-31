@@ -1,0 +1,46 @@
+# ===========================================================================
+# .gitignore — protège les secrets et les artefacts de build de ce projet.
+# La racine git est le Bureau entier ; ce fichier cible le dossier projet.
+# ===========================================================================
+
+# Variables d'environnement (contiennent des clés — NE JAMAIS committer)
+.env
+.env.local
+.env.*.local
+
+# Dépendances
+node_modules/
+
+# Build de production
+dist/
+
+# Logs & divers
+*.log
+npm-debug.log*
+
+# Artefacts d'outils
+.playwright-mcp/
+
+# Local Netlify folder
+.netlify
+
+# HyperFrames temp & cache
+videos/free-ia-integration/temp/
+videos/free-ia-integration/.hyperframes/
+videos/free-ia-integration/.media/
+videos/free-ia-integration/render.log
+videos/free-ia-integration/.env
+videos/free-ia-integration/audio_engine_meta.json
+videos/free-ia-integration/audio_meta.json
+videos/free-ia-integration/audio_request.json
+
+# Remotion temp & cache
+remotion/node_modules/
+remotion/out/
+remotion/.remotion/
+
+# Fichiers d'audit temporaires
+audit-*.jpeg
+etape1-hero-dark.png
+hero.jpg
+light-hero.jpeg

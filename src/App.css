@@ -1,0 +1,48 @@
+/* =========================================================================
+   App shell — structure verticale de la page
+   ========================================================================= */
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.app-main {
+  flex: 1 1 auto;
+  width: 100%;
+}
+
+/* --- Squelette temporaire (remplacé par le Hero à l'étape suivante) ------ */
+.app-placeholder {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: clamp(6rem, 12vw, 11rem) var(--gutter) 8rem;
+  text-align: center;
+}
+
+.app-placeholder__eyebrow {
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+  margin-bottom: 1.25rem;
+}
+
+.app-placeholder__title {
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  background: linear-gradient(120deg, var(--text-primary) 30%, var(--accent-cyan) 70%, var(--accent-violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 1.5rem;
+}
+
+.app-placeholder__subtitle {
+  max-width: 640px;
+  margin: 0 auto;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}

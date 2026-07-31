@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Filet de sécurité SPA : toute route inconnue renvoie index.html (page unique).
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

@@ -1,0 +1,5 @@
+# robots.txt — autorise l'indexation complète du site.
+User-agent: *
+Allow: /
+
+Sitemap: https://free-ia-integration.netlify.app/sitemap.xml

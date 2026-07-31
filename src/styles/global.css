@@ -1,0 +1,387 @@
+/* =============================================================================
+   GLOBAL STYLES & DESIGN TOKENS
+   Esthétique "Linear / Apple" — sombre, futuriste, épurée.
+   Les tokens sont exposés en variables CSS pour rester cohérents partout et
+   pour permettre la bascule dark / light sans dupliquer les valeurs.
+   ========================================================================== */
+
+/* Tailwind — couches de base, composants et utilitaires.
+   Les utilitaires Tailwind consomment les mêmes tokens via tailwind.config.js
+   (couleurs mappées sur les variables CSS ci-dessous), donc thème sombre/clair
+   et classes utilitaires restent parfaitement synchronisés. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* --- Palette (thème sombre par défaut) --- */
+  --color-bg: #030712;            /* Noir profond — fond principal            */
+  --color-surface: #0b1220;       /* Bleu-gris nuit — cartes / sections       */
+  --color-surface-translucent: rgba(11, 18, 32, 0.72);
+  --color-surface-raised: #0e1626; /* Surface légèrement élevée (champs, hover)*/
+  --color-border: rgba(255, 255, 255, 0.08); /* Bordures ultra-fines          */
+  --color-border-strong: rgba(255, 255, 255, 0.14);
+
+  /* --- Accent UNIQUE : turquoise (échelle cohérente). --------------------
+     Une seule famille de teinte pour tous les éléments interactifs et de mise
+     en avant (Color System — Phase 2). Le violet et le vert isolés sont
+     retirés des usages larges : on ne garde qu'une identité turquoise. */
+  --color-accent: #38bdf8;         /* Accent principal (turquoise)            */
+  --color-accent-strong: #0ea5e9;  /* Variante soutenue (survol, contraste)   */
+  --color-accent-soft: #7dd3fc;    /* Variante claire (highlight ponctuel)    */
+  --color-accent-rgb: 56, 189, 248;/* Pour rgba() lisible                     */
+  /* Texte posé SUR l'accent (boutons pleins). Theme-aware : sur le turquoise
+     vif du sombre, un quasi-noir ressort ; en clair l'accent fonce, le blanc
+     devient le bon contraste. Évite le texte « noir/lourd » sur fond clair. */
+  --color-on-accent: #04121f;
+  /* Alias de compatibilité (anciennes références encore présentes). */
+  --color-accent-cyan: #38bdf8;
+
+  --color-text: #f8fafc;          /* Texte principal                          */
+  --color-text-muted: #94a3b8;    /* Texte secondaire                         */
+
+  /* --- Dégradés réutilisables (mono-teinte turquoise, jamais multicolore) - */
+  --gradient-brand: linear-gradient(135deg, var(--color-accent-soft), var(--color-accent-strong));
+  /* Texte titre : blanc → turquoise, dans une seule famille de teinte. */
+  --gradient-text: linear-gradient(115deg, #f8fafc 0%, #e0f2fe 42%, var(--color-accent-soft) 100%);
+
+  /* --- Rayons --- */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 999px;
+
+  /* --- LIGHT SYSTEM : une seule logique lumineuse ------------------------
+     Toutes les ombres descendent (lumière venant du haut), même douceur.
+     - elevation : profondeur neutre des surfaces (cards, modale, champs).
+     - accent    : halo turquoise pour les éléments interactifs mis en avant. */
+  --shadow-elevation-sm: 0 1px 2px rgba(0, 0, 0, 0.3), 0 2px 6px -2px rgba(0, 0, 0, 0.4);
+  --shadow-elevation-md: 0 8px 24px -12px rgba(0, 0, 0, 0.7);
+  --shadow-elevation-lg: 0 30px 80px -32px rgba(0, 0, 0, 0.85);
+  /* Grands panneaux flottants (fenêtres terminal, modale) : même logique,
+     portée plus large. Unifie les ombres jusqu'ici codées en dur. */
+  --shadow-elevation-xl: 0 40px 120px -36px rgba(0, 0, 0, 0.9);
+  --shadow-accent-sm: 0 6px 20px -8px rgba(var(--color-accent-rgb), 0.45);
+  --shadow-accent-md: 0 10px 34px -10px rgba(var(--color-accent-rgb), 0.5);
+  /* Alias de compatibilité. */
+  --shadow-card: var(--shadow-elevation-lg);
+
+  /* --- Typographie --- */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", ui-monospace, Menlo, Consolas,
+    monospace;
+
+  /* --- Mise en page --- */
+  --max-width: 1200px;
+  --nav-height: 72px;
+
+  /* --- MOTION SYSTEM : easing + durées uniques (Phase 2) ----------------
+     Un seul easing pour tout le système (signature Linear), et une échelle de
+     durées partagée. Aucune interaction ne doit sortir de ce vocabulaire. */
+  --ease-signature: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-interaction: 160ms;  /* survol, focus, appui (150–180ms)         */
+  --duration-transition: 300ms;   /* changements d'état (250–350ms)           */
+  --duration-entrance: 440ms;     /* entrées de sections (350–500ms)          */
+  /* Alias de compatibilité. */
+  --ease-out-soft: var(--ease-signature);
+  --transition-base: var(--duration-transition) var(--ease-signature);
+}
+
+/* Thème clair — surcharge des tokens uniquement.
+   Activé via la classe .light posée sur <html> par useDarkMode. */
+:root.light {
+  --color-bg: #f7f9fc;
+  --color-surface: #ffffff;
+  --color-surface-translucent: rgba(255, 255, 255, 0.78);
+  --color-surface-raised: #ffffff;
+  --color-border: rgba(2, 6, 23, 0.08);
+  --color-border-strong: rgba(2, 6, 23, 0.14);
+  --color-text: #0b1220;
+  --color-text-muted: #52607a;
+  /* Accent turquoise conservé, décliné pour contraste sur fond clair. */
+  --color-accent: #0284c7;
+  --color-accent-strong: #0369a1;
+  --color-accent-soft: #0ea5e9;
+  --color-accent-rgb: 2, 132, 199;
+  /* Sur l'accent foncé du thème clair, le blanc donne le meilleur contraste. */
+  --color-on-accent: #ffffff;
+  --gradient-text: linear-gradient(115deg, #0b1220 0%, #0f4c75 45%, var(--color-accent) 100%);
+  --shadow-elevation-sm: 0 1px 2px rgba(15, 23, 42, 0.06), 0 2px 6px -2px rgba(15, 23, 42, 0.08);
+  --shadow-elevation-md: 0 8px 24px -12px rgba(15, 23, 42, 0.18);
+  --shadow-elevation-lg: 0 30px 70px -34px rgba(15, 23, 42, 0.28);
+  --shadow-elevation-xl: 0 40px 100px -40px rgba(15, 23, 42, 0.3);
+  --shadow-accent-sm: 0 6px 20px -8px rgba(var(--color-accent-rgb), 0.3);
+  --shadow-accent-md: 0 10px 34px -10px rgba(var(--color-accent-rgb), 0.34);
+}
+
+/* --- Reset minimal --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Transition douce lors de la bascule de thème */
+  transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+/* -------------------------------------------------------------------------
+   Texture globale : grain léger + vignette (Phase 2 — profondeur).
+   Deux overlays fixes, purement décoratifs, non interactifs, sous le contenu.
+   Le grain casse l'aplat « généré » ; la vignette recentre le regard.
+   ------------------------------------------------------------------------- */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Grain : micro-bruit SVG répété, très basse opacité. */
+body::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+}
+
+/* Vignette : assombrissement très doux des bords en thème sombre. */
+body::after {
+  background: radial-gradient(ellipse 120% 90% at 50% 30%, transparent 55%, rgba(0, 0, 0, 0.35) 100%);
+}
+:root.light body::after {
+  background: radial-gradient(ellipse 120% 90% at 50% 30%, transparent 60%, rgba(15, 23, 42, 0.06) 100%);
+}
+:root.light body::before {
+  opacity: 0.02;
+}
+
+/* Le contenu applicatif passe au-dessus des textures. */
+.app-shell {
+  position: relative;
+  z-index: 1;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Lien à soulignement animé (micro-interaction — Phase 2).
+   Le trait naît sous le texte et s'étend depuis la gauche, easing signature. */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: currentColor;
+  transition: transform var(--duration-transition) var(--ease-signature);
+}
+.link-underline:hover::after,
+.link-underline:focus-visible::after {
+  transform: scaleX(1);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+img,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Respecte la préférence système de réduction d'animation */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --- Utilitaires de layout partagés --- */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+/* Applique le dégradé de marque sur du texte */
+.text-gradient {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Dégradé de marque clippé sur du texte, AVEC REPLI SÛR.
+   Contrairement à la composition d'utilitaires Tailwind (bg-gradient-to-br +
+   from-* + to-* + bg-clip-text + text-transparent), le fond ET le clip vivent
+   ici dans une seule règle atomique : background-image (littéral, jamais purgé)
+   ne peut plus se désynchroniser du texte transparent. Si le clip de fond n'est
+   pas supporté, le texte reste visible en couleur accent au lieu de devenir
+   invisible. Thème-aware via les variables CSS (sombre/clair). */
+.text-gradient-accent {
+  color: var(--color-accent-strong);
+  background-image: linear-gradient(
+    to bottom right,
+    var(--color-accent),
+    var(--color-accent-strong)
+  );
+}
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .text-gradient-accent {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
+
+/* Variante animée du dégradé de texte : le turquoise dérive lentement
+   d'un bord à l'autre du titre (motion-first, inspiration Framer). On élargit
+   le dégradé (200%) pour laisser de la course au déplacement. */
+.text-gradient-animated {
+  background: linear-gradient(
+    115deg,
+    var(--color-text) 0%,
+    var(--color-accent-soft) 35%,
+    var(--color-accent-strong) 55%,
+    var(--color-text) 100%
+  );
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: gradient-pan 8s var(--ease-signature) infinite;
+}
+
+/* -------------------------------------------------------------------------
+   SPOTLIGHT au survol : une lueur radiale suit le curseur à l'intérieur d'une
+   carte. Les composants posent --mx / --my (en %) via onMouseMove ; l'overlay
+   .spotlight (enfant absolu) matérialise la lueur. 100 % transform/opacity.
+   ------------------------------------------------------------------------- */
+.spotlight-host {
+  position: relative;
+}
+.spotlight {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--duration-transition) var(--ease-signature);
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(var(--color-accent-rgb), 0.16),
+    transparent 60%
+  );
+}
+.spotlight-host:hover .spotlight {
+  opacity: 1;
+}
+
+/* Liseré lumineux qui balaie un élément (badge, bouton). L'élément porte la
+   classe .shimmer-line ; un pseudo traverse la surface. */
+.shimmer-line {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(var(--color-accent-rgb), 0.14) 50%,
+    transparent 70%
+  );
+  background-size: 220% 100%;
+  animation: shimmer 4.5s var(--ease-signature) infinite;
+  pointer-events: none;
+}
+
+/* Keyframes utilisés par les classes CSS ci-dessus (indépendamment de Tailwind,
+   qui n'émet un @keyframes que si l'utilitaire animate-* correspondant est employé). */
+@keyframes gradient-pan {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+@keyframes shimmer {
+  0% {
+    background-position: -150% 0;
+  }
+  100% {
+    background-position: 250% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-gradient-animated,
+  .shimmer-line::after {
+    animation: none !important;
+  }
+  .text-gradient-animated {
+    background-position: 0% 50%;
+  }
+}
+
+/* Scrollbar discrète, cohérente avec le thème sombre */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}

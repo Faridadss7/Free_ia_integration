@@ -1,0 +1,19 @@
+{
+  "name": "farid-adisso-remotion",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Pipeline de rendu Remotion — loop d'ambiance du hero (isolé du bundle Vite du site)",
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio",
+    "render:webm": "remotion render AmbientLoop out/hero-ambient.webm --codec=vp8 --image-format=png",
+    "render:mp4": "remotion render AmbientLoop out/hero-ambient.mp4 --codec=h264",
+    "render:poster": "remotion still AmbientLoop out/hero-ambient-poster.jpg --frame=90"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.0",
+    "remotion": "^4.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}

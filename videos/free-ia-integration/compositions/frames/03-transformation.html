@@ -1,0 +1,433 @@
+<template>
+<style>
+@font-face { font-family: "Inter"; font-weight: 400; font-style: normal; font-display: block; src: url("assets/fonts/Inter-400.woff2") format("woff2"); }
+@font-face { font-family: "Inter"; font-weight: 700; font-style: normal; font-display: block; src: url("assets/fonts/Inter-700.woff2") format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-weight: 400; font-style: normal; font-display: block; src: url("assets/fonts/JetBrainsMono-400.woff2") format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-weight: 500; font-style: normal; font-display: block; src: url("assets/fonts/JetBrainsMono-700.woff2") format("woff2"); }
+
+#root {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  container-type: size;
+  overflow: hidden;
+}
+
+.clip { position: absolute; inset: 0; }
+
+.bg-ink { background: #030712; }
+
+.stage {
+  position: absolute;
+  inset: 0;
+  perspective: 1000px;
+  perspective-origin: 50% 50%;
+}
+
+.world {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+.surface {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+/* Scene 1 — terminal pill (centered via GSAP xPercent/yPercent, no CSS transform) */
+.terminal-pill {
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  background: #1B1E1F;
+  border: 1px solid rgba(248, 250, 252, 0.14);
+  border-radius: 8px;
+  padding: 1.4cqw 2.4cqw;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.67cqw;
+  font-weight: 400;
+  color: #f8fafc;
+  line-height: 1.6;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(3, 7, 18, 0.08), 0 4px 16px rgba(3, 7, 18, 0.04);
+  z-index: 100;
+}
+.prompt { color: #5DB8A6; }
+.command { color: #0ea5e9; }
+.cursor {
+  display: inline-block;
+  width: 0.55cqw;
+  height: 1.4cqw;
+  background: #0ea5e9;
+  margin-left: 0.25cqw;
+  vertical-align: text-bottom;
+  opacity: 0;
+}
+
+/* Velocity streak fired on the Enter beat */
+.streak {
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  width: 2px;
+  height: 3px;
+  background: #38bdf8;
+  border-radius: 2px;
+  opacity: 0;
+  z-index: 90;
+}
+
+/* UI fragments — reconstructed workspace panels */
+.ui-fragment {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: #f8fafc;
+  border: 1px solid rgba(3, 7, 18, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(3, 7, 18, 0.08), 0 4px 16px rgba(3, 7, 18, 0.04);
+  opacity: 0;
+  --dof: 0px;
+  filter: blur(var(--dof));
+  will-change: transform, filter;
+}
+
+.editor-pane {
+  width: 25cqw;
+  height: 18cqw;
+  background: #151718;
+  border-color: rgba(248, 250, 252, 0.14);
+  padding: 1cqw 1.2cqw;
+  /* Explicit vertical rhythm so code rows never collapse onto each other
+     (block-flow reads as coincident under the crystallize-hold 3D tilt). */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Wider inter-row gap so adjacent code rows keep clearance while the pane
+     still carries a few degrees of residual rotationX during the crystallize
+     landing — the tilted projected boxes (incl. the closing-brace row) briefly
+     overlapped at 0.55cqw. */
+  gap: 1.1cqw;
+}
+.editor-title {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.05cqw;
+  font-weight: 500;
+  color: #f8fafc;
+  line-height: 1.3;
+  margin-bottom: 0.4cqw;
+  padding-bottom: 0.5cqw;
+  border-bottom: 1px solid rgba(248, 250, 252, 0.14);
+  flex: 0 0 auto;
+}
+.editor-line {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.88cqw;
+  color: #f8fafc;
+  line-height: 1.9;
+  opacity: 0.92;
+  flex: 0 0 auto;
+}
+/* Lightened syntax tones so dim code clears 4.5:1 on the #151718 pane
+   (the parent opacity previously dragged the sky keyword to ~3.5:1). */
+.editor-line .kw { color: #7dd3fc; }
+.editor-line .str { color: #6ee7b7; }
+
+.agent-card {
+  width: 15cqw;
+  height: 12cqw;
+  padding: 1.4cqw;
+  /* Flex column to ensure label and sub never overlap */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4cqw;
+}
+.agent-icon {
+  width: 3cqw;
+  height: 3cqw;
+  background: #0ea5e9;
+  border-radius: 6px;
+  flex: 0 0 auto;
+}
+.agent-label {
+  font-family: "Inter", sans-serif;
+  font-size: 1.5cqw;
+  font-weight: 500;
+  color: #030712;
+  letter-spacing: -0.005em;
+  flex: 0 0 auto;
+}
+.agent-sub {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8cqw;
+  /* Darkened slate so the dim sub-label clears 4.5:1 on the white tile
+     (was #030712 at opacity 0.55 → ~2.5:1). */
+  color: #334155;
+  flex: 0 0 auto;
+}
+
+.file-tree { width: 12cqw; height: 16cqw; padding: 1cqw 1.2cqw; }
+.tree-item {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85cqw;
+  /* Full-opacity dark tone so the tree text clears 4.5:1 on the white tile
+     (was #030712 at opacity 0.65 → ~2.5:1). */
+  color: #151718;
+  line-height: 2;
+  opacity: 1;
+}
+
+.chart-tile { width: 14cqw; height: 10cqw; background: #D0EFFD; padding: 1.2cqw; }
+.chart-bar { height: 1.3cqw; background: #38bdf8; border-radius: 4px; margin-bottom: 0.8cqw; }
+
+.terminal-strip { width: 20cqw; height: 6cqw; background: #151718; border-color: rgba(248, 250, 252, 0.14); padding: 0.9cqw 1.1cqw; }
+.terminal-text { font-family: "JetBrains Mono", monospace; font-size: 0.82cqw; line-height: 1.7; }
+.terminal-text .ok { color: #5DB8A6; }
+.terminal-text .dim { color: #f8fafc; opacity: 0.88; }
+
+/* Voltage line underlining the composed workspace */
+.voltage-line {
+  position: absolute;
+  left: 20%;
+  top: 79%;
+  width: 60%;
+  height: 3px;
+  background: #38bdf8;
+  border-radius: 2px;
+  transform-origin: left center;
+  opacity: 0;
+}
+</style>
+
+<div id="root" data-composition-id="03-transformation" data-duration="10.274" data-width="1920" data-height="1080">
+  <!-- Full-bleed ink ground on a clip layer (never on #root) -->
+  <div class="clip bg-ink" data-start="0" data-duration="9.125" data-track-index="0"></div>
+
+  <!-- 3D camera stage: static perspective lens -->
+  <div class="clip stage" data-start="0" data-duration="9.125" data-track-index="1">
+    <div class="world" id="03-transformation-world" data-layout-allow-overflow>
+      <div class="surface">
+
+        <!-- SCENE 1 -->
+        <div class="streak" id="03-transformation-streak"></div>
+        <div class="terminal-pill" id="03-transformation-terminal">
+          <span class="prompt">$ </span><span class="command" id="03-transformation-cmd"></span><span class="cursor" id="03-transformation-cursor"></span>
+        </div>
+
+        <!-- SCENE 2 / 3 — 9 UI fragments -->
+        <div class="ui-fragment editor-pane" id="03-transformation-frag-1" data-depth="1">
+          <div class="editor-title">main.py</div>
+          <div class="editor-line"><span class="kw">import</span> free_ai</div>
+          <div class="editor-line">agent = free_ai.<span class="kw">init</span>()</div>
+          <div class="editor-line">agent.run()</div>
+        </div>
+
+        <div class="ui-fragment agent-card" id="03-transformation-frag-2" data-depth="2">
+          <div class="agent-icon"></div>
+          <div class="agent-label">Agent</div>
+          <div class="agent-sub">ready</div>
+        </div>
+
+        <div class="ui-fragment file-tree" id="03-transformation-frag-3" data-depth="0">
+          <div class="tree-item">▸ src/</div>
+          <div class="tree-item">▸ agents/</div>
+          <div class="tree-item">▸ config/</div>
+          <div class="tree-item">• main.py</div>
+        </div>
+
+        <div class="ui-fragment chart-tile" id="03-transformation-frag-4" data-depth="1">
+          <div class="chart-bar" style="width: 78%;"></div>
+          <div class="chart-bar" style="width: 94%;"></div>
+          <div class="chart-bar" style="width: 62%;"></div>
+        </div>
+
+        <div class="ui-fragment editor-pane" id="03-transformation-frag-5" data-depth="2">
+          <div class="editor-title">config.json</div>
+          <div class="editor-line">{</div>
+          <div class="editor-line">&nbsp;&nbsp;<span class="str">"model"</span>: <span class="str">"free-ai"</span></div>
+          <div class="editor-line">}</div>
+        </div>
+
+        <div class="ui-fragment agent-card" id="03-transformation-frag-6" data-depth="0">
+          <div class="agent-icon"></div>
+          <div class="agent-label">Panel</div>
+          <div class="agent-sub">live</div>
+        </div>
+
+        <div class="ui-fragment terminal-strip" id="03-transformation-frag-7" data-depth="1">
+          <div class="terminal-text"><span class="dim">$ free-ai status</span></div>
+          <div class="terminal-text"><span class="ok">✓ environment ready</span></div>
+        </div>
+
+        <div class="ui-fragment editor-pane" id="03-transformation-frag-8" data-depth="2">
+          <div class="editor-title">agent.py</div>
+          <div class="editor-line"><span class="kw">class</span> Agent:</div>
+          <div class="editor-line">&nbsp;&nbsp;<span class="kw">def</span> run():</div>
+          <div class="editor-line">&nbsp;&nbsp;&nbsp;&nbsp;...</div>
+        </div>
+
+        <div class="ui-fragment chart-tile" id="03-transformation-frag-9" data-depth="1">
+          <div class="chart-bar" style="width: 70%;"></div>
+          <div class="chart-bar" style="width: 88%;"></div>
+        </div>
+
+        <!-- Voltage line (the one coral/tile-strong voltage moment) -->
+        <div class="voltage-line" id="03-transformation-voltage"></div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script>
+(function () {
+  const tl = gsap.timeline({ paused: true });
+
+  const world    = document.getElementById("03-transformation-world");
+  const terminal = document.getElementById("03-transformation-terminal");
+  const cmdSpan  = document.getElementById("03-transformation-cmd");
+  const cursor   = document.getElementById("03-transformation-cursor");
+  const streak   = document.getElementById("03-transformation-streak");
+  const voltage  = document.getElementById("03-transformation-voltage");
+
+  const fragments = [];
+  for (let i = 1; i <= 9; i++) fragments.push(document.getElementById("03-transformation-frag-" + i));
+
+  // ── Camera: one state object, one writer, fixed transform order ──
+  const cam = { x: 0, y: 0, z: -220, rx: 0, ry: 0 };
+  function applyCamera() {
+    world.style.transform =
+      "translate3d(" + cam.x + "px," + cam.y + "px," + cam.z + "px) rotateX(" + cam.rx + "deg) rotateY(" + cam.ry + "deg)";
+  }
+  applyCamera(); // seed frame 0 so a seek to t=0 renders the opening wide pose
+
+  // Center the terminal pill via GSAP transform props (kept off CSS to avoid
+  // a transform conflict with the scale tweens below).
+  tl.set(terminal, { xPercent: -50, yPercent: -50 }, 0);
+  tl.set(streak, { xPercent: -50, yPercent: -50 }, 0);
+
+  // ── SCENE 1 (0.0–2.0s): terminal, type-on, Enter detonation ──
+  tl.fromTo(cursor, { opacity: 0 }, { opacity: 1, duration: 0.05 }, 0.25);
+
+  // Type-on driven by a numeric tween (onUpdate) so every seeked frame is
+  // deterministic — tl.call callbacks can be skipped under frame-by-frame seeks.
+  const commandText = "free-ai init";
+  const typer = { n: 0 };
+  tl.fromTo(typer,
+    { n: 0 },
+    {
+      n: commandText.length,
+      duration: 0.9,
+      ease: "none",
+      onUpdate: function () { cmdSpan.textContent = commandText.slice(0, Math.round(typer.n)); }
+    },
+    0.32);
+
+  // Cursor blink after the line is typed
+  tl.to(cursor, { opacity: 0, duration: 0.12 }, 1.4)
+    .to(cursor, { opacity: 1, duration: 0.12 }, 1.55)
+    .to(cursor, { opacity: 0, duration: 0.12 }, 1.7);
+
+  // Enter beat: tactile press then release + coral glow
+  tl.to(terminal, { scale: 0.975, duration: 0.09, ease: "power2.in" }, 1.82)
+    .to(terminal, {
+      scale: 1.025,
+      boxShadow: "0 0 22px rgba(56,189,248,0.55), 0 4px 16px rgba(3,7,18,0.04)",
+      duration: 0.16, ease: "power2.out"
+    }, 1.91)
+    .to(terminal, {
+      scale: 1,
+      boxShadow: "0 1px 3px rgba(3,7,18,0.08), 0 4px 16px rgba(3,7,18,0.04)",
+      duration: 0.3, ease: "power2.out"
+    }, 2.07);
+
+  // Directional velocity streak fires outward from the pill
+  tl.fromTo(streak,
+    { opacity: 0, scaleX: 1, scaleY: 1 },
+    { opacity: 0.9, scaleX: 420, scaleY: 1, duration: 0.22, ease: "power3.out" }, 1.9)
+   .to(streak, { opacity: 0, scaleX: 900, duration: 0.35, ease: "power2.out" }, 2.12);
+
+  // ── LEG 1 — camera dive begins on the Enter beat (power4.out) ──
+  tl.fromTo(cam,
+    { x: 0, y: 0, z: -220, rx: 0, ry: 0 },
+    { x: 0, y: 40, z: 320, rx: 26, ry: 0, duration: 0.75, ease: "power4.out", onUpdate: applyCamera },
+    1.85);
+
+  // Terminal hands off — fades as the world explodes into fragments
+  tl.to(terminal, { opacity: 0, duration: 0.4, ease: "power2.in" }, 2.0);
+
+  // ── SCENE 2 (2.0–5.2s): fragments scatter in a 3D depth-cloud; camera flies past ──
+  const scatter = [
+    { x: -450, y: -260, z: 180, rx: -15, ry:  20 },
+    { x:  380, y: -180, z: 200, rx:  10, ry: -25 },
+    { x: -280, y:  120, z:  90, rx: -25, ry:  15 },
+    { x:  440, y:  180, z: 200, rx:  15, ry: -30 },
+    { x: -200, y:  280, z: 190, rx:  20, ry:  10 },
+    { x:  500, y: -100, z: 140, rx: -10, ry:  25 },
+    { x: -380, y:  330, z: 200, rx:  18, ry: -15 },
+    { x:  220, y: -300, z: 170, rx: -20, ry:  18 },
+    { x:  340, y:  300, z: 200, rx:  12, ry: -20 }
+  ];
+
+  fragments.forEach(function (frag, i) {
+    const s = scatter[i];
+    const depth = parseInt(frag.dataset.depth, 10);
+    // Appear at the scatter pose (fromTo seeds a deterministic start).
+    tl.fromTo(frag,
+      { opacity: 0, scale: 0.82, xPercent: -50, yPercent: -50, x: s.x * 0.6, y: s.y * 0.6, z: s.z * 0.5, rotationX: s.rx, rotationY: s.ry },
+      { opacity: 1, scale: 1, x: s.x, y: s.y, z: s.z, duration: 0.55, ease: "power2.out" },
+      2.0 + i * 0.05);
+    // Depth-of-field blur on non-focal planes (leaf elements only).
+    tl.to(frag, { "--dof": (depth * 4) + "px", duration: 0.6, ease: "power2.out" }, 2.0 + i * 0.05);
+  });
+
+  // ── LEG 2 — continuous flight through the chaos (power2.inOut cruise) ──
+  tl.to(cam, { x: -90, y: -40, z: 380, rx: 33, ry: -8, duration: 2.2, ease: "power2.inOut", onUpdate: applyCamera }, 2.6);
+
+  // ── SCENE 3 (5.2–8.725s): tilt-to-flatten landing; fragments snap to grid ──
+  // LEG 3 — decelerate to a flat overview (power4.out landing).
+  tl.to(cam, { x: 0, y: 0, z: 0, rx: 0, ry: 0, duration: 1.6, ease: "power4.out", onUpdate: applyCamera }, 5.0);
+
+  // Final workspace grid (screen-space offsets from center; all within keep-out y<=900).
+  // Column-partitioned so no two panes share horizontal band + vertical band:
+  // left column (x≈-600), center column (x≈-40), right column (x≈600); the bottom
+  // strip sits alone in the center column's lower slot, clear of every editor pane.
+  const grid = [
+    { x: -600, y: -300 }, // 1 editor (main.py)   — left top
+    { x:  600, y: -320 }, // 2 agent               — right top
+    { x:  -40, y: -320 }, // 3 tree                — center top
+    { x:  600, y:  -40 }, // 4 chart               — right mid
+    { x: -600, y:   40 }, // 5 editor (config.json)— left mid
+    { x:  600, y:  240 }, // 6 panel               — right lower
+    { x:  -40, y:  280 }, // 7 strip               — center bottom (alone)
+    { x:  -40, y:  -30 }, // 8 editor (agent.py)   — center mid
+    { x: -600, y:  310 }  // 9 chart               — left lower
+  ];
+
+
+  fragments.forEach(function (frag, i) {
+    const g = grid[i];
+    tl.to(frag, { x: g.x, y: g.y, z: 0, rotationX: 0, rotationY: 0, duration: 1.4, ease: "power4.out" }, 5.2);
+    tl.to(frag, { "--dof": "0px", duration: 1.4, ease: "power4.out" }, 5.2);
+  });
+
+  // "prêt à coder" — the single voltage line draws on under the composed workspace, then holds.
+  tl.fromTo(voltage,
+    { opacity: 0, scaleX: 0 },
+    { opacity: 1, scaleX: 1, duration: 0.8, ease: "power2.out" },
+    7.4);
+
+  // Locked landing dwell to the end of the shot.
+  tl.to({}, { duration: 0.4 }, 8.3);
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines["03-transformation"] = tl;
+})();
+</script>
+</template>

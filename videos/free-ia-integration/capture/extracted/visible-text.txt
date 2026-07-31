@@ -1,0 +1,28 @@
+Free-IA-Integration — film de lancement premium.
+
+Ce que c'est : service d'accompagnement qui configure un environnement de développement
+assisté par IA (Claude Code, Cursor, Cline, Roo Code) directement sur la machine du client,
+connecté aux modèles via AgentRouter, avec scripts d'automatisation et support privé après
+installation. L'utilisateur possède ses modèles sans abonnement.
+
+Pour qui : développeurs indépendants, étudiants, freelances, entrepreneurs.
+Porteur : Farid ADISSO — Data Analyst Associate & Développeur, intégrateur IA.
+Site : free-ia-integration.netlify.app
+
+Message central : configure ton environnement de développement IA — Claude Code, Cursor, GPT —
+sans abonnement, en une seule installation.
+
+Positionnement visuel : annonce officielle d'un produit SaaS mondial (OpenAI, Vercel, Linear,
+Cursor, Stripe, Apple WWDC). Premium, minimaliste, technologique, ultra fluide. Fond noir profond,
+accents turquoise/cyan, glow discret, espace négatif. Chaque seconde bouge ; aucun écran statique.
+
+Packs réels du site : Pack Standard (1 000 FCFA) — Idéal pour tester la méthode ; Pack Pro
+(3 000 FCFA) — Le choix de référence, configuration complète assistée + scripts + support prioritaire.
+
+Témoignage vérifié : Grâce D., Étudiante & Créatrice de projets, 5 étoiles —
+« Le plus beau changement, c'est le temps gagné. Chaque soir je prépare mes consignes avant de
+dormir. Pendant la nuit, Claude Code avance sur mon projet. Le matin, je n'ouvre plus mon
+ordinateur avec une page blanche. J'ai enfin l'impression de travailler avec un véritable
+coéquipier. »
+
+FAQ terminal : ./requirements.sh, ./duration.sh, ./latency.sh, ./legality.sh

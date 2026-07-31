@@ -1,0 +1,77 @@
+/* =============================================================================
+   CURSEUR CUSTOM — point + halo turquoise (esthétique premium).
+   Deux éléments fixes suivant le curseur : un point net (rapide) et un anneau
+   flou (traîne, légèrement en retard). Sur un élément interactif, l'anneau
+   grossit et se remplit légèrement. Purement décoratif, non interactif.
+   ========================================================================== */
+
+/* On masque le curseur système uniquement quand le curseur custom est actif
+   (classe posée sur <html> par le composant, seulement sur pointeur fin). */
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+
+.cursor-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  /* Positionné via translate3d (variables mises à jour en JS, une fois / frame). */
+  will-change: transform;
+}
+
+/* Point central : suit le curseur au pixel près. */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate3d(var(--cx, -100px), var(--cy, -100px), 0);
+  transition: opacity var(--duration-transition) var(--ease-signature);
+}
+
+/* Anneau : suit avec une légère traîne (interpolé en JS), grossit au survol. */
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(var(--color-accent-rgb), 0.5);
+  background: rgba(var(--color-accent-rgb), 0);
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate3d(var(--rx, -100px), var(--ry, -100px), 0) scale(var(--ring-scale, 1));
+  transition:
+    width var(--duration-transition) var(--ease-signature),
+    height var(--duration-transition) var(--ease-signature),
+    background-color var(--duration-transition) var(--ease-signature),
+    border-color var(--duration-transition) var(--ease-signature),
+    opacity var(--duration-transition) var(--ease-signature);
+}
+
+/* État « au-dessus d'un élément interactif » : l'anneau enfle et se teinte. */
+.cursor-root.is-active .cursor-ring {
+  --ring-scale: 1.6;
+  background: rgba(var(--color-accent-rgb), 0.1);
+  border-color: rgba(var(--color-accent-rgb), 0.7);
+}
+.cursor-root.is-active .cursor-dot {
+  opacity: 0.4;
+}
+
+/* Curseur hors fenêtre : on masque proprement. */
+.cursor-root.is-hidden .cursor-dot,
+.cursor-root.is-hidden .cursor-ring {
+  opacity: 0;
+}

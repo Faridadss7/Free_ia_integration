@@ -1,0 +1,231 @@
+<template>
+  <div id="root" data-composition-id="04-workflow-router" data-duration="8.206" data-width="1920" data-height="1080" style="width: 1920px; height: 1080px; container-type: size; position: relative; overflow: hidden;">
+
+    <!-- Full-bleed ink background -->
+    <div class="clip" data-start="0" data-duration="8.258" data-track-index="0" style="position: absolute; inset: 0; background: #030712;"></div>
+
+    <!-- Scene 1: Flow spine (0.0-2.0s) -->
+    <svg class="clip flow-spine" data-start="0" data-duration="8.258" data-track-index="1" viewBox="0 0 1920 360" style="position: absolute; left: 0; top: 15%; width: 100%; height: 360px;">
+      <!-- User node -->
+      <text id="node-user" x="200" y="180" fill="#f8fafc" font-family="JetBrains Mono" font-size="28" font-weight="500" text-anchor="middle" opacity="0">USER</text>
+
+      <!-- Arrow 1 -->
+      <path id="arrow-1" d="M 280 180 L 480 180" stroke="#38bdf8" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path id="chevron-1" d="M 470 170 L 480 180 L 470 190" stroke="#38bdf8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <!-- Free-IA node -->
+      <text id="node-freeia" x="720" y="180" fill="#f8fafc" font-family="JetBrains Mono" font-size="28" font-weight="500" text-anchor="middle" opacity="0">FREE-IA · AGENTROUTER</text>
+
+      <!-- Arrow 2 -->
+      <path id="arrow-2" d="M 1000 180 L 1200 180" stroke="#38bdf8" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path id="chevron-2" d="M 1190 170 L 1200 180 L 1190 190" stroke="#38bdf8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <!-- Model node -->
+      <text id="node-model" x="1440" y="180" fill="#f8fafc" font-family="JetBrains Mono" font-size="28" font-weight="500" text-anchor="middle" opacity="0">MODEL</text>
+    </svg>
+
+    <!-- Scene 2 & 3: Console window (2.0-7.758s) -->
+    <div class="clip console-container" data-start="0" data-duration="8.258" data-track-index="2" style="position: absolute; left: 50%; top: 50%; width: 1400px; height: 700px; transform-origin: center center; opacity: 0;">
+      <div class="console-window" style="width: 100%; height: 100%; background: #151718; border-radius: 12px; border: 1px solid rgba(248, 250, 252, 0.14); box-shadow: 40px 30px 80px rgba(0, 0, 0, 0.45); overflow: hidden; transform-style: preserve-3d;">
+
+        <!-- Title bar -->
+        <div style="height: 48px; background: #202325; border-bottom: 1px solid rgba(248, 250, 252, 0.14); display: flex; align-items: center; padding: 0 20px;">
+          <span style="font-family: 'JetBrains Mono'; font-size: 16px; color: #f8fafc; font-weight: 500;">AgentRouter Console</span>
+        </div>
+
+        <!-- Console content -->
+        <div style="padding: 24px; position: relative; height: calc(100% - 48px);">
+          <img src="assets/agent-router.png" alt="Agent Router Console" style="width: 100%; height: 100%; object-fit: contain; object-position: top left; opacity: 0.95;"/>
+
+          <!-- Overlay rows that will cascade in -->
+          <div class="log-rows" style="position: absolute; top: 24px; left: 24px; right: 24px;">
+
+            <div class="log-row" id="row-1" style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px; opacity: 0; transform: translateY(20px);">
+              <span style="font-family: 'JetBrains Mono'; font-size: 18px; color: #5DB8A6; font-weight: 400;">14:32:18</span>
+              <span style="font-family: 'JetBrains Mono'; font-size: 18px; color: #f8fafc; font-weight: 500;">[REDACTED]</span>
+              <span class="latency-chip" style="font-family: 'JetBrains Mono'; font-size: 16px; color: #0ea5e9; background: rgba(14, 165, 233, 0.12); padding: 4px 12px; border-radius: 6px; font-weight: 500;">2.1s</span>
+            </div>
+
+            <div class="log-row" id="row-2" style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px; opacity: 0; transform: translateY(20px);">
+              <span style="font-family: 'JetBrains Mono'; font-size: 18px; color: #5DB8A6; font-weight: 400;">14:32:21</span>
+              <span style="font-family: 'JetBrains Mono'; font-size: 18px; color: #f8fafc; font-weight: 500;">gpt-4o</span>
+              <span class="latency-chip" style="font-family: 'JetBrains Mono'; font-size: 16px; color: #0ea5e9; background: rgba(14, 165, 233, 0.12); padding: 4px 12px; border-radius: 6px; font-weight: 500;">3.2s</span>
+            </div>
+
+            <div class="log-row" id="row-3" style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px; opacity: 0; transform: translateY(20px);">
+              <span style="font-family: 'JetBrains Mono'; font-size: 18px; color: #5DB8A6; font-weight: 400;">14:32:23</span>
+              <span style="font-family: 'JetBrains Mono'; font-size: 18px; color: #f8fafc; font-weight: 500;">glm-4-plus</span>
+              <span class="latency-chip hero-latency" style="font-family: 'JetBrains Mono'; font-size: 16px; color: #0ea5e9; background: rgba(14, 165, 233, 0.12); padding: 4px 12px; border-radius: 6px; font-weight: 500;">stream</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <style>
+    @font-face { font-family: "Inter"; font-weight: 400; font-style: normal; font-display: block; src: url("assets/fonts/Inter-400.woff2") format("woff2"); }
+    @font-face { font-family: "Inter"; font-weight: 700; font-style: normal; font-display: block; src: url("assets/fonts/Inter-700.woff2") format("woff2"); }
+    @font-face { font-family: "JetBrains Mono"; font-weight: 400; font-style: normal; font-display: block; src: url("assets/fonts/JetBrainsMono-400.woff2") format("woff2"); }
+    @font-face { font-family: "JetBrains Mono"; font-weight: 500; font-style: normal; font-display: block; src: url("assets/fonts/JetBrainsMono-700.woff2") format("woff2"); }
+
+    #root {
+      font-family: "Inter", sans-serif;
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+
+    // Scene 1 (0.0-2.0s): Flow spine builds left-to-right
+
+    // User node appears
+    tl.fromTo("#node-user",
+      { opacity: 0, x: -20 },
+      { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" },
+      0.2
+    );
+
+    // Arrow 1 draws with svg-path-draw technique
+    const arrow1 = document.getElementById("arrow-1");
+    const chevron1 = document.getElementById("chevron-1");
+    const arrow1Len = arrow1.getTotalLength();
+    const chevron1Len = chevron1.getTotalLength();
+    arrow1.style.strokeDasharray = arrow1Len;
+    arrow1.style.strokeDashoffset = arrow1Len;
+    chevron1.style.strokeDasharray = chevron1Len;
+    chevron1.style.strokeDashoffset = chevron1Len;
+
+    tl.to(arrow1,
+      { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" },
+      0.5
+    );
+    tl.to(chevron1,
+      { strokeDashoffset: 0, duration: 0.15, ease: "power2.out" },
+      0.85
+    );
+
+    // Free-IA node appears
+    tl.fromTo("#node-freeia",
+      { opacity: 0, x: -20 },
+      { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" },
+      0.9
+    );
+
+    // Arrow 2 draws
+    const arrow2 = document.getElementById("arrow-2");
+    const chevron2 = document.getElementById("chevron-2");
+    const arrow2Len = arrow2.getTotalLength();
+    const chevron2Len = chevron2.getTotalLength();
+    arrow2.style.strokeDasharray = arrow2Len;
+    arrow2.style.strokeDashoffset = arrow2Len;
+    chevron2.style.strokeDasharray = chevron2Len;
+    chevron2.style.strokeDashoffset = chevron2Len;
+
+    tl.to(arrow2,
+      { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" },
+      1.2
+    );
+    tl.to(chevron2,
+      { strokeDashoffset: 0, duration: 0.15, ease: "power2.out" },
+      1.55
+    );
+
+    // Model node appears
+    tl.fromTo("#node-model",
+      { opacity: 0, x: -20 },
+      { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" },
+      1.6
+    );
+
+    // Scene 2 (2.0-5.0s): Console window rises with 3D tilt, rows cascade in
+
+    // Console container rises and tilts (3d-page-scroll)
+    tl.fromTo(".console-container",
+      {
+        opacity: 0,
+        y: 100,
+        scale: 0.9
+      },
+      {
+        opacity: 1,
+        y: -240,
+        x: "-50%",
+        scale: 1,
+        duration: 0.8,
+        ease: "power3.out"
+      },
+      2.0
+    );
+
+    // Apply 3D tilt to the window itself
+    tl.set(".console-window", {
+      transform: "perspective(2000px) rotateY(-8deg) rotateX(4deg)",
+    }, 2.0);
+
+    // Log rows cascade in (dynamic-content-sequencing)
+    tl.fromTo("#row-1",
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+      2.8
+    );
+
+    tl.fromTo("#row-2",
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+      3.4
+    );
+
+    tl.fromTo("#row-3",
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+      4.0
+    );
+
+    // Scene 3 (5.0-7.758s): Hero row highlights, depth-of-field blur on others
+
+    // Hero latency chip glows (asr-keyword-glow effect)
+    tl.fromTo(".hero-latency",
+      {
+        textShadow: "0 0 0px rgba(14, 165, 233, 0)",
+        scale: 1
+      },
+      {
+        textShadow: "0 0 20px rgba(14, 165, 233, 0.8), 0 0 40px rgba(14, 165, 233, 0.4)",
+        scale: 1.12,
+        duration: 0.6,
+        ease: "power2.out"
+      },
+      5.0
+    );
+
+    // Sustain the glow
+    tl.to(".hero-latency",
+      {
+        textShadow: "0 0 24px rgba(14, 165, 233, 0.9), 0 0 48px rgba(14, 165, 233, 0.5)",
+        duration: 0.8,
+        ease: "power1.inOut"
+      },
+      5.6
+    );
+
+    // Depth-of-field blur on non-hero rows
+    tl.to("#row-1, #row-2",
+      {
+        filter: "blur(3px)",
+        opacity: 0.4,
+        duration: 0.8,
+        ease: "power2.inOut"
+      },
+      5.2
+    );
+
+    // Holds to end - the composition stays in this state
+
+    window.__timelines["04-workflow-router"] = tl;
+  </script>
+</template>

@@ -1,0 +1,185 @@
+<template>
+  <style>
+    @font-face { font-family: "Inter"; font-weight: 400; font-style: normal; font-display: block; src: url("assets/fonts/Inter-400.woff2") format("woff2"); }
+    @font-face { font-family: "Inter"; font-weight: 700; font-style: normal; font-display: block; src: url("assets/fonts/Inter-700.woff2") format("woff2"); }
+    @font-face { font-family: "JetBrains Mono"; font-weight: 400; font-style: normal; font-display: block; src: url("assets/fonts/JetBrainsMono-400.woff2") format("woff2"); }
+    @font-face { font-family: "JetBrains Mono"; font-weight: 500; font-style: normal; font-display: block; src: url("assets/fonts/JetBrainsMono-700.woff2") format("woff2"); }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      container-type: size;
+      overflow: hidden;
+    }
+
+    .sp-ink-ground {
+      position: absolute;
+      inset: 0;
+      background: #030712;
+    }
+
+    .sp-stage {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ambient hero glow — sits BEHIND the card (z-index 1) */
+    .sp-glow {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 1240px;
+      height: 1240px;
+      border-radius: 50%;
+      z-index: 1;
+      opacity: 0;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.26) 0%, rgba(56, 189, 248, 0.10) 34%, rgba(3, 7, 18, 0) 66%);
+      pointer-events: none;
+    }
+
+    /* the proof card block — hero, z-index 2 */
+    .sp-card-block {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0;
+    }
+
+    .sp-card {
+      position: relative;
+      width: 1056px;
+      height: 456px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(248, 250, 252, 0.14);
+      box-shadow: 0 1px 3px rgba(3, 7, 18, 0.5), 0 18px 60px rgba(3, 7, 18, 0.45);
+    }
+
+    .sp-card img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* single-pass verification sheen (tile-strong) */
+    .sp-sweep {
+      position: absolute;
+      top: -20%;
+      left: 0;
+      width: 260px;
+      height: 140%;
+      opacity: 0;
+      background: linear-gradient(100deg, rgba(56, 189, 248, 0) 0%, rgba(56, 189, 248, 0.30) 50%, rgba(56, 189, 248, 0) 100%);
+      pointer-events: none;
+    }
+
+    /* hairline rule that draws in beneath the card */
+    .sp-rule {
+      width: 460px;
+      height: 1px;
+      margin-top: 30px;
+      background: rgba(248, 250, 252, 0.16);
+      transform-origin: center center;
+    }
+  </style>
+
+  <div id="root" data-composition-id="06-social-proof" data-duration="9.303" data-width="1920" data-height="1080">
+    <div class="clip sp-ink-ground" data-start="0" data-duration="9.303" data-track-index="0"></div>
+
+    <div class="clip sp-stage" data-start="0" data-duration="9.303" data-track-index="1">
+      <div class="sp-glow" id="sp-glow"></div>
+
+      <div class="sp-card-block" id="sp-card-block">
+        <div class="sp-card">
+          <img src="assets/testimonial-grace.png" alt="" />
+          <div class="sp-sweep" id="sp-sweep"></div>
+        </div>
+        <div class="sp-rule" id="sp-rule"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    window.__timelines = window.__timelines || {};
+    window.__timelines["06-social-proof"] = tl;
+
+    const DURATION = 8.307;
+
+    const cardBlock = document.getElementById("sp-card-block");
+    const glow = document.getElementById("sp-glow");
+    const sweep = document.getElementById("sp-sweep");
+    const rule = document.getElementById("sp-rule");
+
+    // ── Scene 1 (0.0–2.2s) — "Le plus beau changement" ──
+    // The proof card slides up + crossfades in with one restrained move (waterfall-entry,
+    // single element, power3), landing dead-center. Glow blooms behind on the same settle.
+    const REVEAL_START = 0.15;
+    const REVEAL_DUR = 0.9;
+
+    tl.fromTo(cardBlock,
+      { opacity: 0, y: 72 },
+      { opacity: 1, y: 0, duration: REVEAL_DUR, ease: "power3.out" },
+      REVEAL_START
+    );
+
+    // ambient-glow-bloom (hero-bloom form) — lands with the card's settle as ONE beat
+    const GLOW_PEAK = 0.22;
+    tl.fromTo(glow,
+      { opacity: 0, scale: 0.86 },
+      { opacity: GLOW_PEAK, scale: 1, duration: REVEAL_DUR, ease: "power2.out" },
+      REVEAL_START
+    );
+
+    // ── Scene 2 (2.2–5.0s) — "La nuit… le matin" ── held read.
+    // The Vérifié badge scintillates once: a single-pass tile-strong sheen crosses the card,
+    // then rests. This is the one voltage beat.
+    const SWEEP_START = 3.0;
+    const SWEEP_DUR = 1.25;
+    tl.fromTo(sweep,
+      { x: -320, opacity: 0 },
+      { x: 260, opacity: 0.30, duration: SWEEP_DUR * 0.55, ease: "none" },
+      SWEEP_START
+    );
+    tl.to(sweep,
+      { x: 1120, opacity: 0, duration: SWEEP_DUR * 0.45, ease: "power1.in" },
+      SWEEP_START + SWEEP_DUR * 0.55
+    );
+
+    // ── Scene 3 (5.0–8.307s) — "plus de page blanche" ── full hold.
+    // A neutral hairline rule draws in beneath the card to confirm the cite line; nothing else moves.
+    tl.fromTo(rule,
+      { scaleX: 0 },
+      { scaleX: 1, duration: 0.7, ease: "power2.out" },
+      5.15
+    );
+
+    // Bounded ambient breathe on the glow — the only sustained life during the held frame.
+    const glowPhase = { p: 0 };
+    const BREATHE_START = REVEAL_START + REVEAL_DUR; // 1.05s
+    const BREATHE_DUR = DURATION - BREATHE_START;
+    const BREATHE_CYCLES = BREATHE_DUR / 3.2; // ~3.2s per breath
+    const OPACITY_AMP = 0.03;
+    const SCALE_AMP = 0.014;
+    tl.to(glowPhase, {
+      p: Math.PI * 2 * BREATHE_CYCLES,
+      duration: BREATHE_DUR,
+      ease: "none",
+      onUpdate: () => {
+        const s = Math.sin(glowPhase.p);
+        glow.style.opacity = String(GLOW_PEAK + s * OPACITY_AMP);
+        glow.style.transform = `scale(${1 + s * SCALE_AMP})`;
+      }
+    }, BREATHE_START);
+  </script>
+</template>

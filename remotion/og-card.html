@@ -1,0 +1,111 @@
+<!doctype html>
+<!--
+  Gabarit de la carte de partage social (Open Graph / Twitter), 1200×630.
+  Fond = poster d'ambiance de la marque (réseau de nœuds turquoise) + voile
+  dégradé pour la lisibilité, par-dessus : nom, titre et accroche.
+  Screenshoté par Playwright puis exporté en JPG dans public/assets/.
+-->
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1200px; height: 630px; overflow: hidden; }
+      body {
+        position: relative;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+        background-color: #030712;
+        color: #f8fafc;
+      }
+      /* Fond d'ambiance de la marque (poster de la vidéo Hero). */
+      .bg {
+        position: absolute;
+        inset: 0;
+        background-image: url("/assets/hero-ambient-poster.jpg");
+        background-size: cover;
+        background-position: center;
+      }
+      /* Voile dégradé : assombrit la gauche pour poser le texte dessus. */
+      .veil {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          105deg,
+          rgba(3, 7, 18, 0.94) 0%,
+          rgba(3, 7, 18, 0.82) 42%,
+          rgba(3, 7, 18, 0.35) 100%
+        );
+      }
+      .content {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 84px;
+      }
+      /* Puce « pilule » de confiance, comme sur le site. */
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        align-self: flex-start;
+        padding: 8px 18px;
+        border: 1px solid rgba(56, 189, 248, 0.35);
+        border-radius: 999px;
+        background: rgba(56, 189, 248, 0.08);
+        font-size: 20px;
+        font-weight: 500;
+        color: #7dd3fc;
+        margin-bottom: 30px;
+      }
+      .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #38bdf8;
+        box-shadow: 0 0 12px 2px rgba(56, 189, 248, 0.7);
+      }
+      .name {
+        font-size: 74px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1.05;
+      }
+      .name .accent {
+        background: linear-gradient(to bottom right, #38bdf8, #0ea5e9);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .tagline {
+        margin-top: 24px;
+        max-width: 760px;
+        font-size: 30px;
+        line-height: 1.4;
+        color: #cbd5e1;
+      }
+      .footer {
+        position: absolute;
+        left: 84px;
+        bottom: 54px;
+        font-size: 22px;
+        color: #64748b;
+      }
+      .footer strong { color: #94a3b8; font-weight: 600; }
+    </style>
+  </head>
+  <body>
+    <div class="bg"></div>
+    <div class="veil"></div>
+    <div class="content">
+      <span class="badge"><span class="dot"></span>Intégration IA · Claude Code · Cursor</span>
+      <div class="name">Farid <span class="accent">ADISSO</span></div>
+      <p class="tagline">
+        Configuration et intégration d'environnements IA locaux, étape par étape.
+      </p>
+    </div>
+    <div class="footer"><strong>free-ia-integration.netlify.app</strong></div>
+  </body>
+</html>
