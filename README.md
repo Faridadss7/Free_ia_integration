@@ -224,15 +224,14 @@ Propriété de Farid ADISSO. Tous droits réservés.
 
 ## 📞 Contact
 
-- **Email** : Via le formulaire de contact du site
-- **WhatsApp** : +229 01 61 96 95 40 (MTN MoMo)
+- **Email** : faridadss1234@gmail.com
+- **WhatsApp** : +229 01 58 17 24 31 
 - **LinkedIn** : Farid ADISSO
 - **GitHub** : https://github.com/Faridadss7/Free_ia_integration
 
 ## 🙏 Remerciements
 
-- **Claude Code** : Assistant de développement IA
-- **Cursor** : IDE AI natif
+- **Claude Code** : Assistant de développement IA pour la video 
 - **HyperFrames** : Framework de création vidéo
 - **Remotion** : Framework de vidéo React
 - **ElevenLabs** : Synthèse vocale premium
