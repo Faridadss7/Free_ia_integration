@@ -227,7 +227,7 @@ Propriété de Farid ADISSO. Tous droits réservés.
 - **Email** : Via le formulaire de contact du site
 - **WhatsApp** : +229 01 61 96 95 40 (MTN MoMo)
 - **LinkedIn** : Farid ADISSO
-- **GitHub** : [À compléter]
+- **GitHub** : https://github.com/Faridadss7/Free_ia_integration
 
 ## 🙏 Remerciements
 
