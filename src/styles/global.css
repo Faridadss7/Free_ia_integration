@@ -14,105 +14,116 @@
 @tailwind utilities;
 
 :root {
-  /* --- Palette (thème sombre par défaut) --- */
-  --color-bg: #030712;            /* Noir profond — fond principal            */
-  --color-surface: #0b1220;       /* Bleu-gris nuit — cartes / sections       */
-  --color-surface-translucent: rgba(11, 18, 32, 0.72);
-  --color-surface-raised: #0e1626; /* Surface légèrement élevée (champs, hover)*/
-  --color-border: rgba(255, 255, 255, 0.08); /* Bordures ultra-fines          */
-  --color-border-strong: rgba(255, 255, 255, 0.14);
+  /* --- Palette Thème Sombre (Graphite & Ambre Cuivré) --- */
+  --color-bg: #0a0a0b;            /* Fond Dark Rigoureux                          */
+  --color-surface: #131315;       /* Cartes & Panneaux                            */
+  --color-surface-translucent: rgba(19, 19, 21, 0.85);
+  --color-surface-raised: #1c1c20; /* Surface surélevée                           */
+  --color-border: #26262a;        /* Bordure hairline 1px                        */
+  --color-border-strong: #3a3a40;
+  --color-text: #f4f4f5;          /* Blanc albâtre net                           */
+  --color-text-muted: #a1a1aa;    /* Gris neutre lisible                         */
 
-  /* --- Accent UNIQUE : turquoise (échelle cohérente). --------------------
-     Une seule famille de teinte pour tous les éléments interactifs et de mise
-     en avant (Color System — Phase 2). Le violet et le vert isolés sont
-     retirés des usages larges : on ne garde qu'une identité turquoise. */
-  --color-accent: #38bdf8;         /* Accent principal (turquoise)            */
-  --color-accent-strong: #0ea5e9;  /* Variante soutenue (survol, contraste)   */
-  --color-accent-soft: #7dd3fc;    /* Variante claire (highlight ponctuel)    */
-  --color-accent-rgb: 56, 189, 248;/* Pour rgba() lisible                     */
-  /* Texte posé SUR l'accent (boutons pleins). Theme-aware : sur le turquoise
-     vif du sombre, un quasi-noir ressort ; en clair l'accent fonce, le blanc
-     devient le bon contraste. Évite le texte « noir/lourd » sur fond clair. */
-  --color-on-accent: #04121f;
-  /* Alias de compatibilité (anciennes références encore présentes). */
-  --color-accent-cyan: #38bdf8;
+  /* --- Accent Développeur : Ambre Cuivré & Bleu Désaturé --- */
+  --color-accent: #d97706;        /* Ambre cuivré chaleureux                     */
+  --color-accent-strong: #b45309;
+  --color-accent-soft: #f59e0b;
+  --color-accent-rgb: 217, 119, 6;
+  --color-secondary: #3b82f6;     /* Accent secondaire statuts rares             */
+  --color-amber: #d97706;
+  --color-on-accent: #0a0a0b;
 
-  --color-text: #f8fafc;          /* Texte principal                          */
-  --color-text-muted: #94a3b8;    /* Texte secondaire                         */
+  /* --- Dégradés & textures techniques sobres --- */
+  --gradient-brand: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  --gradient-text: linear-gradient(180deg, #f4f4f5 0%, #a1a1aa 100%);
+  --gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.015) 0%, rgba(255, 255, 255, 0) 100%);
 
-  /* --- Dégradés réutilisables (mono-teinte turquoise, jamais multicolore) - */
-  --gradient-brand: linear-gradient(135deg, var(--color-accent-soft), var(--color-accent-strong));
-  /* Texte titre : blanc → turquoise, dans une seule famille de teinte. */
-  --gradient-text: linear-gradient(115deg, #f8fafc 0%, #e0f2fe 42%, var(--color-accent-soft) 100%);
-
-  /* --- Rayons --- */
-  --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
+  /* --- Rayons modérés (Look logiciel/IDE) --- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
   --radius-full: 999px;
 
-  /* --- LIGHT SYSTEM : une seule logique lumineuse ------------------------
-     Toutes les ombres descendent (lumière venant du haut), même douceur.
-     - elevation : profondeur neutre des surfaces (cards, modale, champs).
-     - accent    : halo turquoise pour les éléments interactifs mis en avant. */
-  --shadow-elevation-sm: 0 1px 2px rgba(0, 0, 0, 0.3), 0 2px 6px -2px rgba(0, 0, 0, 0.4);
-  --shadow-elevation-md: 0 8px 24px -12px rgba(0, 0, 0, 0.7);
-  --shadow-elevation-lg: 0 30px 80px -32px rgba(0, 0, 0, 0.85);
-  /* Grands panneaux flottants (fenêtres terminal, modale) : même logique,
-     portée plus large. Unifie les ombres jusqu'ici codées en dur. */
-  --shadow-elevation-xl: 0 40px 120px -36px rgba(0, 0, 0, 0.9);
-  --shadow-accent-sm: 0 6px 20px -8px rgba(var(--color-accent-rgb), 0.45);
-  --shadow-accent-md: 0 10px 34px -10px rgba(var(--color-accent-rgb), 0.5);
-  /* Alias de compatibilité. */
-  --shadow-card: var(--shadow-elevation-lg);
+  /* --- Zéro ombre décorative — profondeur par bordure hairline --- */
+  --shadow-elevation-sm: none;
+  --shadow-elevation-md: none;
+  --shadow-elevation-lg: 0 20px 40px -15px rgba(0, 0, 0, 0.8); /* Réservé modale */
+  --shadow-elevation-xl: 0 30px 60px -20px rgba(0, 0, 0, 0.9); /* Réservé modale */
+  --shadow-accent-sm: none;
+  --shadow-accent-md: none;
+  --shadow-card: none;
 
   /* --- Typographie --- */
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Helvetica, Arial, sans-serif;
-  --font-mono: "JetBrains Mono", "SFMono-Regular", ui-monospace, Menlo, Consolas,
-    monospace;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 
   /* --- Mise en page --- */
   --max-width: 1200px;
-  --nav-height: 72px;
+  --nav-height: 68px;
 
-  /* --- MOTION SYSTEM : easing + durées uniques (Phase 2) ----------------
-     Un seul easing pour tout le système (signature Linear), et une échelle de
-     durées partagée. Aucune interaction ne doit sortir de ce vocabulaire. */
   --ease-signature: cubic-bezier(0.16, 1, 0.3, 1);
-  --duration-interaction: 160ms;  /* survol, focus, appui (150–180ms)         */
-  --duration-transition: 300ms;   /* changements d'état (250–350ms)           */
-  --duration-entrance: 440ms;     /* entrées de sections (350–500ms)          */
-  /* Alias de compatibilité. */
+  --duration-interaction: 160ms;
+  --duration-transition: 250ms;
+  --duration-entrance: 400ms;
   --ease-out-soft: var(--ease-signature);
   --transition-base: var(--duration-transition) var(--ease-signature);
 }
 
-/* Thème clair — surcharge des tokens uniquement.
-   Activé via la classe .light posée sur <html> par useDarkMode. */
+/* Thème clair — Rendu Papier Tech / Albâtre Pur */
 :root.light {
-  --color-bg: #f7f9fc;
+  --color-bg: #faf9f7;
   --color-surface: #ffffff;
-  --color-surface-translucent: rgba(255, 255, 255, 0.78);
-  --color-surface-raised: #ffffff;
-  --color-border: rgba(2, 6, 23, 0.08);
-  --color-border-strong: rgba(2, 6, 23, 0.14);
-  --color-text: #0b1220;
-  --color-text-muted: #52607a;
-  /* Accent turquoise conservé, décliné pour contraste sur fond clair. */
-  --color-accent: #0284c7;
-  --color-accent-strong: #0369a1;
-  --color-accent-soft: #0ea5e9;
-  --color-accent-rgb: 2, 132, 199;
-  /* Sur l'accent foncé du thème clair, le blanc donne le meilleur contraste. */
+  --color-surface-translucent: rgba(255, 255, 255, 0.92);
+  --color-surface-raised: #f2f0ec;
+  --color-border: #e5e3e0;
+  --color-border-strong: #d1cec9;
+  --color-text: #0a0a0b;
+  --color-text-muted: #71717a;
+  
+  --color-accent: #c2620a;        /* Ambre cuivré assombri pour contraste AA */
+  --color-accent-strong: #9a4c06;
+  --color-accent-soft: #d97706;
+  --color-accent-rgb: 194, 98, 10;
+  --color-secondary: #2563eb;
+  --color-amber: #c2620a;
   --color-on-accent: #ffffff;
-  --gradient-text: linear-gradient(115deg, #0b1220 0%, #0f4c75 45%, var(--color-accent) 100%);
-  --shadow-elevation-sm: 0 1px 2px rgba(15, 23, 42, 0.06), 0 2px 6px -2px rgba(15, 23, 42, 0.08);
-  --shadow-elevation-md: 0 8px 24px -12px rgba(15, 23, 42, 0.18);
-  --shadow-elevation-lg: 0 30px 70px -34px rgba(15, 23, 42, 0.28);
-  --shadow-elevation-xl: 0 40px 100px -40px rgba(15, 23, 42, 0.3);
-  --shadow-accent-sm: 0 6px 20px -8px rgba(var(--color-accent-rgb), 0.3);
-  --shadow-accent-md: 0 10px 34px -10px rgba(var(--color-accent-rgb), 0.34);
+
+  --gradient-brand: linear-gradient(135deg, #c2620a 0%, #9a4c06 100%);
+  --gradient-text: linear-gradient(180deg, #0a0a0b 0%, #3f3f46 100%);
+  --gradient-card: linear-gradient(180deg, #ffffff 0%, #faf9f7 100%);
+
+  --shadow-elevation-sm: none;
+  --shadow-elevation-md: none;
+  --shadow-elevation-lg: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+  --shadow-elevation-xl: 0 20px 45px -10px rgba(0, 0, 0, 0.15);
+  --shadow-accent-sm: none;
+  --shadow-accent-md: none;
+}
+
+.glass-cockpit {
+  background: rgba(18, 18, 21, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-elevation-lg);
+}
+:root.light .glass-cockpit {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-elevation-md);
+}
+
+.mesh-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--duration-interaction) var(--ease-signature), box-shadow var(--duration-interaction) var(--ease-signature);
+}
+.mesh-card:hover {
+  border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-elevation-md);
 }
 
 /* --- Reset minimal --- */
@@ -373,14 +384,34 @@ ul {
   }
 }
 
-/* Scrollbar discrète, cohérente avec le thème sombre */
+/* Utilitaires spécifiques Dev / Tech */
+.text-glow {
+  text-shadow: 0 0 20px rgba(16, 185, 129, 0.35);
+}
+
+.glow-pill {
+  position: relative;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  box-shadow: 0 0 15px -3px rgba(16, 185, 129, 0.2);
+}
+
+.ticker-mask {
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+/* Scrollbar discrète, ultra-fine */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-border-strong);
+  background: var(--color-border);
   border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-strong);
 }
 ::-webkit-scrollbar-track {
   background: transparent;

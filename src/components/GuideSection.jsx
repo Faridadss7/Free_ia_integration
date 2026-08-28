@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { IconCheck, IconArrowRight } from "./icons";
+import {
+  IconCheck,
+  IconArrowRight,
+  IconLogoClaude,
+  IconLogoCursor,
+  IconLogoCopilot,
+  IconLogoRooCode,
+  IconLogoQwen,
+} from "./icons";
 import Reveal from "./Reveal";
 import useTilt from "../hooks/useTilt";
 import PaymentWizard from "./PaymentWizard";
@@ -71,18 +79,18 @@ export default function GuideSection({ t, lang }) {
           <a
             href={guideUrl}
             download={freeFileName}
-            className="mt-8 inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-on-accent shadow-accent-sm transition-[transform,box-shadow,background-color] duration-interaction ease-signature hover:-translate-y-0.5 hover:bg-accent-strong hover:shadow-accent-md"
+            className="mt-8 inline-flex items-center justify-center gap-2 rounded-lg bg-accent hover:bg-accent-strong px-6 py-3 text-sm font-semibold text-white border border-accent-soft/30 active:scale-[0.98] transition-all font-mono"
           >
-            {freeCta}
-            <IconArrowRight size={18} />
+            <span>{freeCta}</span>
+            <IconArrowRight size={16} />
           </a>
         </Reveal>
 
         {/* ---- Bloc 2 : Packs d'accompagnement ---- */}
         {/* Texte d'accroche au-dessus des deux packs. */}
         <Reveal>
-          <p className="mx-auto mt-20 max-w-3xl text-center text-base leading-relaxed text-muted">
-            {packsIntro}
+          <p className="mx-auto mt-20 max-w-3xl text-center text-base leading-relaxed text-muted font-mono text-xs uppercase tracking-wider">
+            // {packsIntro}
           </p>
         </Reveal>
 
@@ -120,7 +128,7 @@ export default function GuideSection({ t, lang }) {
           >
             {/* Détail des outils supportés (spécifique au Pack Pro). */}
             <div className="mt-6 space-y-4 border-t border-border pt-6 text-sm">
-              <p className="text-ink/80">{pro.toolsLead}</p>
+              <p className="text-ink font-mono text-xs">{pro.toolsLead}</p>
               <ToolGroup label={pro.ideLabel} items={pro.ide} />
               <ToolGroup label={pro.agentsLabel} items={pro.agents} />
             </div>
@@ -142,20 +150,7 @@ export default function GuideSection({ t, lang }) {
 }
 
 /**
- * PackCard — Carte d'un pack, calquée sur `PlanCard` de la section Pricing
- * (mêmes classes, mêmes états) pour une intégration visuelle sans rupture.
- *
- * @param {object} props
- * @param {string} props.name
- * @param {string} props.price
- * @param {string} props.cta
- * @param {string} props.currency
- * @param {string[]} props.features
- * @param {boolean} props.featured             Style « mis en avant » (Pro) ?
- * @param {string} [props.badge]               Libellé du badge (si `featured`).
- * @param {() => void} props.onSelect          Ouvre le wizard sur ce pack.
- * @param {import('react').ReactNode} [props.children]  Contenu additionnel.
- * @returns {JSX.Element}
+ * PackCard — Carte d'un pack au style Dev/Tech Corporate.
  */
 function PackCard({
   name,
@@ -170,73 +165,62 @@ function PackCard({
   className = "",
   style,
 }) {
-  const tilt = useTilt({ max: 5 });
+  const tilt = useTilt({ max: 3 });
   return (
     <article
       onPointerMove={tilt.onPointerMove}
       onPointerLeave={tilt.onPointerLeave}
       style={style}
       className={[
-        "spotlight-host relative flex h-full flex-col rounded-2xl border p-7 transition-[transform,border-color,box-shadow] duration-transition ease-signature will-change-transform",
+        "spotlight-host relative flex h-full flex-col rounded-xl border p-7 transition-all duration-200",
         featured
-          ? "border-accent/35 bg-surface shadow-accent-md md:-translate-y-2"
-          : "border-border bg-surface shadow-elevation-md",
+          ? "border-accent/40 bg-surface md:-translate-y-1"
+          : "border-border bg-surface hover:border-border-strong",
         className,
       ].join(" ")}
     >
-      {/* Projecteur turquoise qui suit le curseur */}
-      <span aria-hidden="true" className="spotlight" />
-
-      {/* Halo turquoise diffus derrière la carte Pro (palette unifiée) */}
-      {featured ? (
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -inset-px -z-10 rounded-2xl bg-gradient-to-b from-accent/15 to-transparent blur-xl"
-        />
-      ) : null}
-
       {/* Badge « Le plus choisi » */}
       {featured && badge ? (
-        <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-on-accent shadow-accent-sm">
-          {badge}
+        <span className="absolute -top-3 left-6 rounded border border-accent bg-accent px-2.5 py-0.5 font-mono text-[11px] font-bold text-white">
+          ★ {badge}
         </span>
       ) : null}
 
       {/* En-tête de carte */}
       <header className="relative">
-        <h3 className="text-lg font-semibold text-ink">{name}</h3>
+        <h3 className="text-lg font-bold font-display tracking-tightest text-ink">{name}</h3>
       </header>
 
       {/* Prix */}
       <div className="relative mt-6 flex items-baseline gap-2">
-        <span className="text-4xl font-bold tracking-tight text-ink">
+        <span className="text-4xl font-bold font-display tracking-tightest text-ink">
           {price}
         </span>
-        <span className="text-sm font-medium text-muted">{currency}</span>
+        <span className="text-sm font-semibold text-muted font-mono">{currency}</span>
       </div>
 
-      {/* Liste des avantages (flex-1 : pousse le CTA en bas de carte) */}
+      {/* Liste des avantages */}
       <ul className="relative mt-6 flex-1 space-y-3">
         {features.map((feature) => (
           <li key={feature} className="flex items-start gap-3 text-sm">
-            <IconCheck size={18} className="mt-0.5 shrink-0 text-accent" />
-            <span className="text-ink/80">{feature}</span>
+            <IconCheck size={16} className="mt-0.5 shrink-0 text-accent" />
+            <span className="text-ink text-xs sm:text-sm">{feature}</span>
           </li>
         ))}
       </ul>
 
-      {/* Détail additionnel optionnel (outils du Pack Pro) */}
+      {/* Détail additionnel optionnel */}
       {children ? <div className="relative">{children}</div> : null}
 
-      {/* CTA — même style que la carte Pricing correspondante. */}
+      {/* CTA */}
       <button
         type="button"
         onClick={onSelect}
         className={[
-          "relative mt-8 w-full rounded-xl px-5 py-3 text-sm font-semibold transition-[transform,box-shadow,background-color,border-color] duration-interaction ease-signature",
+          "relative mt-8 w-full rounded-lg px-5 py-3 text-sm font-semibold transition-all active:scale-[0.98] font-mono",
           featured
-            ? "shimmer-line bg-accent text-on-accent shadow-accent-sm hover:-translate-y-0.5 hover:bg-accent-strong hover:shadow-accent-md"
-            : "border border-border-strong text-ink hover:-translate-y-0.5 hover:border-accent/40 hover:bg-accent/5",
+            ? "bg-accent hover:bg-accent-strong text-white border border-accent-soft/30"
+            : "border border-border bg-surface-raised text-ink hover:bg-surface",
         ].join(" ")}
       >
         {cta}
@@ -245,8 +229,18 @@ function PackCard({
   );
 }
 
+function getToolIcon(name) {
+  const n = name.toLowerCase();
+  if (n.includes("claude")) return IconLogoClaude;
+  if (n.includes("cursor")) return IconLogoCursor;
+  if (n.includes("copilot")) return IconLogoCopilot;
+  if (n.includes("qwen")) return IconLogoQwen;
+  if (n.includes("roo") || n.includes("cline") || n.includes("kilo")) return IconLogoRooCode;
+  return null;
+}
+
 /**
- * ToolGroup — Étiquette + liste de puces d'outils (IDE / agents terminal).
+ * ToolGroup — Étiquette + liste de puces d'outils avec logos officiels.
  *
  * @param {{ label: string, items: string[] }} props
  * @returns {JSX.Element}
@@ -258,14 +252,18 @@ function ToolGroup({ label, items }) {
         {label}
       </span>
       <ul className="mt-2 flex flex-wrap gap-2">
-        {items.map((item) => (
-          <li
-            key={item}
-            className="rounded-md border border-border bg-accent/[0.04] px-2.5 py-1 text-xs text-ink/80"
-          >
-            {item}
-          </li>
-        ))}
+        {items.map((item) => {
+          const Icon = getToolIcon(item);
+          return (
+            <li
+              key={item}
+              className="inline-flex items-center gap-1.5 rounded-md border border-border bg-surface-raised px-2.5 py-1 text-xs text-ink/90 font-mono"
+            >
+              {Icon && <Icon size={13} className="text-accent shrink-0" />}
+              <span>{item}</span>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

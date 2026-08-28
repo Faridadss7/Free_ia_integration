@@ -37,6 +37,7 @@ export const translations = {
     nav: {
       links: [
         { id: "values", label: "Prestations" },
+        { id: "training", label: "Formation" },
         { id: "demo", label: "Démo" },
         { id: "pricing", label: "Tarifs" },
         { id: "testimonials", label: "Avis" },
@@ -214,6 +215,124 @@ export const translations = {
           "Inclut tout ce qui est dans le pack Standard",
         ],
       },
+    },
+
+    training: {
+      eyebrow: "PROGRAMME DE FORMATION PAYANTE",
+      title: "Masterclass IA & VibeCoding Mastery",
+      subtitle:
+        "Devenez un ingénieur IA d'élite. Maîtrisez les modèles sans abonnement, réduisez vos tokens de 90%, dominez l'écosystème Google IA, Antigravity et la création multimédia.",
+      badge: "Formation Complète Clé en Main",
+      stats: [
+        { label: "Modules immersifs", value: "6" },
+        { label: "Économie de tokens", value: "Jusqu'à -90%" },
+        { label: "Outils & Modèles", value: "100% Maîtrisés" },
+        { label: "Accès & Mises à jour", value: "À vie" },
+      ],
+      cta: "Rejoindre la Formation",
+      ctaSub: "Accès immédiat + Groupe VIP + Mises à jour incluses",
+      price: "5 000",
+      priceOld: "15 000",
+      currency: "FCFA",
+      planName: "Formation Complète IA & VibeCoding",
+      modules: [
+        {
+          id: "m1",
+          number: "01",
+          title: "Intégration des Modèles IA Sans Abonnement",
+          tag: "Architecture & Routing",
+          duration: "Module Pratique",
+          description:
+            "Déployez Claude Code, Cursor, Cline, Roo Code et Trae connectés à AgentRouter, OpenRouter et APIs tierces. Utilisez Claude 3.7, DeepSeek R1/V3, Gemini 2.5 et GLM sans payer 20$/mois par outil.",
+          skills: [
+            "Configuration Claude Code CLI & Cursor",
+            "AgentRouter & variables d'environnement globales",
+            "Multi-modèles (DeepSeek R1, Claude 3.7, Gemini 2.5)",
+            "Scripts de démarrage automatisés en 1 clic",
+          ],
+        },
+        {
+          id: "m2",
+          number: "02",
+          title: "Marmouth IA & Systèmes d'Automatisation",
+          tag: "Workflows & No-Code",
+          duration: "Module Stratégique",
+          description:
+            "Automatisez vos opérations et concevez des agents IA autonomes connectés à n8n, Make et vos pipelines de code pour créer des services monétisables pour vos clients.",
+          skills: [
+            "Architecture d'agents autonomes & micro-services",
+            "Workflows n8n & Make connectés aux APIs de code",
+            "Création de templates d'automatisation rentables",
+            "Industrialisation et monitoring des pipelines",
+          ],
+        },
+        {
+          id: "m3",
+          number: "03",
+          title: "L'Art du VibeCoding & Économie Radicale de Tokens (-90%)",
+          tag: "Productivité & Token Economy",
+          duration: "Module Méthodologique",
+          description:
+            "Apprenez à coder à la vitesse de la pensée sans gaspiller vos tokens. Structurez vos projets, utilisez le Context Caching, les règles chirurgicales et évitez la réécriture intégrale de fichiers.",
+          skills: [
+            "Règles d'or du VibeCoding (Architecte vs Exécuteur)",
+            "Économie de tokens jusqu'à -90% (Diff chirurgical, micro-fichiers)",
+            "Configuration avancée de .cursorrules et AGENTS.md",
+            "Prompt engineering modulaire & context caching",
+          ],
+        },
+        {
+          id: "m4",
+          number: "04",
+          title: "Écosystème Google IA Avancé (Studio, Stitch, Flow, IA Plus)",
+          tag: "Google Cloud & AI Studio",
+          duration: "Module Technique",
+          description:
+            "Exploitez toute la suite Google : activation Google IA Plus (2M tokens de contexte), Google AI Studio (JSON Schema, Function Calling, Cache), Google Stitch et Google Flow pour le traitement de données.",
+          skills: [
+            "Activation et rentabilisation de Google IA Plus",
+            "Google AI Studio : Clés gratuites, System Instructions, JSON Schema",
+            "Function Calling / Tool Use autonome dans vos applications",
+            "Google Flow & Cloud Dataflow pour pipelines IA massifs",
+          ],
+        },
+        {
+          id: "m5",
+          number: "05",
+          title: "Maîtrise de Google DeepMind Antigravity",
+          tag: "Agentic Engineering",
+          duration: "Module Expert",
+          description:
+            "Dominez l'environnement de développement pair-programming autonome de Google. Exploitez les Skills, serveurs MCP, Subagents de recherche web et le mode Planning pour bâtir des projets complexes.",
+          skills: [
+            "Planning Mode vs Execution Mode (Architecture & Walkthrough)",
+            "Création et intégration de serveurs MCP personnalisés",
+            "Subagents autonomes & automation du navigateur",
+            "Création de custom skills et règles de pair-programming",
+          ],
+        },
+        {
+          id: "m6",
+          number: "06",
+          title: "Création Audio & Musique Publicitaire avec SUNO",
+          tag: "Production Multimédia",
+          duration: "Module Créatif",
+          description:
+            "Concevez des bandes-son professionnelles, génériques tech et pistes audio percutantes pour vos vidéos SaaS, réseaux sociaux et publicités sans compétences musicales préalables.",
+          skills: [
+            "Prompt engineering musical (styles Cyberpunk, SaaS, Synthwave)",
+            "Structure avancée de morceaux ([Intro], [Drop], [Climax], [Outro])",
+            "Mixage & intégration avec voix off IA (ElevenLabs / Kokoro)",
+            "Production de sound design pour vidéos de lancement",
+          ],
+        },
+      ],
+      guarantees: [
+        "Accès immédiat à l'ensemble des 6 modules",
+        "Scripts prêts à l'emploi et templates de configuration",
+        "Accès au groupe privé VIP d'entraide et de support",
+        "Mises à jour gratuites de tous les nouveaux modules",
+      ],
     },
 
     why: {
@@ -481,6 +600,24 @@ export const translations = {
       close: "Fermer",
     },
 
+    techMarquee: {
+      title: "Environnements, Modèles & Agents IA 100% opérationnels",
+    },
+
+    roi: {
+      eyebrow: "SIMULATEUR DE RENTABILITÉ",
+      title: "Combien perdez-vous en abonnements chaque mois ?",
+      subtitle:
+        "Cochez vos outils actuels pour découvrir vos économies nettes avec notre intégration locale illimitée.",
+    },
+
+    beforeAfter: {
+      eyebrow: "LA DIFFÉRENCE CONCRÈTE",
+      title: "Pourquoi continuer à payer des abonnements mensuels ?",
+      subtitle:
+        "Comparez l'expérience classique avec notre solution d'intégration locale haute performance.",
+    },
+
     footer: {
       title: "AI Integration & Cloud Solutions",
       github: "GitHub",
@@ -515,6 +652,7 @@ export const translations = {
     nav: {
       links: [
         { id: "values", label: "Services" },
+        { id: "training", label: "Masterclass" },
         { id: "demo", label: "Demo" },
         { id: "pricing", label: "Pricing" },
         { id: "testimonials", label: "Reviews" },
@@ -690,6 +828,124 @@ export const translations = {
           "Includes everything in the Standard pack",
         ],
       },
+    },
+
+    training: {
+      eyebrow: "PREMIUM MASTERCLASS PROGRAM",
+      title: "AI & VibeCoding Mastery Bootcamp",
+      subtitle:
+        "Become an elite AI engineer. Master subscription-free models, slash token usage by 90%, dominate the Google AI ecosystem, Antigravity, and multimedia generation.",
+      badge: "Turnkey Masterclass & Certification",
+      stats: [
+        { label: "Immersive Modules", value: "6" },
+        { label: "Token Savings", value: "Up to -90%" },
+        { label: "Tools & Models", value: "100% Mastered" },
+        { label: "Access & Updates", value: "Lifetime" },
+      ],
+      cta: "Enroll in Masterclass",
+      ctaSub: "Instant Access + VIP Private Group + Lifetime Updates",
+      price: "5,000",
+      priceOld: "15,000",
+      currency: "FCFA",
+      planName: "AI & VibeCoding Complete Masterclass",
+      modules: [
+        {
+          id: "m1",
+          number: "01",
+          title: "Subscription-Free AI Model Integration",
+          tag: "Architecture & Routing",
+          duration: "Hands-on Module",
+          description:
+            "Deploy Claude Code, Cursor, Cline, Roo Code and Trae routed via AgentRouter, OpenRouter and third-party APIs. Access Claude 3.7, DeepSeek R1/V3, Gemini 2.5 and GLM without monthly subscriptions.",
+          skills: [
+            "Claude Code CLI & Cursor terminal setup",
+            "AgentRouter & global environment variables",
+            "Multi-model routing (DeepSeek R1, Claude 3.7, Gemini 2.5)",
+            "1-click automated startup scripts (.bat / .sh)",
+          ],
+        },
+        {
+          id: "m2",
+          number: "02",
+          title: "Marmouth AI & Autonomous Automations",
+          tag: "Workflows & No-Code",
+          duration: "Strategic Module",
+          description:
+            "Automate your operations and build autonomous AI agents integrated with n8n, Make and your custom code pipelines to create high-ticket monetization services.",
+          skills: [
+            "Autonomous AI agents & micro-services architecture",
+            "n8n & Make workflows connected to code APIs",
+            "Profitable automation templates creation",
+            "Pipeline industrialization and observability",
+          ],
+        },
+        {
+          id: "m3",
+          number: "03",
+          title: "The Art of VibeCoding & Radical Token Economics (-90%)",
+          tag: "Productivity & Token Economy",
+          duration: "Methodology Module",
+          description:
+            "Learn to code at the speed of thought without burning your tokens. Structure projects, leverage Context Caching, surgical prompt rules and avoid full file rewrites.",
+          skills: [
+            "Golden Rules of VibeCoding (Architect vs Executor)",
+            "Slash token consumption by up to -90% (Surgical diff, micro-files)",
+            "Advanced .cursorrules and AGENTS.md configuration",
+            "Modular prompt engineering & prompt caching",
+          ],
+        },
+        {
+          id: "m4",
+          number: "04",
+          title: "Advanced Google AI Ecosystem (Studio, Stitch, Flow, AI Plus)",
+          tag: "Google Cloud & AI Studio",
+          duration: "Technical Module",
+          description:
+            "Harness the entire Google stack: Google AI Plus activation (2M context window), Google AI Studio (JSON Schema, Function Calling, Cache), Google Stitch, and Google Flow data pipelines.",
+          skills: [
+            "Google AI Plus activation and ROI optimization",
+            "Google AI Studio: Free keys, System Instructions, JSON Schema",
+            "Autonomous Function Calling / Tool Use in your apps",
+            "Google Flow & Cloud Dataflow for massive AI pipelines",
+          ],
+        },
+        {
+          id: "m5",
+          number: "05",
+          title: "Google DeepMind Antigravity Mastery",
+          tag: "Agentic Engineering",
+          duration: "Expert Module",
+          description:
+            "Master Google's autonomous pair-programming agentic environment. Use Skills, custom MCP servers, web research Subagents, and Planning mode to engineer complex codebases.",
+          skills: [
+            "Planning Mode vs Execution Mode (Architecture & Walkthrough)",
+            "Custom MCP Servers creation and wiring",
+            "Autonomous browser subagents & live web research",
+            "Custom skills authoring & pair-programming rules",
+          ],
+        },
+        {
+          id: "m6",
+          number: "06",
+          title: "Audio & Commercial Music Generation with SUNO",
+          tag: "Multimedia Production",
+          duration: "Creative Module",
+          description:
+            "Craft studio-grade soundtracks, tech jingles, and high-converting commercial audio for your SaaS videos, social channels, and ads with zero prior music skills.",
+          skills: [
+            "Musical prompt engineering (Cyberpunk, SaaS, Synthwave)",
+            "Advanced track structure tags ([Intro], [Drop], [Climax], [Outro])",
+            "Audio mixing & voiceover layering (ElevenLabs / Kokoro)",
+            "Sound design production for product launch films",
+          ],
+        },
+      ],
+      guarantees: [
+        "Instant lifetime access to all 6 modules",
+        "Ready-to-use production scripts and config templates",
+        "Access to the VIP private support and networking group",
+        "Free lifetime updates for all newly released modules",
+      ],
     },
 
     why: {
@@ -940,6 +1196,24 @@ export const translations = {
           "Hello Farid, I'd like to complete my AI integration order.",
       },
       close: "Close",
+    },
+
+    techMarquee: {
+      title: "Environments, Models & AI Agents 100% operational",
+    },
+
+    roi: {
+      eyebrow: "AI SAVINGS CALCULATOR",
+      title: "How much are you losing in monthly subscriptions?",
+      subtitle:
+        "Check your current tools to discover your net savings with our unlimited local integration.",
+    },
+
+    beforeAfter: {
+      eyebrow: "THE CONCRETE DIFFERENCE",
+      title: "Why keep paying monthly subscription fees?",
+      subtitle:
+        "Compare the traditional fragmented setup with our high-performance local AI integration.",
     },
 
     footer: {

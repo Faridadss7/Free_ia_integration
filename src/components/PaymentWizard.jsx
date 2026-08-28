@@ -130,7 +130,7 @@ export default function PaymentWizard({ t, lang, plan, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/70 p-4 backdrop-blur-md sm:items-center sm:p-6"
+      className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/60 p-4 backdrop-blur-md sm:items-center sm:p-6"
       onMouseDown={(e) => {
         // Ferme uniquement si le clic démarre sur l'arrière-plan lui-même.
         if (e.target === e.currentTarget) onClose();
@@ -142,21 +142,21 @@ export default function PaymentWizard({ t, lang, plan, onClose }) {
         aria-modal="true"
         aria-labelledby="wizard-title"
         tabIndex={-1}
-        className="animate-fade-up relative w-full max-w-lg rounded-2xl border border-white/10 bg-[#0B1220] shadow-elevation-xl outline-none"
+        className="animate-fade-up relative w-full max-w-lg rounded-3xl border border-border bg-surface shadow-2xl outline-none"
       >
         {/* --- En-tête : titre + forfait + fermeture --- */}
-        <div className="flex items-start justify-between gap-4 border-b border-white/5 px-6 py-5">
+        <div className="flex items-start justify-between gap-4 border-b border-border px-6 py-5">
           <div>
             <h2
               id="wizard-title"
-              className="text-lg font-semibold text-slate-50"
+              className="text-lg font-bold font-display text-ink"
             >
               {t("wizard.title")}
             </h2>
             {plan ? (
-              <p className="mt-1 text-sm text-slate-400">
+              <p className="mt-1 text-sm text-muted">
                 {t("wizard.selectedPlan")} :{" "}
-                <span className="font-medium text-accent">
+                <span className="font-bold text-accent">
                   {plan.name} — {plan.price} {currency}
                 </span>
               </p>
@@ -166,7 +166,7 @@ export default function PaymentWizard({ t, lang, plan, onClose }) {
             type="button"
             onClick={onClose}
             aria-label={t("wizard.close")}
-            className="rounded-lg p-1.5 text-slate-400 transition-colors hover:bg-white/5 hover:text-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            className="rounded-lg p-1.5 text-muted transition-colors hover:bg-surface-raised hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
             <IconClose size={20} />
           </button>
@@ -185,10 +185,10 @@ export default function PaymentWizard({ t, lang, plan, onClose }) {
                       className={[
                         "flex h-7 w-7 shrink-0 items-center justify-center rounded-full border text-xs font-semibold transition-[background-color,border-color,color] duration-transition ease-signature",
                         done
-                          ? "border-transparent bg-accent text-[#04121f]"
+                          ? "border-transparent bg-accent text-on-accent font-bold"
                           : current
-                          ? "border-accent text-accent"
-                          : "border-white/10 text-slate-500",
+                          ? "border-accent text-accent font-bold"
+                          : "border-border text-muted",
                       ].join(" ")}
                     >
                       {done ? <IconCheck size={14} /> : index + 1}
@@ -198,7 +198,7 @@ export default function PaymentWizard({ t, lang, plan, onClose }) {
                     <span
                       className={[
                         "h-px flex-1 transition-colors duration-transition ease-signature",
-                        index < step ? "bg-accent" : "bg-white/10",
+                        index < step ? "bg-accent" : "bg-border",
                       ].join(" ")}
                     />
                   ) : null}
@@ -206,7 +206,7 @@ export default function PaymentWizard({ t, lang, plan, onClose }) {
               );
             })}
           </ol>
-          <p className="mt-3 text-xs font-medium uppercase tracking-[0.14em] text-slate-500">
+          <p className="mt-3 text-xs font-bold uppercase tracking-[0.14em] text-muted">
             {steps[step]}
           </p>
         </div>
@@ -267,8 +267,8 @@ export default function PaymentWizard({ t, lang, plan, onClose }) {
         </div>
 
         {/* --- Secours international permanent --- */}
-        <div className="border-t border-white/5 px-6 py-4 text-center">
-          <p className="text-xs text-slate-500">
+        <div className="border-t border-border px-6 py-4 text-center">
+          <p className="text-xs text-muted">
             {t("wizard.fallback.text")}{" "}
             <a
               href={waLink}
@@ -386,8 +386,8 @@ function StepPayment({
                 className={[
                   "rounded-xl border px-4 py-3 text-sm font-medium transition-all duration-transition ease-signature focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
                   selected
-                    ? "border-accent/60 bg-accent/10 text-slate-50"
-                    : "border-white/10 text-slate-400 hover:border-white/20",
+                    ? "border-accent bg-accent/10 text-ink font-bold"
+                    : "border-border text-muted hover:border-border-strong hover:text-ink",
                 ].join(" ")}
               >
                 {op.label}
@@ -398,22 +398,22 @@ function StepPayment({
       </div>
 
       {/* Instructions + détails du transfert */}
-      <p className="text-sm leading-relaxed text-slate-400">
+      <p className="text-sm leading-relaxed text-muted">
         {t("wizard.step2.instructions")}
       </p>
 
-      <dl className="rounded-xl border border-white/10 bg-white/[0.02] p-4 text-sm">
+      <dl className="rounded-xl border border-border bg-surface-raised p-4 text-sm">
         <Row label={t("wizard.step2.recipientLabel")}>
-          <span className="text-slate-100">{t("wizard.step2.recipientName")}</span>
+          <span className="text-ink font-semibold">{t("wizard.step2.recipientName")}</span>
         </Row>
         <Row label={t("wizard.step2.numberLabel")}>
           <span className="flex items-center gap-2">
-            <span className="font-mono text-slate-100">{activeOperator.number}</span>
+            <span className="font-mono text-ink font-bold">{activeOperator.number}</span>
             <button
               type="button"
               onClick={() => onCopy(activeOperator.number)}
               aria-label={t("wizard.step2.copyAria")}
-              className="inline-flex items-center gap-1 rounded-md border border-white/10 px-2 py-1 text-xs text-slate-300 transition-colors duration-interaction ease-signature hover:border-accent/40 hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1 text-xs text-muted transition-colors duration-interaction ease-signature hover:border-accent hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               {copied ? <IconCheck size={13} /> : <IconCopy size={13} />}
               {copied ? t("wizard.step2.copied") : null}
@@ -421,7 +421,7 @@ function StepPayment({
           </span>
         </Row>
         <Row label={t("wizard.step2.amountLabel")} last>
-          <span className="font-semibold text-accent">
+          <span className="font-bold text-accent font-mono">
             {plan ? `${plan.price} ${currency}` : "—"}
           </span>
         </Row>
@@ -509,17 +509,17 @@ function StepConfirm({
           className={[
             "mt-2 flex w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-dashed px-4 py-6 text-center transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
             dragActive
-              ? "border-sky-500/60 bg-sky-500/[0.06]"
-              : "border-white/15 bg-white/[0.02] hover:border-sky-500/40",
+              ? "border-accent bg-accent/10"
+              : "border-border bg-surface-raised hover:border-accent/60",
           ].join(" ")}
         >
-          <IconUpload size={22} className="text-sky-400" />
+          <IconUpload size={22} className="text-accent" />
           {fileName ? (
-            <span className="text-sm text-slate-200">
+            <span className="text-sm text-ink font-semibold">
               {t("wizard.step3.uploadChosen")} : {fileName}
             </span>
           ) : (
-            <span className="text-sm text-slate-500">
+            <span className="text-sm text-muted">
               {t("wizard.step3.uploadHint")}
             </span>
           )}
@@ -589,16 +589,16 @@ function StepDone({ t, onClose, attachmentDropped, waLink }) {
       <span className="relative flex h-14 w-14 items-center justify-center motion-safe:animate-success-in">
         <span
           aria-hidden="true"
-          className="absolute inset-0 rounded-full bg-emerald-500/15 shadow-[0_0_30px_-6px_rgba(16,185,129,0.45)]"
+          className="absolute inset-0 rounded-full bg-accent/15"
         />
-        <span className="relative flex h-full w-full items-center justify-center rounded-full text-emerald-400 ring-1 ring-inset ring-emerald-400/25">
+        <span className="relative flex h-full w-full items-center justify-center rounded-full text-accent ring-1 ring-inset ring-accent/30">
           <IconCheck size={28} />
         </span>
       </span>
-      <h3 className="text-lg font-semibold text-slate-50">
+      <h3 className="text-lg font-bold font-display tracking-tightest text-ink">
         {t("wizard.step4.title")}
       </h3>
-      <p className="max-w-sm text-sm leading-relaxed text-slate-400">
+      <p className="max-w-sm text-sm leading-relaxed text-muted">
         {t("wizard.step4.subtitle")}
       </p>
       <p className="max-w-sm text-sm leading-relaxed text-slate-500">
@@ -635,8 +635,8 @@ function StepDone({ t, onClose, attachmentDropped, waLink }) {
 function Header({ t, titleKey, subtitleKey }) {
   return (
     <div>
-      <h3 className="text-base font-semibold text-slate-100">{t(titleKey)}</h3>
-      <p className="mt-1 text-sm text-slate-400">{t(subtitleKey)}</p>
+      <h3 className="text-base font-bold font-display text-ink">{t(titleKey)}</h3>
+      <p className="mt-1 text-sm text-muted">{t(subtitleKey)}</p>
     </div>
   );
 }
@@ -656,26 +656,24 @@ function Row({ label, children, last = false }) {
   return (
     <div
       className={`flex items-center justify-between gap-4 py-2 ${
-        last ? "" : "border-b border-white/5"
+        last ? "" : "border-b border-border"
       }`}
     >
-      <dt className="text-slate-500">{label}</dt>
-      <dd>{children}</dd>
+      <dt className="text-muted">{label}</dt>
+      <dd className="text-ink font-semibold">{children}</dd>
     </div>
   );
 }
 
-// Champs légèrement surélevés (surface distincte du fond de la modale) + focus
-// élégant : anneau turquoise doux, easing signature. Profondeur au lieu d'aplat.
+// Champs de saisie haut de gamme, contrastés et nets
 const inputClass =
-  "w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] outline-none transition-[border-color,box-shadow,background-color] duration-interaction ease-signature focus:border-accent/60 focus:bg-white/[0.05] focus:shadow-[0_0_0_3px_rgba(56,189,248,0.14)]";
+  "w-full rounded-xl border border-border bg-surface-raised px-4 py-2.5 text-sm text-ink placeholder:text-muted outline-none transition-[border-color,box-shadow,background-color] duration-interaction ease-signature focus:border-accent focus:bg-surface focus:shadow-[0_0_0_3px_rgba(2,132,199,0.18)]";
 
-const labelClass = "text-xs font-medium uppercase tracking-[0.12em] text-slate-500";
+const labelClass = "text-xs font-bold uppercase tracking-[0.12em] text-muted";
 
-// Bouton primaire : même système lumineux que le reste du site — élévation
-// légère + ombre d'accent au survol (pas un simple aplat de couleur).
+// Bouton primaire : éclatant et tactile
 const primaryBtn =
-  "inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-[#04121f] shadow-accent-sm transition-[transform,box-shadow,background-color] duration-interaction ease-signature hover:-translate-y-0.5 hover:bg-accent-strong hover:shadow-accent-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
+  "inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-accent px-5 py-2.5 text-sm font-bold text-on-accent shadow-sm transition-[transform,box-shadow,opacity] duration-interaction ease-signature hover:-translate-y-0.5 hover:opacity-95 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 
 const secondaryBtn =
-  "inline-flex items-center justify-center rounded-xl border border-white/10 px-5 py-2.5 text-sm font-medium text-slate-300 transition-[transform,border-color,color] duration-interaction ease-signature hover:-translate-y-0.5 hover:border-white/25 hover:text-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
+  "inline-flex items-center justify-center rounded-xl border border-border bg-surface-raised px-5 py-2.5 text-sm font-semibold text-ink transition-[transform,border-color,color] duration-interaction ease-signature hover:-translate-y-0.5 hover:bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";

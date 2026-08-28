@@ -207,15 +207,15 @@ export default function FaqTerminal({ t }) {
         </div>
 
         {/* --- Fenêtre console Unix --- */}
-        <div className="mx-auto mt-14 overflow-hidden rounded-2xl border border-white/5 bg-[#05070e] shadow-elevation-xl">
+        <div className="mx-auto mt-14 overflow-hidden rounded-2xl border border-border bg-slate-950 shadow-elevation-xl">
           {/* Barre de titre */}
-          <div className="flex items-center gap-4 border-b border-white/5 bg-white/[0.02] px-4 py-3">
+          <div className="flex items-center gap-4 border-b border-slate-800 bg-slate-900/90 px-4 py-3">
             <div className="flex items-center gap-2" aria-hidden="true">
               <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
               <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
               <span className="h-3 w-3 rounded-full bg-[#28c840]" />
             </div>
-            <span className="mx-auto select-none font-mono text-xs text-slate-500">
+            <span className="mx-auto select-none font-mono text-xs text-slate-400">
               {shellPrompt}
             </span>
           </div>
@@ -223,20 +223,20 @@ export default function FaqTerminal({ t }) {
           {/* Corps de la console */}
           <div
             ref={outputRef}
-            className="max-h-[26rem] overflow-y-auto p-5 font-mono text-sm leading-relaxed sm:p-6"
+            className="max-h-[26rem] overflow-y-auto p-5 font-mono text-sm leading-relaxed sm:p-6 text-slate-200"
             aria-live="polite"
           >
             {/* Ligne de chargement */}
-            <p className="text-slate-500">
-              <span className="text-slate-400">{loadingLabel}...</span>{" "}
-              <span className="text-sky-400">[{bar}]</span>{" "}
-              <span className="text-slate-400">{progress}%</span>
+            <p className="text-slate-400">
+              <span className="text-slate-300">{loadingLabel}...</span>{" "}
+              <span className="text-accent">[{bar}]</span>{" "}
+              <span className="text-slate-300">{progress}%</span>
             </p>
 
             {loaded ? (
               <>
                 {/* Invite d'aide */}
-                <p className="mt-3 text-slate-500"># {hint}</p>
+                <p className="text-slate-400"># {hint}</p>
 
                 {/* Liste des commandes exécutables */}
                 <ul className="mt-3 space-y-1.5">
@@ -248,13 +248,13 @@ export default function FaqTerminal({ t }) {
                           type="button"
                           onClick={() => setActiveId(cmd.id)}
                           aria-pressed={selected}
-                          className="group flex w-full items-baseline gap-2 rounded px-1 text-left transition-colors hover:bg-white/[0.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                          className="group flex w-full items-baseline gap-2 rounded px-2 py-1 text-left transition-colors hover:bg-slate-800/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                         >
-                          <span className="text-slate-600">{index + 1}.</span>
-                          <span className="text-slate-500">$</span>
+                          <span className="text-slate-500">{index + 1}.</span>
+                          <span className="text-slate-400">$</span>
                           <span
                             className={[
-                              "transition-colors",
+                              "transition-colors font-bold font-mono",
                               selected
                                 ? "text-accent-soft"
                                 : "text-accent group-hover:text-accent-soft",
@@ -262,7 +262,7 @@ export default function FaqTerminal({ t }) {
                           >
                             {cmd.command}
                           </span>
-                          <span className="ml-auto pl-3 text-xs text-slate-600">
+                          <span className="ml-auto pl-3 text-xs text-slate-400 font-sans">
                             {cmd.label}
                           </span>
                         </button>
@@ -273,23 +273,23 @@ export default function FaqTerminal({ t }) {
 
                 {/* Sortie de la commande active */}
                 {activeCommand ? (
-                  <div className="mt-4 border-t border-white/5 pt-4">
+                  <div className="mt-4 border-t border-slate-800 pt-4">
                     {/* Ligne de frappe simulée */}
-                    <p className="flex flex-wrap items-baseline text-slate-300">
-                      <span className="text-slate-500">
+                    <p className="flex flex-wrap items-baseline text-slate-200">
+                      <span className="text-slate-400">
                         {shellPrompt.replace(/:~\$$/, "")}
                       </span>
-                      <span className="text-slate-500">:~$ </span>
-                      <span className="text-accent">{typed}</span>
+                      <span className="text-slate-400">:~$ </span>
+                      <span className="text-accent font-bold">{typed}</span>
                       {isTyping ? (
                         <span className="ml-0.5 inline-block h-4 w-2 translate-y-0.5 animate-blink bg-accent" />
                       ) : null}
-                      {/* Skip discret : révèle immédiatement le reste de la séquence. */}
+                      {/* Skip discret */}
                       {isTyping ? (
                         <button
                           type="button"
                           onClick={skipTyping}
-                          className="ml-auto pl-3 text-xs text-slate-600 transition-colors duration-interaction ease-signature hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                          className="ml-auto pl-3 text-xs text-slate-400 transition-colors duration-interaction ease-signature hover:text-accent-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                         >
                           {skipLabel}
                         </button>
@@ -299,16 +299,16 @@ export default function FaqTerminal({ t }) {
                     {/* Réponse, ligne par ligne */}
                     <div className="mt-2 space-y-1">
                       {answerLines.map((line, i) => (
-                        <p key={i} className="text-slate-400">
+                        <p key={i} className="text-slate-300">
                           {/* Ligne vide = respiration : on préserve la hauteur */}
-                          {line === "" ? " " : line}
+                          {line === "" ? " " : line}
                         </p>
                       ))}
-                      {/* Curseur clignotant final une fois la commande frappée */}
+                      {/* Curseur clignotant final */}
                       {typed.length >= activeCommand.command.length ? (
                         <span
                           aria-hidden="true"
-                          className="inline-block h-4 w-2 translate-y-0.5 animate-blink bg-slate-400"
+                          className="inline-block h-4 w-2 translate-y-0.5 animate-blink bg-accent"
                         />
                       ) : null}
                     </div>

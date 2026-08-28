@@ -62,29 +62,28 @@ export default function ValueGrid({ t }) {
               <article
                 key={item.id}
                 onPointerMove={handleCardMove}
-                className="spotlight-host group relative h-full overflow-hidden rounded-2xl border border-border bg-surface p-6 shadow-elevation-md transition-[transform,border-color,box-shadow] duration-transition ease-signature hover:-translate-y-1 hover:border-accent/30 hover:shadow-accent-sm"
+                className="spotlight-host group relative flex h-full flex-col justify-between overflow-hidden rounded-xl border border-border bg-surface p-7 transition-all duration-200 hover:-translate-y-1 hover:border-border-strong"
               >
-                {/* Projecteur turquoise qui suit le curseur (spotlight) */}
+                {/* Projecteur qui suit le curseur (spotlight) */}
                 <span aria-hidden="true" className="spotlight" />
 
-                {/* Lumière de bordure turquoise révélée au survol (palette unifiée) */}
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-br from-accent/[0.08] via-transparent to-transparent opacity-0 transition-opacity duration-transition ease-signature group-hover:opacity-100"
-                />
-
                 <div className="relative">
-                  {/* Pastille d'icône (flotte doucement au survol) */}
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-accent/[0.06] text-accent transition-[color,transform] duration-transition ease-signature group-hover:text-accent-strong motion-safe:group-hover:animate-float">
-                    {Icon ? <Icon size={22} /> : null}
-                  </span>
+                  {/* Pastille d'icône */}
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-surface-raised text-accent transition-all duration-200">
+                    {Icon ? <Icon size={24} /> : null}
+                  </div>
 
-                  <h3 className="mt-5 text-lg font-semibold text-ink">
+                  <h3 className="mt-5 font-display text-lg font-bold tracking-tightest text-ink transition-colors">
                     {item.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">
+                  <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-muted">
                     {item.description}
                   </p>
+                </div>
+
+                <div className="relative mt-6 pt-4 border-t border-border flex items-center justify-between text-[11px] text-muted font-mono">
+                  <span>Module actif</span>
+                  <span className="text-accent font-bold">● Prêt</span>
                 </div>
               </article>
             );

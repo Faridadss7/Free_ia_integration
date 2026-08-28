@@ -68,10 +68,12 @@ function GlowBackground() {
       {/* Halo turquoise profond — coin inférieur droit, flou 180px.
           (Nom de classe `--violet` conservé pour l'historique ; teinte turquoise.) */}
       <span className="glow-orb glow-orb--violet" />
-      {/* Liant turquoise central, très subtil, pour relier les deux. */}
-      <span className="glow-orb glow-orb--accent" />
-      {/* Grille technique très discrète par-dessus les halos. */}
-      <div className="glow-grid" />
+      {/* Grille technique et faisceaux laser animés */}
+      <div className="glow-grid">
+        <span className="glow-beam glow-beam--1" />
+        <span className="glow-beam glow-beam--2" />
+        <span className="glow-beam glow-beam--3" />
+      </div>
     </div>
   );
 }

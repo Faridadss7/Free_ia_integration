@@ -396,3 +396,260 @@ export const WHY_ICONS = {
   assist: IconHeadset,
   reactive: IconSpark,
 };
+
+/* =============================================================================
+   Logos Officiels des Outils & Modèles IA (Vectoriels & Fidèles aux Marques)
+   ============================================================================= */
+
+/** Logo Officiel OpenAI / ChatGPT */
+export function IconLogoOpenAI({ size = 20, className = "" }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.08 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.493zm-9.66-4.32a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.84zm-1.63-8.818a4.464 4.464 0 0 1 2.338-1.972V13.1a.78.78 0 0 0 .387.68l5.84 3.37-2.02 1.166a.07.07 0 0 1-.07 0l-4.83-2.79A4.508 4.508 0 0 1 1.97 9.292zm16.108 3.843l-5.844-3.37 2.02-1.166a.07.07 0 0 1 .07 0l4.83 2.79a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.4-.681zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L8.889 10.45V8.118a.08.08 0 0 1 .033-.062l4.84-2.793a4.5 4.5 0 0 1 6.326 4.035zm-11.458-2.54l2.02-1.167a.07.07 0 0 1 .07 0l4.83 2.79a4.504 4.504 0 0 1-1.8 8.497v-5.678a.79.79 0 0 0-.39-.681L9.74 10.45zM10.865 13.91l2.585-1.492 2.585 1.492v2.985l-2.585 1.493-2.585-1.493z" />
+    </svg>
+  );
+}
+
+/** Logo Officiel Anthropic / Claude */
+export function IconLogoClaude({ size = 20, className = "" }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M13.827 2.5h3.913l6.26 18.995h-3.914l-1.378-4.22H12.87l-1.379 4.22H7.577L13.827 2.5zm3.705 11.666L15.783 7.85l-1.75 6.316h3.499zM0 21.495L6.26 2.5h3.913L3.913 21.495H0z" />
+    </svg>
+  );
+}
+
+/** Logo Officiel Cursor AI */
+export function IconLogoCursor({ size = 20, className = "" }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M11.23 2.19a1.5 1.5 0 0 1 1.54 0l8.5 5.09a1.5 1.5 0 0 1 .73 1.29v9.86a1.5 1.5 0 0 1-.73 1.29l-8.5 5.09a1.5 1.5 0 0 1-1.54 0l-8.5-5.09a1.5 1.5 0 0 1-.73-1.29V8.57a1.5 1.5 0 0 1 .73-1.29l8.5-5.09zM12 4.14 4.5 8.63 12 13.12l7.5-4.49L12 4.14zm-8 6.22v7.27l7 4.19v-7.27l-7-4.19zm9 11.46 7-4.19v-7.27l-7 4.19v7.27z" />
+    </svg>
+  );
+}
+
+/** Logo Officiel GitHub Copilot */
+export function IconLogoCopilot({ size = 20, className = "" }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z" />
+    </svg>
+  );
+}
+
+/** Logo Tokens API / Puce & Infrastructure */
+export function IconLogoTokensApi({ size = 20, className = "" }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <rect x="4" y="4" width="16" height="16" rx="2" />
+      <rect x="9" y="9" width="6" height="6" />
+      <path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3" />
+    </svg>
+  );
+}
+
+/** Logo Officiel Google AI / Gemini */
+export function IconLogoGoogleAI({ size = 20, className = "" }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+    </svg>
+  );
+}
+
+/** Logo Officiel Antigravity IDE */
+export function IconLogoAntigravity({ size = 20, className = "" }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path d="m8 12 4-4 4 4" />
+      <path d="M12 8v8" />
+    </svg>
+  );
+}
+
+/** Logo Officiel Suno AI */
+export function IconLogoSuno({ size = 20, className = "" }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M2 10v4M6 6v12M10 3v18M14 8v8M18 5v14M22 10v4" />
+    </svg>
+  );
+}
+
+/** Logo Officiel VS Code */
+export function IconLogoVSCode({ size = 20, className = "" }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M17.583.063a1.5 1.5 0 0 0-.974.341l-9.87 8.358-4.42-3.35a1.125 1.125 0 0 0-1.572.247L.18 6.467a1.125 1.125 0 0 0 .247 1.572L4.35 11.05.427 15.96a1.125 1.125 0 0 0-.247 1.573l.567.808a1.125 1.125 0 0 0 1.572.247l4.42-3.35 9.87 8.358a1.5 1.5 0 0 0 2.456-1.144V1.207A1.5 1.5 0 0 0 17.583.063zm-.083 4.294v15.286l-7.795-6.602 7.795-8.684z" />
+    </svg>
+  );
+}
+
+/** Logo Officiel DeepSeek */
+export function IconLogoDeepSeek({ size = 20, className = "" }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 0-3.62 2.4-6.68 5.75-7.64.44.75 1.05 1.76 1.75 3.01.21.37.52.88.9 1.48-1.42 1.02-2.4 2.65-2.4 4.5 0 3.03 2.47 5.5 5.5 5.5 1.85 0 3.48-.98 4.5-2.4.6.38 1.11.69 1.48.9 1.25.7 2.26 1.31 3.01 1.75C22.68 17.6 19.62 20 16 20h-4zm3-8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+    </svg>
+  );
+}
+
+/** Logo Officiel Ollama */
+export function IconLogoOllama({ size = 20, className = "" }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M9 3a2 2 0 0 0-2 2v2H6a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3v-8a3 3 0 0 0-3-3h-1V5a2 2 0 0 0-2-2H9zm0 2h6v2H9V5zm-1 6a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm8 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm-5 4h2a1 1 0 0 1 1 1v1H10v-1a1 1 0 0 1 1-1z" />
+    </svg>
+  );
+}
+
+/** Logo Officiel Qwen / Alibaba Cloud */
+export function IconLogoQwen({ size = 20, className = "" }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M12 2L2 7l10 5 10-5-10-5zm0 8.5L4.5 7 12 3.5 19.5 7 12 10.5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+/** Logo Officiel Roo Code / Agent */
+export function IconLogoRooCode({ size = 20, className = "" }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
+      <circle cx="12" cy="12" r="2" fill="currentColor" />
+    </svg>
+  );
+}
+
+/** Logo Officiel Open-WebUI */
+export function IconLogoOpenWebUI({ size = 20, className = "" }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <rect x="3" y="3" width="18" height="18" rx="4" />
+      <path d="M3 9h18M9 21V9" />
+    </svg>
+  );
+}

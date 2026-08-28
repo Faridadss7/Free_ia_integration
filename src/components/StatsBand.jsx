@@ -31,14 +31,14 @@ export default function StatsBand({ t }) {
       className="relative px-6 pb-8 pt-4 sm:pb-12"
     >
       <Reveal direction="up" className="mx-auto max-w-4xl">
-        <div className="overflow-hidden rounded-3xl border border-border bg-surface-translucent backdrop-blur-md">
+        <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-md">
           <dl className="grid grid-cols-1 divide-y divide-border sm:grid-cols-3 sm:divide-x sm:divide-y-0">
             {items.map((item) => (
               <StatItem key={item.id} item={item} />
             ))}
           </dl>
-          <p className="border-t border-border px-6 py-4 text-center text-sm text-muted">
-            {since}
+          <p className="border-t border-border px-6 py-3.5 text-center text-xs font-mono text-muted">
+            // {since}
           </p>
         </div>
       </Reveal>
@@ -47,25 +47,19 @@ export default function StatsBand({ t }) {
 }
 
 /**
- * StatItem — Une cellule de la bande : nombre animé (préfixe + valeur + suffixe)
- * au-dessus de son libellé. Isolé en sous-composant car {@link useCountUp} doit
- * être appelé au niveau racine d'un composant (règle des hooks).
- *
- * @param {object} props
- * @param {{value:number, prefix:string, suffix:string, label:string}} props.item
- * @returns {JSX.Element}
+ * StatItem — Une cellule de la bande.
  */
 function StatItem({ item }) {
   const { ref, value } = useCountUp(item.value, { duration: 1600 });
 
   return (
-    <div ref={ref} className="flex flex-col items-center gap-1 px-6 py-8 text-center">
-      <dd className="text-gradient-accent text-4xl font-bold tracking-tight sm:text-5xl">
+    <div ref={ref} className="flex flex-col items-center gap-1.5 px-6 py-7 text-center">
+      <dd className="font-display text-4xl font-bold tracking-tightest text-accent sm:text-5xl">
         {item.prefix}
         {value}
         {item.suffix}
       </dd>
-      <dt className="text-sm text-muted">{item.label}</dt>
+      <dt className="text-xs font-medium text-muted">{item.label}</dt>
     </div>
   );
 }

@@ -55,9 +55,9 @@ export default function DemoSection({ t }) {
         </div>
 
         {/* --- Fenêtre terminal MacOS --- */}
-        <div className="mx-auto mt-14 overflow-hidden rounded-2xl border border-white/5 bg-[#05070e] shadow-elevation-xl">
+        <div className="mx-auto mt-14 overflow-hidden rounded-2xl border border-border bg-slate-950 shadow-elevation-xl">
           {/* Barre de titre */}
-          <div className="flex items-center gap-4 border-b border-white/5 bg-white/[0.02] px-4 py-3">
+          <div className="flex items-center gap-4 border-b border-slate-800 bg-slate-900/90 px-4 py-3">
             {/* Pastilles de contrôle */}
             <div className="flex items-center gap-2" aria-hidden="true">
               <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
@@ -65,19 +65,19 @@ export default function DemoSection({ t }) {
               <span className="h-3 w-3 rounded-full bg-[#28c840]" />
             </div>
             {/* Titre d'onglet */}
-            <span className="mx-auto select-none font-mono text-xs text-slate-500">
+            <span className="mx-auto select-none font-mono text-xs text-slate-400">
               {terminalTitle}
             </span>
           </div>
 
           {/* Corps : vidéo ou placeholder */}
-          <div className="relative aspect-[16/10] w-full bg-[#05070e]">
+          <div className="relative aspect-[16/10] w-full bg-slate-950">
             {videoFailed ? (
               <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-gradient-to-br from-accent/10 via-transparent to-accent/[0.04]">
-                <span className="font-mono text-sm text-slate-500">
+                <span className="font-mono text-sm text-slate-400">
                   {terminalTitle}
                 </span>
-                <span className="font-mono text-xs text-slate-600">
+                <span className="font-mono text-xs text-slate-500">
                   demo_baz2vr.mp4
                 </span>
               </div>

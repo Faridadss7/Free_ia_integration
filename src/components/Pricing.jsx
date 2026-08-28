@@ -1,18 +1,13 @@
 import { useState } from "react";
-import { IconCheck } from "./icons";
+import { IconCheck, IconArrowRight, IconBadgeCheck } from "./icons";
 import SectionHeading from "./SectionHeading";
 import Reveal from "./Reveal";
 import useTilt from "../hooks/useTilt";
+import BorderBeam from "./BorderBeam";
 import PaymentWizard from "./PaymentWizard";
 
 /**
- * Pricing — Table des tarifs à deux forfaits (Basic / Pro).
- *
- * Le forfait Pro éclipse volontairement le Basic : bordure lumineuse turquoise,
- * badge « Le plus choisi », CTA plus visible et légère mise en avant d'échelle.
- * Au clic sur un forfait, la {@link PaymentWizard} s'ouvre en modale plein écran.
- *
- * Tous les textes proviennent de `translations.js` via `t` (langue globale).
+ * Pricing — Table des tarifs 100% React interactive (Basic & Pro).
  *
  * @param {object} props
  * @param {(key: string) => any} props.t    Fonction de traduction (chemin pointé).
@@ -28,12 +23,8 @@ export default function Pricing({ t, lang }) {
   const basic = t("pricing.basic");
   const pro = t("pricing.pro");
 
-  /**
-   * Forfait sélectionné → pilote l'ouverture du wizard.
-   * `null` = modale fermée.
-   * @type {[{ name: string, price: string } | null, Function]}
-   */
   const [selectedPlan, setSelectedPlan] = useState(null);
+  const [activeCurrency, setActiveCurrency] = useState(lang === "fr" ? "FCFA" : "EUR");
 
   return (
     <section
@@ -42,7 +33,6 @@ export default function Pricing({ t, lang }) {
       className="relative scroll-mt-24 px-6 py-24 sm:py-28"
     >
       <div className="mx-auto max-w-5xl">
-        {/* --- En-tête de section (entrée en cascade) --- */}
         <SectionHeading
           id="pricing-title"
           eyebrow={eyebrow}
@@ -50,67 +40,53 @@ export default function Pricing({ t, lang }) {
           subtitle={subtitle}
         />
 
-        {/* --- Cartes de tarif (entrée en cascade) ---
-            En français : visuels Canva sur-mesure (cliquables). En anglais :
-            cartes React thème-aware (les visuels Canva ont leur texte en dur). */}
+        {/* Cartes de tarifs interactives 100% React */}
         <Reveal
           stagger
           direction="up"
           staggerGap={120}
-          className="mt-14 grid grid-cols-1 items-stretch gap-6 md:grid-cols-2"
+          className="mt-14 grid grid-cols-1 items-stretch gap-8 md:grid-cols-2"
         >
-          {lang === "fr" ? (
-            <>
-              {/* ---- Visuel Canva — Standard ---- */}
-              <PlanImageCard
-                src="/assets/pricing-standard-fr.png"
-                alt={`${basic.name} — ${basic.price} ${currency}`}
-                cta={basic.cta}
-                featured={false}
-                onSelect={() =>
-                  setSelectedPlan({ name: basic.name, price: basic.price })
-                }
-              />
+          {/* Forfait STANDARD / BASIC */}
+          <InteractivePlanCard
+            plan={basic}
+            currency={currency}
+            featured={false}
+            onSelect={() =>
+              setSelectedPlan({ name: basic.name, price: basic.price })
+            }
+          />
 
-              {/* ---- Visuel Canva — Pro (mis en avant) ---- */}
-              <PlanImageCard
-                src="/assets/pricing-pro-fr.png"
-                alt={`${pro.name} — ${pro.price} ${currency}`}
-                cta={pro.cta}
-                featured
-                onSelect={() =>
-                  setSelectedPlan({ name: pro.name, price: pro.price })
-                }
-              />
-            </>
-          ) : (
-            <>
-              {/* ---- Forfait Basic (sobre) ---- */}
-              <PlanCard
-                plan={basic}
-                currency={currency}
-                featured={false}
-                onSelect={() =>
-                  setSelectedPlan({ name: basic.name, price: basic.price })
-                }
-              />
-
-              {/* ---- Forfait Pro (mis en avant) ---- */}
-              <PlanCard
-                plan={pro}
-                currency={currency}
-                featured
-                badge={mostChosen}
-                onSelect={() =>
-                  setSelectedPlan({ name: pro.name, price: pro.price })
-                }
-              />
-            </>
-          )}
+          {/* Forfait PRO (Mis en avant avec BorderBeam et glow néon) */}
+          <InteractivePlanCard
+            plan={pro}
+            currency={currency}
+            featured
+            badge={mostChosen}
+            onSelect={() =>
+              setSelectedPlan({ name: pro.name, price: pro.price })
+            }
+          />
         </Reveal>
+
+        {/* Bannière de réassurance & garantie */}
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-6 rounded-xl border border-border bg-surface p-4 text-center text-xs text-muted">
+          <span className="flex items-center gap-2 text-ink">
+            <IconBadgeCheck size={16} className="text-accent" />
+            <span><strong>Paiement sécurisé</strong> via Mobile Money (MTN / Moov) & Virement</span>
+          </span>
+          <span className="flex items-center gap-2 text-ink">
+            <IconBadgeCheck size={16} className="text-accent" />
+            <span><strong>Installation &lt; 1h</strong> assistée pas-à-pas à distance</span>
+          </span>
+          <span className="flex items-center gap-2 text-ink">
+            <IconBadgeCheck size={16} className="text-accent" />
+            <span><strong>Zéro abonnement</strong> supplémentaire requis</span>
+          </span>
+        </div>
       </div>
 
-      {/* --- Modale de paiement (montée à la demande) --- */}
+      {/* Modale de commande & paiement */}
       {selectedPlan ? (
         <PaymentWizard
           t={t}
@@ -124,153 +100,93 @@ export default function Pricing({ t, lang }) {
 }
 
 /**
- * PlanCard — Carte d'un forfait.
- *
- * @param {object} props
- * @param {{ name: string, price: string, tagline: string, cta: string,
- *           features: string[] }} props.plan  Données du forfait.
- * @param {string} props.currency              Devise (ex. « FCFA »).
- * @param {boolean} props.featured             Style « mis en avant » (Pro) ?
- * @param {string} [props.badge]               Libellé du badge (si `featured`).
- * @param {() => void} props.onSelect          Ouvre le wizard sur ce forfait.
- * @returns {JSX.Element}
+ * InteractivePlanCard — Carte de forfait native avec animations et effets techniques.
  */
-function PlanCard({ plan, currency, featured, badge, onSelect, className = "", style }) {
-  const tilt = useTilt({ max: 5 });
+function InteractivePlanCard({ plan, currency, featured, badge, onSelect }) {
+  const tilt = useTilt({ max: 3, scale: 1.01 });
+
   return (
     <article
       onPointerMove={tilt.onPointerMove}
       onPointerLeave={tilt.onPointerLeave}
-      style={style}
-      className={[
-        "spotlight-host relative flex h-full flex-col rounded-2xl border p-7 transition-[transform,border-color,box-shadow] duration-transition ease-signature will-change-transform",
+      className={`spotlight-host relative flex h-full flex-col justify-between overflow-hidden rounded-xl border p-8 transition-all duration-200 ${
         featured
-          ? "border-accent/35 bg-surface shadow-accent-md md:-translate-y-2"
-          : "border-border bg-surface shadow-elevation-md",
-        className,
-      ].join(" ")}
+          ? "border-accent/40 bg-surface md:-translate-y-1"
+          : "border-border bg-surface hover:border-border-strong"
+      }`}
     >
-      {/* Projecteur turquoise qui suit le curseur */}
-      <span aria-hidden="true" className="spotlight" />
+      {featured && (
+        <BorderBeam size={280} duration={8} colorFrom="#d97706" colorTo="#b45309" />
+      )}
 
-      {/* Halo turquoise diffus derrière la carte Pro (palette unifiée) */}
-      {featured ? (
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -inset-px -z-10 rounded-2xl bg-gradient-to-b from-accent/15 to-transparent blur-xl"
-        />
-      ) : null}
+      {/* Badge technique style étiquette */}
+      {featured && badge && (
+        <div className="absolute top-0 right-6 -translate-y-1/2">
+          <span className="inline-flex items-center gap-1.5 rounded border border-accent bg-accent px-2.5 py-0.5 font-mono text-[11px] font-bold text-white">
+            ★ {badge}
+          </span>
+        </div>
+      )}
 
-      {/* Badge « Le plus choisi » */}
-      {featured && badge ? (
-        <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-on-accent shadow-accent-sm">
-          {badge}
-        </span>
-      ) : null}
+      <div>
+        {/* En-tête de carte */}
+        <div className="flex items-start justify-between">
+          <div>
+            <h3 className="text-xl font-bold font-display tracking-tightest text-ink">{plan.name}</h3>
+            <p className="mt-1 text-xs text-muted leading-relaxed">{plan.tagline}</p>
+          </div>
+          <span
+            className={`rounded px-2 py-0.5 text-xs font-mono font-bold ${
+              featured ? "bg-accent/10 text-accent border border-accent/30" : "bg-surface-raised border border-border text-muted"
+            }`}
+          >
+            {featured ? "[PACK COMPLET]" : "[ESSENTIEL]"}
+          </span>
+        </div>
 
-      {/* En-tête de carte */}
-      <header className="relative">
-        <h3 className="text-lg font-semibold text-ink">{plan.name}</h3>
-        <p className="mt-1 text-sm text-muted">{plan.tagline}</p>
-      </header>
+        {/* Prix */}
+        <div className="mt-6 flex items-baseline gap-2 border-b border-border pb-6">
+          <span className="text-4xl font-bold font-display tracking-tightest text-ink sm:text-5xl">
+            {plan.price}
+          </span>
+          <span className="text-sm font-semibold text-muted font-mono">{currency}</span>
+          <span className="ml-auto text-[11px] text-accent font-mono font-bold bg-surface-raised px-2 py-0.5 rounded border border-border">
+            Paiement Unique
+          </span>
+        </div>
 
-      {/* Prix */}
-      <div className="relative mt-6 flex items-baseline gap-2">
-        <span className="text-4xl font-bold tracking-tight text-ink">
-          {plan.price}
-        </span>
-        <span className="text-sm font-medium text-muted">{currency}</span>
+        {/* Liste des fonctionnalités */}
+        <ul className="mt-6 space-y-3.5 text-sm">
+          {plan.features.map((feature, idx) => (
+            <li key={idx} className="flex items-start gap-3">
+              <span className="mt-0.5 shrink-0 text-accent">
+                <IconCheck size={15} />
+              </span>
+              <span className="text-ink text-xs sm:text-sm leading-relaxed">{feature}</span>
+            </li>
+          ))}
+        </ul>
       </div>
 
-      {/* Liste des avantages */}
-      <ul className="relative mt-6 flex-1 space-y-3">
-        {plan.features.map((feature) => (
-          <li key={feature} className="flex items-start gap-3 text-sm">
-            <IconCheck
-              size={18}
-              className="mt-0.5 shrink-0 text-accent"
-            />
-            <span className="text-ink/80">{feature}</span>
-          </li>
-        ))}
-      </ul>
-
-      {/* CTA */}
-      <button
-        type="button"
-        onClick={onSelect}
-        className={[
-          "relative mt-8 w-full rounded-xl px-5 py-3 text-sm font-semibold transition-[transform,box-shadow,background-color,border-color] duration-interaction ease-signature focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
-          featured
-            ? "shimmer-line bg-accent text-on-accent shadow-accent-sm hover:-translate-y-0.5 hover:bg-accent-strong hover:shadow-accent-md"
-            : "border border-border-strong text-ink hover:-translate-y-0.5 hover:border-accent/40 hover:bg-accent/5",
-        ].join(" ")}
-      >
-        {plan.cta}
-      </button>
+      {/* Bouton CTA */}
+      <div className="mt-8 pt-4">
+        <button
+          type="button"
+          onClick={onSelect}
+          className={`group flex w-full items-center justify-center gap-2 rounded-lg px-6 py-3.5 text-sm font-semibold transition-all active:scale-[0.98] font-mono ${
+            featured
+              ? "bg-accent hover:bg-accent-strong text-white border border-accent-soft/30"
+              : "border border-border bg-surface-raised text-ink hover:bg-surface"
+          }`}
+        >
+          <span>{plan.cta}</span>
+          <IconArrowRight
+            size={16}
+            className="transition-transform duration-200 group-hover:translate-x-1"
+          />
+        </button>
+      </div>
     </article>
   );
 }
 
-/**
- * PlanImageCard — Carte de forfait basée sur un visuel Canva (français).
- *
- * Affiche l'image Canva du forfait dans un conteneur cohérent avec le reste du
- * site : inclinaison 3D au survol (`useTilt`), projecteur turquoise qui suit le
- * curseur (spotlight), halo pour la carte mise en avant. Toute la carte est un
- * bouton : au clic, elle ouvre le tunnel de paiement sur le forfait concerné.
- *
- * Le visuel Canva ayant son texte « cuit » (bilinguisme et thème gérés en amont
- * dans {@link Pricing} : images en FR, cartes React en EN), ce composant ne
- * porte aucun texte propre — l'accessibilité passe par `alt` + `aria-label`.
- *
- * @param {object} props
- * @param {string} props.src              Chemin du visuel Canva (public/assets).
- * @param {string} props.alt             Texte alternatif (nom + prix du forfait).
- * @param {string} props.cta             Libellé d'action (aria-label du bouton).
- * @param {boolean} props.featured       Style « mis en avant » (Pro) ?
- * @param {() => void} props.onSelect    Ouvre le wizard sur ce forfait.
- * @param {string} [props.className]     Classes injectées (cascade Reveal).
- * @param {object} [props.style]         Style injecté (délai de cascade Reveal).
- * @returns {JSX.Element}
- */
-function PlanImageCard({ src, alt, cta, featured, onSelect, className = "", style }) {
-  const tilt = useTilt({ max: 5 });
-  return (
-    <button
-      type="button"
-      onClick={onSelect}
-      onPointerMove={tilt.onPointerMove}
-      onPointerLeave={tilt.onPointerLeave}
-      aria-label={cta}
-      style={style}
-      className={[
-        "spotlight-host group relative block w-full overflow-hidden rounded-2xl border transition-[transform,border-color,box-shadow] duration-transition ease-signature will-change-transform focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
-        featured
-          ? "border-accent/35 shadow-accent-md md:-translate-y-2"
-          : "border-border shadow-elevation-md hover:-translate-y-0.5 hover:border-accent/40",
-        className,
-      ].join(" ")}
-    >
-      {/* Halo turquoise diffus derrière la carte Pro (palette unifiée) */}
-      {featured ? (
-        <span
-          aria-hidden="true"
-          className="pointer-events-none absolute -inset-px -z-10 rounded-2xl bg-gradient-to-b from-accent/20 to-transparent blur-xl"
-        />
-      ) : null}
-
-      {/* Visuel Canva du forfait */}
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        decoding="async"
-        className="block w-full"
-      />
-
-      {/* Projecteur turquoise qui suit le curseur */}
-      <span aria-hidden="true" className="spotlight" />
-    </button>
-  );
-}

@@ -125,7 +125,7 @@ export default function IntroScene({ t, onDone }) {
           </div>
           {/* Corps */}
           <div className="px-6 py-8 font-mono sm:px-8 sm:py-10">
-            <p className="text-lg font-semibold tracking-tight text-slate-100 sm:text-2xl">
+            <p className="text-lg font-semibold tracking-tightest text-ink sm:text-2xl font-display">
               <span className="mr-1 text-accent">$</span>
               {typed}
               {/* Curseur clignotant tant que la scène joue (blink net, façon Unix) */}
@@ -149,7 +149,7 @@ export default function IntroScene({ t, onDone }) {
         type="button"
         onClick={finish}
         aria-label={t("intro.skipAria")}
-        className="absolute bottom-6 right-6 rounded-lg px-3 py-1.5 text-xs font-medium text-slate-500 transition-colors duration-interaction ease-signature hover:text-slate-200"
+        className="absolute bottom-6 right-6 rounded-lg px-3 py-1.5 text-xs font-medium text-muted transition-colors duration-interaction ease-signature hover:text-ink"
       >
         {t("intro.skip")}
       </button>

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { IconGitHub, IconLinkedIn, IconSun, IconMoon, IconMenu, IconClose } from "./icons";
 
 /**
@@ -76,24 +77,24 @@ export default function Header({
 
   return (
     <header
-      className="sticky top-0 z-50 border-b border-white/[0.06] bg-bg/70 backdrop-blur-xl backdrop-saturate-150"
+      className="sticky top-0 z-50 border-b border-border bg-bg/80 backdrop-blur-xl backdrop-saturate-150 transition-colors"
     >
       <div className="mx-auto flex h-[var(--nav-height)] max-w-[var(--max-width)] items-center justify-between gap-4 px-6">
-        {/* --- Logo minimaliste : badge dégradé "F" + wordmark --- */}
+        {/* --- Logo Dev/Tech : badge carré avec indicateur d'état + wordmark --- */}
         <button
           type="button"
           onClick={() => handleNavigate("main")}
-          className="group flex items-center gap-3 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+          className="group flex items-center gap-2.5 rounded-md outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
         >
           <span
             aria-hidden="true"
-            className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-accent-soft to-accent-strong text-sm font-bold text-on-accent shadow-accent-sm transition-[transform,box-shadow] duration-interaction ease-signature group-hover:-translate-y-0.5 group-hover:shadow-accent-md"
+            className="grid h-8 w-8 place-items-center rounded-md border border-border bg-surface-raised font-mono text-sm font-bold text-ink transition-all duration-150 group-hover:border-accent group-hover:text-accent"
           >
             F
           </span>
-          <span className="hidden text-sm font-semibold tracking-tight text-text sm:block">
+          <span className="hidden text-sm font-bold tracking-tight text-ink sm:block font-display">
             Farid ADISSO{" "}
-            <span className="font-normal text-muted">| Tech Integration</span>
+            <span className="font-mono text-xs font-normal text-muted">/ local.ai</span>
           </span>
         </button>
 
@@ -108,7 +109,7 @@ export default function Header({
                 key={link.id}
                 type="button"
                 onClick={() => onNavigate(link.id)}
-                className="link-underline rounded-full px-3 py-2 text-sm text-muted transition-colors duration-200 hover:text-text"
+                className="rounded-md px-3 py-1.5 text-xs font-semibold text-muted transition-colors hover:text-ink hover:bg-surface-raised"
               >
                 {link.label}
               </button>
@@ -116,51 +117,65 @@ export default function Header({
         </nav>
 
         {/* --- Actions (droite) --- */}
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-2">
           {/* Liens sociaux */}
           <a
             href="https://github.com/Faridadss7"
             target="_blank"
             rel="noopener noreferrer"
             aria-label={t("nav.github")}
-            className="hidden h-9 w-9 place-items-center rounded-lg text-muted transition-colors duration-200 hover:bg-white/[0.06] hover:text-text sm:grid"
+            className="hidden h-8 w-8 place-items-center rounded-md border border-border bg-surface text-muted transition-colors hover:bg-surface-raised hover:text-ink sm:grid"
           >
-            <IconGitHub size={18} />
+            <IconGitHub size={16} />
           </a>
           <a
             href="https://www.linkedin.com/in/farid-yelogniss%C3%A8-b-adisso-086726384"
             target="_blank"
             rel="noopener noreferrer"
             aria-label={t("nav.linkedin")}
-            className="hidden h-9 w-9 place-items-center rounded-lg text-muted transition-colors duration-200 hover:bg-white/[0.06] hover:text-text sm:grid"
+            className="hidden h-8 w-8 place-items-center rounded-md border border-border bg-surface text-muted transition-colors hover:bg-surface-raised hover:text-ink sm:grid"
           >
-            <IconLinkedIn size={18} />
+            <IconLinkedIn size={16} />
           </a>
 
-          {/* Sélecteur de langue segmenté */}
+          {/* Sélecteur de langue segmenté avec morphing */}
           <div
             role="group"
             aria-label={t("nav.toggleLang")}
-            className="flex items-center rounded-lg border border-white/[0.08] p-0.5"
+            className="flex items-center rounded-md border border-border bg-surface p-0.5 relative"
           >
             <button
               type="button"
               aria-pressed={lang === "fr"}
               onClick={() => setLang("fr")}
-              className={`rounded-md px-2 py-1 text-xs font-medium transition-colors duration-200 ${
-                lang === "fr" ? "bg-white/[0.1] text-text" : "text-muted hover:text-text"
+              className={`relative z-10 rounded px-2.5 py-1 text-xs font-mono font-bold transition-colors ${
+                lang === "fr" ? "text-accent" : "text-muted hover:text-ink"
               }`}
             >
+              {lang === "fr" && (
+                <motion.span
+                  layoutId="active-lang-pill"
+                  className="absolute inset-0 z-[-1] rounded bg-surface-raised border border-border"
+                  transition={{ type: "spring", stiffness: 450, damping: 32 }}
+                />
+              )}
               FR
             </button>
             <button
               type="button"
               aria-pressed={lang === "en"}
               onClick={() => setLang("en")}
-              className={`rounded-md px-2 py-1 text-xs font-medium transition-colors duration-200 ${
-                lang === "en" ? "bg-white/[0.1] text-text" : "text-muted hover:text-text"
+              className={`relative z-10 rounded px-2.5 py-1 text-xs font-mono font-bold transition-colors ${
+                lang === "en" ? "text-accent" : "text-muted hover:text-ink"
               }`}
             >
+              {lang === "en" && (
+                <motion.span
+                  layoutId="active-lang-pill"
+                  className="absolute inset-0 z-[-1] rounded bg-surface-raised border border-border"
+                  transition={{ type: "spring", stiffness: 450, damping: 32 }}
+                />
+              )}
               EN
             </button>
           </div>
@@ -170,21 +185,21 @@ export default function Header({
             type="button"
             onClick={toggleTheme}
             aria-label={isDark ? t("nav.toggleThemeDark") : t("nav.toggleThemeLight")}
-            className="grid h-9 w-9 place-items-center rounded-lg text-muted transition-colors duration-200 hover:bg-white/[0.06] hover:text-text"
+            className="grid h-8 w-8 place-items-center rounded-md border border-border bg-surface text-muted transition-colors hover:bg-surface-raised hover:text-ink"
           >
-            {isDark ? <IconSun size={18} /> : <IconMoon size={18} />}
+            {isDark ? <IconSun size={16} /> : <IconMoon size={16} />}
           </button>
 
-          {/* CTA discret (desktop large) */}
+          {/* CTA technique structuré (desktop large) */}
           <button
             type="button"
             onClick={() => onNavigate("pricing")}
-            className="ml-1 hidden rounded-lg border border-border-strong bg-white/[0.04] px-4 py-2 text-sm font-medium text-text transition-[transform,border-color,background-color] duration-interaction ease-signature hover:-translate-y-0.5 hover:border-accent/40 hover:bg-white/[0.08] lg:block"
+            className="ml-1 hidden rounded-md bg-accent hover:bg-accent-strong text-white text-xs font-semibold px-4 py-2 border border-accent-soft/30 active:scale-[0.98] transition-all lg:block font-mono"
           >
             {t("nav.cta")}
           </button>
 
-          {/* Bouton hamburger — mobile uniquement (symétrique de la nav desktop) */}
+          {/* Bouton hamburger */}
           <button
             ref={toggleRef}
             type="button"
@@ -192,9 +207,9 @@ export default function Header({
             aria-label={menuOpen ? t("nav.menuClose") : t("nav.menuOpen")}
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
-            className="grid h-9 w-9 place-items-center rounded-lg text-muted transition-colors duration-200 hover:bg-white/[0.06] hover:text-text md:hidden"
+            className="grid h-8 w-8 place-items-center rounded-md border border-border bg-surface text-muted transition-colors hover:bg-surface-raised hover:text-ink md:hidden"
           >
-            {menuOpen ? <IconClose size={20} /> : <IconMenu size={20} />}
+            {menuOpen ? <IconClose size={18} /> : <IconMenu size={18} />}
           </button>
         </div>
       </div>
@@ -204,7 +219,7 @@ export default function Header({
         <nav
           id="mobile-nav"
           aria-label={t("nav.aria")}
-          className="border-t border-white/[0.06] bg-bg/95 backdrop-blur-xl md:hidden"
+          className="border-t border-border bg-bg/95 backdrop-blur-xl md:hidden"
         >
           <div className="mx-auto flex max-w-[var(--max-width)] flex-col gap-1 px-6 py-4">
             {Array.isArray(links) &&
@@ -214,42 +229,19 @@ export default function Header({
                   ref={index === 0 ? firstItemRef : null}
                   type="button"
                   onClick={() => handleNavigate(link.id)}
-                  className="rounded-lg px-4 py-3 text-left text-base font-medium text-muted transition-colors duration-200 hover:bg-white/[0.06] hover:text-text"
+                  className="rounded-lg px-4 py-3 text-left text-sm font-semibold text-muted transition-colors hover:bg-surface-raised hover:text-ink"
                 >
                   {link.label}
                 </button>
               ))}
 
-            {/* CTA — toujours présent dans le panneau mobile */}
             <button
               type="button"
               onClick={() => handleNavigate("pricing")}
-              className="mt-2 rounded-lg border border-border-strong bg-white/[0.04] px-4 py-3 text-center text-base font-medium text-text transition-[border-color,background-color] duration-interaction ease-signature hover:border-accent/40 hover:bg-white/[0.08]"
+              className="mt-2 rounded-lg bg-accent hover:bg-accent-strong px-4 py-3 text-center text-sm font-semibold text-white font-mono border border-accent-soft/30"
             >
               {t("nav.cta")}
             </button>
-
-            {/* Liens sociaux */}
-            <div className="mt-2 flex items-center gap-2 border-t border-white/[0.06] pt-4">
-              <a
-                href="https://github.com/Faridadss7"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={t("nav.github")}
-                className="grid h-10 w-10 place-items-center rounded-lg text-muted transition-colors duration-200 hover:bg-white/[0.06] hover:text-text"
-              >
-                <IconGitHub size={20} />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/farid-yelogniss%C3%A8-b-adisso-086726384"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={t("nav.linkedin")}
-                className="grid h-10 w-10 place-items-center rounded-lg text-muted transition-colors duration-200 hover:bg-white/[0.06] hover:text-text"
-              >
-                <IconLinkedIn size={20} />
-              </a>
-            </div>
           </div>
         </nav>
       )}

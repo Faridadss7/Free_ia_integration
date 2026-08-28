@@ -31,11 +31,8 @@
 .app-placeholder__title {
   font-size: clamp(2.4rem, 6vw, 4.5rem);
   line-height: 1.05;
-  letter-spacing: -0.03em;
-  background: linear-gradient(120deg, var(--text-primary) 30%, var(--accent-cyan) 70%, var(--accent-violet));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
   margin-bottom: 1.5rem;
 }
 
@@ -43,6 +40,6 @@
   max-width: 640px;
   margin: 0 auto;
   font-size: clamp(1rem, 2vw, 1.2rem);
-  color: var(--text-secondary);
+  color: var(--color-muted);
   line-height: 1.6;
 }
