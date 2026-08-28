@@ -12,15 +12,16 @@
       height: 1080px;
       overflow: hidden;
       perspective: 1800px;
-    }
-
-    .02-logo-constellation-ground {
-      position: absolute;
-      inset: 0;
       background: #030712;
     }
 
-    .02-logo-constellation-camera {
+    .c02-ground {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(217, 119, 6, 0.12) 0%, rgba(3, 7, 18, 1) 70%);
+    }
+
+    .c02-camera {
       position: absolute;
       inset: 0;
       display: grid;
@@ -29,7 +30,7 @@
       will-change: transform;
     }
 
-    .02-logo-constellation-stage {
+    .c02-stage {
       position: relative;
       display: grid;
       place-items: center;
@@ -38,51 +39,57 @@
       transform-style: preserve-3d;
     }
 
-    .02-logo-constellation-wordmark {
+    .c02-wordmark {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       font-family: "Inter", sans-serif;
-      font-size: 7.3cqw;
-      font-weight: 400;
-      line-height: 1.02;
-      letter-spacing: -0.022em;
+      font-size: 84px;
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
       color: #f8fafc;
       text-align: center;
+      white-space: nowrap;
       will-change: transform, opacity;
+      text-shadow: 0 0 40px rgba(217, 119, 6, 0.4);
     }
 
-    .02-logo-constellation-spike {
-      color: #0ea5e9;
-      margin-right: 0.3em;
+    .c02-spike {
+      color: #d97706;
+      margin-right: 0.25em;
     }
 
-    .02-logo-constellation-hub {
+    .c02-hub {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 180px;
-      height: 180px;
+      width: 220px;
+      height: 220px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(56, 189, 248, 0.08) 50%, transparent 100%);
-      border: 2px solid rgba(56, 189, 248, 0.4);
+      background: radial-gradient(circle, rgba(217, 119, 6, 0.35) 0%, rgba(217, 119, 6, 0.1) 60%, transparent 100%);
+      border: 2px solid rgba(217, 119, 6, 0.6);
+      box-shadow: 0 0 60px rgba(217, 119, 6, 0.3);
       display: grid;
       place-items: center;
       will-change: transform, opacity;
       z-index: 100;
+      opacity: 0;
     }
 
-    .02-logo-constellation-hub-label {
+    .c02-hub-label {
       font-family: "Inter", sans-serif;
-      font-size: 1.67cqw;
-      font-weight: 500;
+      font-size: 22px;
+      font-weight: 700;
       color: #f8fafc;
       text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
-    .02-logo-constellation-orbit-item {
+    .c02-orbit-item {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -91,125 +98,134 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
-    }
-
-    .02-logo-constellation-node {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background: rgba(208, 239, 253, 0.12);
-      border: 1px solid rgba(248, 250, 252, 0.2);
-      display: grid;
-      place-items: center;
-      font-family: "Inter", sans-serif;
-      font-size: 1.25cqw;
-      font-weight: 500;
-      color: #f8fafc;
-      text-align: center;
-      padding: 12px;
-    }
-
-    .02-logo-constellation-label {
-      font-family: "JetBrains Mono", monospace;
-      font-size: 1.35cqw;
-      font-weight: 500;
-      color: rgba(248, 250, 252, 0.7);
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-      text-align: center;
-    }
-
-    .02-logo-constellation-connectors {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-
-    .02-logo-constellation-connector-line {
-      stroke: #0ea5e9;
-      stroke-width: 2;
-      fill: none;
-      stroke-dasharray: 1000;
-      stroke-dashoffset: 1000;
-    }
-
-    .02-logo-constellation-shimmer {
-      fill: #0ea5e9;
+      gap: 10px;
       opacity: 0;
     }
 
-    .02-logo-constellation-tagline {
+    .c02-node {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: rgba(17, 24, 39, 0.85);
+      border: 1.5px solid rgba(217, 119, 6, 0.5);
+      box-shadow: 0 0 25px rgba(217, 119, 6, 0.25);
+      display: grid;
+      place-items: center;
+      font-family: "Inter", sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #f8fafc;
+      text-align: center;
+      padding: 12px;
+      backdrop-filter: blur(8px);
+    }
+
+    .c02-label {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 14px;
+      font-weight: 600;
+      color: #d97706;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-align: center;
+      background: rgba(217, 119, 6, 0.15);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .c02-connectors {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    .c02-connector-line {
+      stroke: #d97706;
+      stroke-width: 2;
+      fill: none;
+      stroke-dasharray: 600;
+      stroke-dashoffset: 600;
+      opacity: 0.6;
+    }
+
+    .c02-shimmer {
+      fill: #fbbf24;
+      opacity: 0;
+    }
+
+    .c02-tagline {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      margin-top: 140px;
+      margin-top: 150px;
       font-family: "JetBrains Mono", monospace;
-      font-size: 1.46cqw;
-      font-weight: 500;
-      color: rgba(248, 250, 252, 0.7);
-      letter-spacing: 0.16em;
+      font-size: 24px;
+      font-weight: 600;
+      color: rgba(248, 250, 252, 0.8);
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       text-align: center;
       will-change: opacity;
+      opacity: 0;
     }
   </style>
 
-  <div data-hf-id="hf-jycq" id="root" data-composition-id="02-logo-constellation" data-duration="12.882" data-width="1920" data-height="1080">
-    <div data-hf-id="hf-z7ap" class="02-logo-constellation-ground clip" data-start="0" data-duration="13.117" data-track-index="0"></div>
+  <div id="root" data-composition-id="02-logo-constellation" data-duration="12.882" data-width="1920" data-height="1080">
+    <div class="c02-ground clip" data-start="0" data-duration="13.117" data-track-index="0"></div>
 
-  <div data-hf-id="hf-b1wy" class="02-logo-constellation-camera clip" id="02-logo-constellation-camera" data-start="0" data-duration="13.117" data-track-index="1">
-    <div data-hf-id="hf-yk8t" class="02-logo-constellation-stage">
+    <div class="c02-camera clip" id="c02-camera" data-start="0" data-duration="13.117" data-track-index="1">
+      <div class="c02-stage">
 
-      <div data-hf-id="hf-gw52" class="02-logo-constellation-wordmark" id="02-logo-constellation-wordmark">
-        <span data-hf-id="hf-ggjj" class="02-logo-constellation-spike" style="color: #d97706;">✱</span>freeIA <span data-hf-id="hf-rtxg" style="color: #d97706; font-weight: 700;">INTEGRATION</span>
+        <div class="c02-wordmark" id="c02-wordmark">
+          <span class="c02-spike">✱</span>freeIA <span style="color: #d97706;">INTEGRATION</span>
+        </div>
+
+        <div class="c02-hub" id="c02-hub">
+          <div class="c02-hub-label">freeIA<br><span style="font-size: 14px; color: #d97706; font-weight: 400;">CLUSTER</span></div>
+        </div>
+
+        <div class="c02-orbit-item" id="c02-orbit-0">
+          <div class="c02-node" style="border-color: #d97706;">DeepSeek R1</div>
+          <div class="c02-label">128 T/S</div>
+        </div>
+
+        <div class="c02-orbit-item" id="c02-orbit-1">
+          <div class="c02-node" style="border-color: #d97706;">Claude 3.5</div>
+          <div class="c02-label">SONNET</div>
+        </div>
+
+        <div class="c02-orbit-item" id="c02-orbit-2">
+          <div class="c02-node" style="border-color: #d97706;">Qwen 2.5</div>
+          <div class="c02-label">CODER</div>
+        </div>
+
+        <div class="c02-orbit-item" id="c02-orbit-3">
+          <div class="c02-node" style="border-color: #d97706;">Cursor AI</div>
+          <div class="c02-label">IDE</div>
+        </div>
+
+        <svg class="c02-connectors" id="c02-connectors" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+          <line id="c02-line-0" class="c02-connector-line" x1="960" y1="540" x2="1410" y2="540" />
+          <circle id="c02-shimmer-0" class="c02-shimmer" cx="960" cy="540" r="5" />
+
+          <line id="c02-line-1" class="c02-connector-line" x1="960" y1="540" x2="960" y2="270" />
+          <circle id="c02-shimmer-1" class="c02-shimmer" cx="960" cy="540" r="5" />
+
+          <line id="c02-line-2" class="c02-connector-line" x1="960" y1="540" x2="510" y2="540" />
+          <circle id="c02-shimmer-2" class="c02-shimmer" cx="960" cy="540" r="5" />
+
+          <line id="c02-line-3" class="c02-connector-line" x1="960" y1="540" x2="960" y2="810" />
+          <circle id="c02-shimmer-3" class="c02-shimmer" cx="960" cy="540" r="5" />
+        </svg>
+
+        <div class="c02-tagline" id="c02-tagline">
+          0€ D'ABONNEMENT · VIBECODING ILLIMITÉ
+        </div>
+
       </div>
-
-      <div data-hf-id="hf-hh9n" class="02-logo-constellation-hub" id="02-logo-constellation-hub" style="border-color: rgba(217, 119, 6, 0.6); background: radial-gradient(circle, rgba(217, 119, 6, 0.3) 0%, transparent 100%);">
-        <div data-hf-id="hf-36ut" class="02-logo-constellation-hub-label">freeIA Cluster</div>
-      </div>
-
-      <div data-hf-id="hf-tjem" class="02-logo-constellation-orbit-item" id="02-logo-constellation-orbit-0" data-angle="0">
-        <div data-hf-id="hf-qemc" class="02-logo-constellation-node">DeepSeek R1</div>
-        <div data-hf-id="hf-nggo" class="02-logo-constellation-label">128 T/S</div>
-      </div>
-
-      <div data-hf-id="hf-g10e" class="02-logo-constellation-orbit-item" id="02-logo-constellation-orbit-1" data-angle="90">
-        <div data-hf-id="hf-8ain" class="02-logo-constellation-node">Claude 3.5</div>
-        <div data-hf-id="hf-anyy" class="02-logo-constellation-label">SONNET</div>
-      </div>
-
-      <div data-hf-id="hf-k1cn" class="02-logo-constellation-orbit-item" id="02-logo-constellation-orbit-2" data-angle="180">
-        <div data-hf-id="hf-59c1" class="02-logo-constellation-node">Qwen 2.5</div>
-        <div data-hf-id="hf-siuu" class="02-logo-constellation-label">CODER</div>
-      </div>
-
-      <div data-hf-id="hf-oxdo" class="02-logo-constellation-orbit-item" id="02-logo-constellation-orbit-3" data-angle="270">
-        <div data-hf-id="hf-px6z" class="02-logo-constellation-node">Cursor AI</div>
-        <div data-hf-id="hf-rsmj" class="02-logo-constellation-label">IDE</div>
-      </div>
-
-      <svg data-hf-id="hf-6sru" class="02-logo-constellation-connectors" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
-        <line data-hf-id="hf-o32h" id="02-logo-constellation-line-0" class="02-logo-constellation-connector-line" x1="960" y1="540" x2="1410" y2="540" />
-        <circle data-hf-id="hf-dkm2" id="02-logo-constellation-shimmer-0" class="02-logo-constellation-shimmer" cx="960" cy="540" r="4" />
-
-        <line data-hf-id="hf-qump" id="02-logo-constellation-line-1" class="02-logo-constellation-connector-line" x1="960" y1="540" x2="960" y2="270" />
-        <circle data-hf-id="hf-7iz3" id="02-logo-constellation-shimmer-1" class="02-logo-constellation-shimmer" cx="960" cy="540" r="4" />
-
-        <line data-hf-id="hf-g7c5" id="02-logo-constellation-line-2" class="02-logo-constellation-connector-line" x1="960" y1="540" x2="510" y2="540" />
-        <circle data-hf-id="hf-867g" id="02-logo-constellation-shimmer-2" class="02-logo-constellation-shimmer" cx="960" cy="540" r="4" />
-
-        <line data-hf-id="hf-k9vn" id="02-logo-constellation-line-3" class="02-logo-constellation-connector-line" x1="960" y1="540" x2="960" y2="810" />
-        <circle data-hf-id="hf-fx2h" id="02-logo-constellation-shimmer-3" class="02-logo-constellation-shimmer" cx="960" cy="540" r="4" />
-      </svg>
-
-      <div data-hf-id="hf-r742" class="02-logo-constellation-tagline" id="02-logo-constellation-tagline">
-        sans abonnement
-      </div>
-
     </div>
-  </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
@@ -218,209 +234,112 @@
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
 
-      const wordmark = document.getElementById('02-logo-constellation-wordmark');
-      const hub = document.getElementById('02-logo-constellation-hub');
-      const tagline = document.getElementById('02-logo-constellation-tagline');
-      const camera = document.getElementById('02-logo-constellation-camera');
+      const wordmark = document.getElementById('c02-wordmark');
+      const hub = document.getElementById('c02-hub');
+      const tagline = document.getElementById('c02-tagline');
+      const camera = document.getElementById('c02-camera');
+      const connectors = document.getElementById('c02-connectors');
       const items = [
-        document.getElementById('02-logo-constellation-orbit-0'),
-        document.getElementById('02-logo-constellation-orbit-1'),
-        document.getElementById('02-logo-constellation-orbit-2'),
-        document.getElementById('02-logo-constellation-orbit-3')
+        document.getElementById('c02-orbit-0'),
+        document.getElementById('c02-orbit-1'),
+        document.getElementById('c02-orbit-2'),
+        document.getElementById('c02-orbit-3')
       ];
 
-      const RADIUS_X = 450;
-      const RADIUS_Y = 270;
+      const RADIUS_X = 420;
+      const RADIUS_Y = 250;
 
-      // Scene 1 (0.0-2.2s): Wordmark assembles from depth-cloud
-      const wordmarkGlyphs = wordmark.textContent.split('').map((char, i) => {
-        const span = document.createElement('span');
-        span.textContent = char;
-        span.style.display = 'inline-block';
-        span.style.willChange = 'transform, opacity';
-        return span;
-      });
-      wordmark.innerHTML = '';
-      wordmarkGlyphs.forEach(span => wordmark.appendChild(span));
+      // Initial state
+      gsap.set(wordmark, { opacity: 0, scale: 0.7, y: 30 });
+      gsap.set(hub, { opacity: 0, scale: 0.5 });
+      gsap.set(connectors, { opacity: 0 });
+      gsap.set(tagline, { opacity: 0, y: 20 });
 
-      wordmarkGlyphs.forEach((span, i) => {
-        // Deterministic pseudo-random values seeded by character index
-        const seed1 = (i * 37.13) % 60 - 30;
-        const seed2 = (i * 53.71) % 60 - 30;
-        const seed3 = (i * 19.47) % 200;
-        gsap.set(span, {
-          opacity: 0,
-          scale: 0.3,
-          rotateX: seed1,
-          rotateY: seed2,
-          z: -200 - seed3
-        });
-
-        tl.to(span, {
-          opacity: 1,
-          scale: 1,
-          rotateX: 0,
-          rotateY: 0,
-          z: 0,
-          duration: 1.2,
-          ease: 'power3.out'
-        }, 0.2 + i * 0.04);
-      });
-
-      // Scene 2 (2.2-6.0s): Wordmark demotes, hub blooms, models enter orbit
+      // Scene 1 (0.0-2.5s): Wordmark rises boldly
       tl.to(wordmark, {
-        scale: 0.25,
-        y: -320,
-        duration: 0.8,
-        ease: 'power2.inOut'
-      }, 2.2);
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 1.2,
+        ease: "power3.out"
+      }, 0.2);
 
-      gsap.set(hub, { opacity: 0, scale: 0.6 });
+      tl.to(wordmark, {
+        textShadow: "0 0 70px rgba(217, 119, 6, 0.8)",
+        duration: 0.8,
+        repeat: 1,
+        yoyo: true,
+        ease: "sine.inOut"
+      }, 0.6);
+
+      // Scene 2 (2.5-6.5s): Wordmark morphs to Hub & Constellation orbits expand
+      tl.to(wordmark, {
+        opacity: 0,
+        scale: 0.8,
+        duration: 0.6,
+        ease: "power2.in"
+      }, 2.5);
+
       tl.to(hub, {
         opacity: 1,
         scale: 1,
-        duration: 0.7,
-        ease: 'back.out(1.4)'
-      }, 2.4);
+        duration: 0.8,
+        ease: "back.out(1.7)"
+      }, 2.8);
 
-      items.forEach((el, i) => {
-        const angle = Number(el.dataset.angle);
-        const a0 = (angle / 360) * Math.PI * 2;
-        const startX = Math.cos(a0) * RADIUS_X;
-        const startY = Math.sin(a0) * RADIUS_Y;
+      tl.to(connectors, {
+        opacity: 1,
+        duration: 0.4
+      }, 3.0);
 
-        gsap.set(el, {
-          xPercent: -50,
-          yPercent: -50,
-          x: startX,
-          y: startY,
-          rotateX: -90,
-          rotateY: 45,
-          z: -300,
-          opacity: 0,
-          scale: 0.4
-        });
-
-        tl.to(el, {
-          rotateX: 0,
-          rotateY: 0,
-          z: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.6,
-          ease: 'back.out(1.6)'
-        }, 2.8 + i * 0.12);
-
-        const orbit = { p: 0 };
-        tl.to(orbit, {
-          p: 1,
-          duration: 10.417,
-          ease: 'none',
-          onUpdate: () => {
-            const a = a0 + orbit.p * Math.PI * 2;
-            const x = Math.cos(a) * RADIUS_X;
-            const y = Math.sin(a) * RADIUS_Y;
-            const zIndex = 1 + Math.round(((y + RADIUS_Y) / (2 * RADIUS_Y)) * 49);
-            el.style.zIndex = String(zIndex);
-            el.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
-          }
-        }, 3.4 + i * 0.12);
-      });
-
-      // Scene 3 (6.0-9.6s): Connector lines draw, shimmer travels, hub pulses
-      for (let i = 0; i < 4; i++) {
-        const line = document.getElementById(`02-logo-constellation-line-${i}`);
-        const shimmer = document.getElementById(`02-logo-constellation-shimmer-${i}`);
-        const len = line.getTotalLength();
-
-        gsap.set(line, {
-          strokeDasharray: len,
-          strokeDashoffset: len
-        });
-
+      // Lines draw out
+      const lines = [
+        document.getElementById('c02-line-0'),
+        document.getElementById('c02-line-1'),
+        document.getElementById('c02-line-2'),
+        document.getElementById('c02-line-3')
+      ];
+      lines.forEach((line, i) => {
         tl.to(line, {
           strokeDashoffset: 0,
-          duration: 0.7,
-          ease: 'power2.out'
-        }, 6.2 + i * 0.15);
+          duration: 0.8,
+          ease: "power2.out"
+        }, 3.0 + i * 0.1);
+      });
 
-        tl.fromTo(shimmer, {
-          opacity: 0,
-          attr: { cx: line.getAttribute('x2'), cy: line.getAttribute('y2') }
-        }, {
+      // Orbit items fan out to 4 cardinal directions
+      const angles = [0, Math.PI / 2, Math.PI, 3 * Math.PI / 2];
+      items.forEach((item, i) => {
+        const targetX = Math.cos(angles[i]) * RADIUS_X;
+        const targetY = -Math.sin(angles[i]) * RADIUS_Y;
+
+        gsap.set(item, { x: 0, y: 0, opacity: 0, scale: 0.3 });
+        tl.to(item, {
+          x: targetX,
+          y: targetY,
           opacity: 1,
-          duration: 0.1,
-          ease: 'power1.in'
-        }, 6.3 + i * 0.15);
+          scale: 1,
+          duration: 1.0,
+          ease: "power3.out"
+        }, 3.2 + i * 0.1);
+      });
 
-        tl.to(shimmer, {
-          attr: { cx: line.getAttribute('x1'), cy: line.getAttribute('y1') },
-          duration: 0.6,
-          ease: 'power1.inOut'
-        }, 6.4 + i * 0.15);
-
-        tl.to(shimmer, {
-          opacity: 0,
-          duration: 0.1,
-          ease: 'power1.out'
-        }, 6.9 + i * 0.15);
-      }
-
-      tl.to(hub, {
-        scale: 1.15,
-        duration: 0.3,
-        ease: 'power2.out'
-      }, 7.8);
-
-      tl.to(hub, {
-        scale: 1,
-        duration: 0.4,
-        ease: 'power2.inOut'
-      }, 8.1);
-
-      // Scene 4 (9.6-12.617s): Camera push-in, wordmark re-centers, tagline reveals
-      const phase = { scale: 0.92 };
-
-      tl.to(phase, {
-        scale: 1.0,
-        duration: 1.5,
-        ease: 'power2.inOut'
-      }, 2.2);
-
-      tl.to(phase, {
-        scale: 1.08,
-        duration: 2.8,
-        ease: 'power2.out'
-      }, 9.6);
-
-      const drift = { p: 0 };
-      tl.to(drift, {
-        p: Math.PI * 2 * 2,
-        duration: 12.617,
-        ease: 'none',
-        onUpdate: () => {
-          const dx = Math.sin(drift.p) * 3;
-          const dy = Math.sin(drift.p * 1.3) * 2;
-          camera.style.transform = `scale(${phase.scale}) translate(${dx}px, ${dy}px)`;
-        }
-      }, 0);
-
-      tl.to(wordmark, {
-        scale: 0.4,
-        y: -80,
-        duration: 1.2,
-        ease: 'power2.inOut'
-      }, 9.8);
-
-      gsap.set(tagline, { opacity: 0, y: 20 });
+      // Tagline emerges
       tl.to(tagline, {
         opacity: 1,
         y: 0,
         duration: 0.8,
-        ease: 'power2.out'
-      }, 11.0);
+        ease: "power2.out"
+      }, 4.2);
 
-      window.__timelines["02-logo-constellation"] = tl;
+      // Camera slow cinematic push
+      tl.to(camera, {
+        scale: 1.08,
+        duration: 12.8,
+        ease: "none"
+      }, 0);
+
+      window.__timelines['02-logo-constellation'] = tl;
     })();
   </script>
 </template>

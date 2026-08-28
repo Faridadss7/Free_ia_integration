@@ -12,12 +12,13 @@
       height: 1080px;
       container-type: size;
       overflow: hidden;
+      background: #030712;
     }
 
     .sp-ink-ground {
       position: absolute;
       inset: 0;
-      background: #030712;
+      background: radial-gradient(circle at 50% 50%, rgba(217, 119, 6, 0.15) 0%, rgba(3, 7, 18, 1) 75%);
     }
 
     .sp-stage {
@@ -27,84 +28,209 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      padding: 60px;
     }
 
-    /* ambient hero glow — sits BEHIND the card (z-index 1) */
-    .sp-glow {
-      position: absolute;
-      inset: 0;
-      margin: auto;
-      width: 1240px;
-      height: 1240px;
-      border-radius: 50%;
-      z-index: 1;
+    .sp-header {
+      text-align: center;
+      margin-bottom: 40px;
       opacity: 0;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.26) 0%, rgba(56, 189, 248, 0.10) 34%, rgba(3, 7, 18, 0) 66%);
-      pointer-events: none;
     }
 
-    /* the proof card block — hero, z-index 2 */
-    .sp-card-block {
-      position: relative;
-      z-index: 2;
+    .sp-kicker {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 16px;
+      font-weight: 600;
+      color: #d97706;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+    }
+
+    .sp-title {
+      font-family: "Inter", sans-serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: #f8fafc;
+      letter-spacing: -0.02em;
+    }
+
+    .sp-cards-container {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      opacity: 0;
+      gap: 32px;
+      width: 100%;
+      max-width: 1500px;
+      justify-content: center;
     }
 
     .sp-card {
-      position: relative;
-      width: 1056px;
-      height: 456px;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid rgba(248, 250, 252, 0.14);
-      box-shadow: 0 1px 3px rgba(3, 7, 18, 0.5), 0 18px 60px rgba(3, 7, 18, 0.45);
-    }
-
-    .sp-card img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* single-pass verification sheen (tile-strong) */
-    .sp-sweep {
-      position: absolute;
-      top: -20%;
-      left: 0;
-      width: 260px;
-      height: 140%;
+      flex: 1;
+      background: rgba(17, 24, 39, 0.75);
+      border: 1px solid rgba(217, 119, 6, 0.25);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(16px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       opacity: 0;
-      background: linear-gradient(100deg, rgba(56, 189, 248, 0) 0%, rgba(56, 189, 248, 0.30) 50%, rgba(56, 189, 248, 0) 100%);
-      pointer-events: none;
     }
 
-    /* hairline rule that draws in beneath the card */
-    .sp-rule {
-      width: 460px;
-      height: 1px;
-      margin-top: 30px;
-      background: rgba(248, 250, 252, 0.16);
-      transform-origin: center center;
+    .sp-stars {
+      color: #fbbf24;
+      font-size: 20px;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+
+    .sp-quote {
+      font-family: "Inter", sans-serif;
+      font-size: 20px;
+      line-height: 1.5;
+      color: #e2e8f0;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .sp-author-box {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 18px;
+    }
+
+    .sp-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #d97706, #f59e0b);
+      display: grid;
+      place-items: center;
+      font-family: "Inter", sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: #030712;
+    }
+
+    .sp-author-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sp-author-name {
+      font-family: "Inter", sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sp-verified {
+      color: #38bdf8;
+      font-size: 14px;
+    }
+
+    .sp-author-role {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    .sp-metrics-bar {
+      margin-top: 48px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      background: rgba(17, 24, 39, 0.9);
+      border: 1px solid rgba(217, 119, 6, 0.3);
+      padding: 14px 32px;
+      border-radius: 999px;
+      opacity: 0;
+    }
+
+    .sp-metric-item {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 15px;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sp-metric-val {
+      color: #d97706;
+      font-weight: 700;
     }
   </style>
 
-  <div data-hf-id="hf-purn" id="root" data-composition-id="06-social-proof" data-duration="9.303" data-width="1920" data-height="1080">
-    <div data-hf-id="hf-6i2r" class="clip sp-ink-ground" data-start="0" data-duration="9.303" data-track-index="0"></div>
+  <div id="root" data-composition-id="06-social-proof" data-duration="9.303" data-width="1920" data-height="1080">
+    <div class="sp-ink-ground clip" data-start="0" data-duration="9.303" data-track-index="0"></div>
 
-    <div data-hf-id="hf-0d54" class="clip sp-stage" data-start="0" data-duration="9.303" data-track-index="1">
-      <div data-hf-id="hf-ur68" class="sp-glow" id="sp-glow"></div>
-
-      <div data-hf-id="hf-s9f2" class="sp-card-block" id="sp-card-block">
-        <div data-hf-id="hf-gik0" class="sp-card">
-          <img data-hf-id="hf-h7yp" src="assets/testimonial-grace.png" alt="">
-          <div data-hf-id="hf-erxe" class="sp-sweep" id="sp-sweep"></div>
-        </div>
-        <div data-hf-id="hf-z522" class="sp-rule" id="sp-rule"></div>
+    <div class="sp-stage clip" data-start="0" data-duration="9.303" data-track-index="1">
+      <div class="sp-header" id="sp-header">
+        <div class="sp-kicker">✦ Retours d'expérience vérifiés</div>
+        <div class="sp-title">Ce que disent les créateurs & développeurs</div>
       </div>
+
+      <div class="sp-cards-container">
+        <!-- Card 1 -->
+        <div class="sp-card" id="sp-card-1">
+          <div>
+            <div class="sp-stars">★★★★★</div>
+            <div class="sp-quote">« J'ai résilié mes abonnements ChatGPT et Cursor. Avec freeIA, je génère des apps complètes en local à une vitesse folle. »</div>
+          </div>
+          <div class="sp-author-box">
+            <div class="sp-avatar">EK</div>
+            <div class="sp-author-info">
+              <div class="sp-author-name">Éric K. <span class="sp-verified">✓</span></div>
+              <div class="sp-author-role">Dev Fullstack · Cotonou</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="sp-card" id="sp-card-2" style="border-color: rgba(217, 119, 6, 0.6);">
+          <div>
+            <div class="sp-stars">★★★★★</div>
+            <div class="sp-quote">« La Masterclass m'a fait économiser des mois d'apprentissage. 5 000 FCFA rentabilisés en une seule mission client ! »</div>
+          </div>
+          <div class="sp-author-box">
+            <div class="sp-avatar" style="background: linear-gradient(135deg, #38bdf8, #0ea5e9);">AD</div>
+            <div class="sp-author-info">
+              <div class="sp-author-name">Aïssatou D. <span class="sp-verified">✓</span></div>
+              <div class="sp-author-role">Freelance SaaS · Dakar</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="sp-card" id="sp-card-3">
+          <div>
+            <div class="sp-stars">★★★★★</div>
+            <div class="sp-quote">« Le VibeCoding avec DeepSeek et Claude Code sans limite d'usage, c'est tout simplement une révolution pour l'Afrique. »</div>
+          </div>
+          <div class="sp-author-box">
+            <div class="sp-avatar" style="background: linear-gradient(135deg, #10b981, #059669);">MO</div>
+            <div class="sp-author-info">
+              <div class="sp-author-name">Marc O. <span class="sp-verified">✓</span></div>
+              <div class="sp-author-role">Lead Tech · Abidjan</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sp-metrics-bar" id="sp-metrics-bar">
+        <div class="sp-metric-item"><span class="sp-metric-val">+350</span> Développeurs Formés</div>
+        <div style="color: rgba(255,255,255,0.2);">|</div>
+        <div class="sp-metric-item"><span class="sp-metric-val">4.9 / 5</span> Note Moyenne</div>
+        <div style="color: rgba(255,255,255,0.2);">|</div>
+        <div class="sp-metric-item"><span class="sp-metric-val">0€ / mois</span> Frais Récurrents</div>
+      </div>
+
     </div>
   </div>
 
@@ -114,72 +240,46 @@
     window.__timelines = window.__timelines || {};
     window.__timelines["06-social-proof"] = tl;
 
-    const DURATION = 8.307;
+    const header = document.getElementById("sp-header");
+    const c1 = document.getElementById("sp-card-1");
+    const c2 = document.getElementById("sp-card-2");
+    const c3 = document.getElementById("sp-card-3");
+    const metrics = document.getElementById("sp-metrics-bar");
 
-    const cardBlock = document.getElementById("sp-card-block");
-    const glow = document.getElementById("sp-glow");
-    const sweep = document.getElementById("sp-sweep");
-    const rule = document.getElementById("sp-rule");
+    // Header enters
+    tl.fromTo(header, {
+      opacity: 0,
+      y: 30
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: "power3.out"
+    }, 0.2);
 
-    // ── Scene 1 (0.0–2.2s) — "Le plus beau changement" ──
-    // The proof card slides up + crossfades in with one restrained move (waterfall-entry,
-    // single element, power3), landing dead-center. Glow blooms behind on the same settle.
-    const REVEAL_START = 0.15;
-    const REVEAL_DUR = 0.9;
+    // Cards cascade in with 3D feel
+    tl.fromTo(c1, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.9, ease: "back.out(1.4)" }, 0.4);
+    tl.fromTo(c2, { opacity: 0, y: 50, scale: 0.95 }, { opacity: 1, y: 0, scale: 1.04, duration: 0.9, ease: "back.out(1.4)" }, 0.55);
+    tl.fromTo(c3, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.9, ease: "back.out(1.4)" }, 0.7);
 
-    tl.fromTo(cardBlock,
-      { opacity: 0, y: 72 },
-      { opacity: 1, y: 0, duration: REVEAL_DUR, ease: "power3.out" },
-      REVEAL_START
-    );
+    // Subtle sheen pulse on middle featured card
+    tl.to(c2, {
+      boxShadow: "0 25px 60px rgba(217, 119, 6, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+      duration: 1.2,
+      repeat: 3,
+      yoyo: true,
+      ease: "sine.inOut"
+    }, 1.5);
 
-    // ambient-glow-bloom (hero-bloom form) — lands with the card's settle as ONE beat
-    const GLOW_PEAK = 0.22;
-    tl.fromTo(glow,
-      { opacity: 0, scale: 0.86 },
-      { opacity: GLOW_PEAK, scale: 1, duration: REVEAL_DUR, ease: "power2.out" },
-      REVEAL_START
-    );
-
-    // ── Scene 2 (2.2–5.0s) — "La nuit… le matin" ── held read.
-    // The Vérifié badge scintillates once: a single-pass tile-strong sheen crosses the card,
-    // then rests. This is the one voltage beat.
-    const SWEEP_START = 3.0;
-    const SWEEP_DUR = 1.25;
-    tl.fromTo(sweep,
-      { x: -320, opacity: 0 },
-      { x: 260, opacity: 0.30, duration: SWEEP_DUR * 0.55, ease: "none" },
-      SWEEP_START
-    );
-    tl.to(sweep,
-      { x: 1120, opacity: 0, duration: SWEEP_DUR * 0.45, ease: "power1.in" },
-      SWEEP_START + SWEEP_DUR * 0.55
-    );
-
-    // ── Scene 3 (5.0–8.307s) — "plus de page blanche" ── full hold.
-    // A neutral hairline rule draws in beneath the card to confirm the cite line; nothing else moves.
-    tl.fromTo(rule,
-      { scaleX: 0 },
-      { scaleX: 1, duration: 0.7, ease: "power2.out" },
-      5.15
-    );
-
-    // Bounded ambient breathe on the glow — the only sustained life during the held frame.
-    const glowPhase = { p: 0 };
-    const BREATHE_START = REVEAL_START + REVEAL_DUR; // 1.05s
-    const BREATHE_DUR = DURATION - BREATHE_START;
-    const BREATHE_CYCLES = BREATHE_DUR / 3.2; // ~3.2s per breath
-    const OPACITY_AMP = 0.03;
-    const SCALE_AMP = 0.014;
-    tl.to(glowPhase, {
-      p: Math.PI * 2 * BREATHE_CYCLES,
-      duration: BREATHE_DUR,
-      ease: "none",
-      onUpdate: () => {
-        const s = Math.sin(glowPhase.p);
-        glow.style.opacity = String(GLOW_PEAK + s * OPACITY_AMP);
-        glow.style.transform = `scale(${1 + s * SCALE_AMP})`;
-      }
-    }, BREATHE_START);
+    // Metrics bar enters
+    tl.fromTo(metrics, {
+      opacity: 0,
+      y: 20
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: "power2.out"
+    }, 1.2);
   </script>
 </template>
