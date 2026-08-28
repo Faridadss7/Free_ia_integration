@@ -28,25 +28,49 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding-top: 96px;
+      padding-top: 60px;
+    }
+
+    .p07-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .p07-header-kicker {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #d97706;
+      margin-bottom: 8px;
+    }
+
+    .p07-header-title {
+      font-family: "Inter", sans-serif;
+      font-size: 42px;
+      font-weight: 700;
+      color: #f8fafc;
+      letter-spacing: -0.02em;
     }
 
     .p07-stage {
       position: relative;
       display: flex;
-      gap: 72px;
+      align-items: center;
+      gap: 32px;
       transform-style: preserve-3d;
       will-change: transform;
     }
 
     .p07-glow {
       position: absolute;
-      top: -40px;
-      left: 636px;
-      width: 660px;
-      height: 700px;
+      top: -30px;
+      right: 0px;
+      width: 540px;
+      height: 620px;
       z-index: 0;
-      background: radial-gradient(ellipse at center, rgba(56, 189, 248, 0.30) 0%, rgba(56, 189, 248, 0.08) 45%, transparent 70%);
+      background: radial-gradient(ellipse at center, rgba(217, 119, 6, 0.35) 0%, rgba(217, 119, 6, 0.08) 50%, transparent 70%);
       transform-origin: 50% 50%;
       pointer-events: none;
     }
@@ -55,187 +79,228 @@
       position: relative;
       z-index: 2;
       box-sizing: border-box;
-      width: 600px;
-      height: 600px;
-      padding: 52px 50px;
-      border-radius: 14px;
-      background: rgba(248, 250, 252, 0.04);
-      border: 1px solid rgba(248, 250, 252, 0.14);
+      width: 460px;
+      height: 560px;
+      padding: 36px 32px;
+      border-radius: 16px;
+      background: rgba(248, 250, 252, 0.03);
+      border: 1px solid rgba(248, 250, 252, 0.12);
       transform-style: preserve-3d;
-      will-change: transform, filter;
-      --dof: 0px;
-      filter: blur(var(--dof));
+      will-change: transform, filter, opacity;
       display: flex;
       flex-direction: column;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     }
 
-    /* left card faces right -> soft shadow falls right */
-    #p07-card-left {
-      box-shadow: 26px 34px 70px rgba(3, 7, 18, 0.42);
-    }
-    /* right card faces left -> soft shadow falls left */
-    #p07-card-right {
-      box-shadow: -26px 34px 70px rgba(3, 7, 18, 0.42);
-    }
-
-    .p07-card--pro {
-      border: 1px solid rgba(56, 189, 248, 0.45);
-      background: rgba(56, 189, 248, 0.06);
+    .p07-card--master {
+      width: 490px;
+      height: 590px;
+      border: 1.5px solid rgba(217, 119, 6, 0.55);
+      background: rgba(217, 119, 6, 0.06);
+      box-shadow: 0 25px 60px rgba(217, 119, 6, 0.18), 0 10px 30px rgba(0, 0, 0, 0.7);
     }
 
     .p07-kicker {
       font-family: "JetBrains Mono", monospace;
-      font-size: 22px;
-      font-weight: 500;
-      letter-spacing: 0.16em;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: #0ea5e9;
-      margin-bottom: 20px;
+      color: #94a3b8;
+      margin-bottom: 12px;
+    }
+
+    .p07-kicker--master {
+      color: #d97706;
     }
 
     .p07-title {
-      font-family: "Inter", Georgia, serif;
-      font-size: 64px;
-      font-weight: 400;
-      letter-spacing: -0.018em;
-      line-height: 1.02;
+      font-family: "Inter", sans-serif;
+      font-size: 38px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
       color: #f8fafc;
-      margin-bottom: 30px;
+      margin-bottom: 18px;
     }
 
     .p07-price {
       display: flex;
       align-items: baseline;
-      gap: 14px;
-      margin-bottom: 8px;
+      gap: 10px;
+      margin-bottom: 22px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(248, 250, 252, 0.08);
       will-change: transform, opacity;
     }
 
     .p07-figure {
-      font-family: "Inter", Georgia, serif;
-      font-size: 76px;
-      font-weight: 400;
-      letter-spacing: -0.025em;
-      line-height: 0.95;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 52px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
       color: #f8fafc;
+    }
+
+    .p07-figure--master {
+      color: #fbbf24;
     }
 
     .p07-unit {
       font-family: "JetBrains Mono", monospace;
-      font-size: 28px;
-      font-weight: 500;
+      font-size: 20px;
+      font-weight: 600;
       color: rgba(248, 250, 252, 0.65);
+    }
+
+    .p07-period {
+      font-family: "Inter", sans-serif;
+      font-size: 13px;
+      color: rgba(248, 250, 252, 0.45);
+      margin-left: auto;
     }
 
     .p07-lines {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 14px;
       margin-top: auto;
     }
 
     .p07-line {
       display: flex;
-      align-items: center;
-      gap: 14px;
-      font-family: "Inter", system-ui, sans-serif;
-      font-size: 26px;
+      align-items: flex-start;
+      gap: 10px;
+      font-family: "Inter", sans-serif;
+      font-size: 16px;
       font-weight: 400;
-      color: rgba(248, 250, 252, 0.9);
-      will-change: transform, opacity;
+      color: rgba(248, 250, 252, 0.88);
+      line-height: 1.4;
     }
 
     .p07-line::before {
-      content: "\2713";
-      color: #38bdf8;
-      font-size: 22px;
+      content: "✓";
+      color: #d97706;
+      font-size: 15px;
       font-weight: 700;
+      margin-top: 1px;
+    }
+
+    .p07-line--master::before {
+      color: #fbbf24;
     }
 
     .p07-badge {
       position: absolute;
-      top: -20px;
-      left: 636px;
+      top: -16px;
+      right: 32px;
       z-index: 5;
-      padding: 12px 24px;
+      padding: 6px 16px;
       border-radius: 9999px;
-      background: #38bdf8;
-      color: #030712;
+      background: #d97706;
+      color: #ffffff;
       font-family: "JetBrains Mono", monospace;
-      font-size: 20px;
-      font-weight: 500;
+      font-size: 13px;
+      font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       white-space: nowrap;
-      box-shadow: 0 10px 34px rgba(56, 189, 248, 0.5);
-      transform-origin: 50% 50%;
-      will-change: transform;
+      box-shadow: 0 8px 24px rgba(217, 119, 6, 0.6);
     }
 
     .p07-seal-wrap {
-      margin-top: 40px;
+      margin-top: 36px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 18px;
+      gap: 12px;
     }
 
     .p07-rule {
-      width: 560px;
+      width: 680px;
       height: 1px;
-      background: rgba(248, 250, 252, 0.22);
+      background: rgba(248, 250, 252, 0.15);
       transform-origin: 50% 50%;
-      will-change: transform;
     }
 
     .p07-seal {
       font-family: "JetBrains Mono", monospace;
-      font-size: 24px;
+      font-size: 18px;
       font-weight: 500;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: rgba(248, 250, 252, 0.7);
-      will-change: transform, opacity;
     }
   </style>
 
   <div data-hf-id="hf-uo93" id="root" data-composition-id="07-pricing" data-duration="13.017" data-width="1920" data-height="1080">
-    <div data-hf-id="hf-inzd" class="clip p07-ink" data-start="0" data-duration="13.801" data-track-index="0"></div>
+    <div data-hf-id="hf-inzd" class="clip p07-ink" id="p07-ink" data-start="0" data-duration="13.801" data-track-index="0"></div>
 
-    <div data-hf-id="hf-s6ao" class="clip p07-scene" data-start="0" data-duration="13.801" data-track-index="1">
+    <div data-hf-id="hf-s6ao" class="clip p07-scene" id="p07-scene" data-start="0" data-duration="13.801" data-track-index="1">
+      
+      <div class="p07-header" id="p07-header">
+        <div class="p07-header-kicker">TARIFS TRANSPARENTS · ZÉRO ABONNEMENT</div>
+        <div class="p07-header-title">Choisissez la formule adaptée à vos besoins</div>
+      </div>
+
       <div data-hf-id="hf-tsn6" class="p07-stage" id="p07-stage">
         <div data-hf-id="hf-6ytq" class="p07-glow" id="p07-glow"></div>
 
-        <div data-hf-id="hf-66f8" class="p07-card" id="p07-card-left">
-          <div data-hf-id="hf-q3hv" class="p07-kicker">✱ Pack</div>
-          <div data-hf-id="hf-z0ob" class="p07-title">Standard</div>
-          <div data-hf-id="hf-h8em" class="p07-price" id="p07-price-left">
-            <span data-hf-id="hf-h9sb" class="p07-figure">1 000</span><span data-hf-id="hf-g0mp" class="p07-unit">FCFA</span>
+        <!-- PACK 1 : BASIC 1 000 FCFA -->
+        <div data-hf-id="hf-66f8" class="p07-card" id="p07-card-basic">
+          <div class="p07-kicker">✱ ESSENTIEL</div>
+          <div class="p07-title">Basic</div>
+          <div class="p07-price" id="p07-price-basic">
+            <span class="p07-figure">1 000</span>
+            <span class="p07-unit">FCFA</span>
+            <span class="p07-period">Paiement unique</span>
           </div>
-          <div data-hf-id="hf-6hfd" class="p07-lines">
-            <div data-hf-id="hf-70h6" class="p07-line" id="p07-line-left">tester la méthode</div>
-          </div>
-        </div>
-
-        <div data-hf-id="hf-gfoi" class="p07-card p07-card--pro" id="p07-card-right">
-          <div data-hf-id="hf-j9qu" class="p07-kicker">✱ Formation &amp; Setup</div>
-          <div data-hf-id="hf-aels" class="p07-title">Masterclass</div>
-          <div data-hf-id="hf-pfk5" class="p07-price" id="p07-price-right">
-            <span data-hf-id="hf-lp2v" class="p07-figure">5 000</span><span data-hf-id="hf-gu1x" class="p07-unit">FCFA</span>
-          </div>
-          <div data-hf-id="hf-nuz1" class="p07-lines">
-            <div data-hf-id="hf-7gdx" class="p07-line pro-line">masterclass vibecoding 6 modules</div>
-            <div data-hf-id="hf-7wv0" class="p07-line pro-line">configuration multi-ide complète</div>
-            <div data-hf-id="hf-zjrc" class="p07-line pro-line">support &amp; intégration privée</div>
+          <div class="p07-lines">
+            <div class="p07-line">Guide d'installation standard</div>
+            <div class="p07-line">Accès au groupe WhatsApp</div>
+            <div class="p07-line">Idéal pour tester la méthode</div>
           </div>
         </div>
 
-        <div data-hf-id="hf-v9u4" class="p07-badge" id="p07-badge">Le plus choisi</div>
+        <!-- PACK 2 : PRO 3 000 FCFA -->
+        <div class="p07-card" id="p07-card-pro">
+          <div class="p07-kicker">✱ PACK COMPLET</div>
+          <div class="p07-title">Pro</div>
+          <div class="p07-price" id="p07-price-pro">
+            <span class="p07-figure">3 000</span>
+            <span class="p07-unit">FCFA</span>
+            <span class="p07-period">Paiement unique</span>
+          </div>
+          <div class="p07-lines">
+            <div class="p07-line">Configuration assistée (Terminal, Cursor, Roo)</div>
+            <div class="p07-line">Pack de scripts d'installation en 1 clic</div>
+            <div class="p07-line">20 plugins &amp; compétences configurés</div>
+            <div class="p07-line">Accès prioritaire au groupe</div>
+          </div>
+        </div>
+
+        <!-- PACK 3 : MASTERCLASS 5 000 FCFA -->
+        <div data-hf-id="hf-gfoi" class="p07-card p07-card--master" id="p07-card-master">
+          <div class="p07-badge" id="p07-badge">Recommandé · 6 Modules</div>
+          <div class="p07-kicker p07-kicker--master">✱ FORMATION &amp; INTÉGRATION PRIVÉE</div>
+          <div class="p07-title">Masterclass VibeCoding</div>
+          <div class="p07-price" id="p07-price-master">
+            <span class="p07-figure p07-figure--master">5 000</span>
+            <span class="p07-unit">FCFA</span>
+            <span class="p07-period">Paiement unique</span>
+          </div>
+          <div class="p07-lines">
+            <div class="p07-line p07-line--master">Tout le Pack Pro + Intégration en direct avec Farid</div>
+            <div class="p07-line p07-line--master">Formation VibeCoding complète en 6 modules</div>
+            <div class="p07-line p07-line--master">DeepSeek V4, Claude Opus 5 &amp; GPT-5.6 illimités</div>
+            <div class="p07-line p07-line--master">Accompagnement privé &amp; session Meet / AnyDesk</div>
+          </div>
+        </div>
+
       </div>
 
       <div data-hf-id="hf-p84o" class="p07-seal-wrap">
         <div data-hf-id="hf-svky" class="p07-rule" id="p07-rule"></div>
-        <div data-hf-id="hf-wud1" class="p07-seal" id="p07-seal">Paiement unique · Sans abonnement</div>
+        <div data-hf-id="hf-wud1" class="p07-seal" id="p07-seal">Mobile Money (MTN · Moov · Celtiis · Wave) · Carte Bancaire</div>
       </div>
     </div>
   </div>
@@ -247,101 +312,55 @@
     window.__timelines["07-pricing"] = tl;
 
     const DURATION = 13.401;
-    const TILT = 11;
-    const OVERSHOOT = 6;
-    const SLIDE = 380;
-    const ENTRY_DUR = 0.9;
-
-    const leftCard = document.getElementById("p07-card-left");
-    const rightCard = document.getElementById("p07-card-right");
-    const stage = document.getElementById("p07-stage");
+    const cardBasic = document.getElementById("p07-card-basic");
+    const cardPro = document.getElementById("p07-card-pro");
+    const cardMaster = document.getElementById("p07-card-master");
+    const header = document.getElementById("p07-header");
     const glow = document.getElementById("p07-glow");
     const badge = document.getElementById("p07-badge");
     const rule = document.getElementById("p07-rule");
     const seal = document.getElementById("p07-seal");
-    const priceLeft = document.getElementById("p07-price-left");
-    const lineLeft = document.getElementById("p07-line-left");
-    const priceRight = document.getElementById("p07-price-right");
-    const proLines = gsap.utils.toArray(".pro-line");
 
-    // Glow hidden until Pro becomes focal (opacity/scale only — no CSS transform baked)
+    // Initial state
     gsap.set(glow, { opacity: 0, scale: 0.9 });
+    gsap.set(badge, { scale: 0, opacity: 0 });
 
-    // ---- Scene 1 (0.0-2.6s): mirrored book-open entrance (split-tilt-cards) ----
-    // Signature move: two cards enter from opposite wings with mirrored rotationY tilts.
-    tl.fromTo(leftCard,
-      { x: -SLIDE, rotateY: TILT + OVERSHOOT, opacity: 0 },
-      { x: 0, rotateY: TILT, opacity: 1, duration: ENTRY_DUR, ease: "power3.out" },
-      0.15);
-    tl.fromTo(rightCard,
-      { x: SLIDE, rotateY: -TILT - OVERSHOOT, opacity: 0 },
-      { x: 0, rotateY: -TILT, opacity: 1, duration: ENTRY_DUR, ease: "power3.out" },
+    // Scene 1: Header entrance (0.0s - 0.8s)
+    tl.fromTo(header,
+      { y: -30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+      0.1);
+
+    // Scene 2: 3 Cards cascading 3D entrance (0.3s - 2.2s)
+    tl.fromTo(cardBasic,
+      { x: -200, rotateY: 15, opacity: 0 },
+      { x: 0, rotateY: 0, opacity: 1, duration: 0.9, ease: "power3.out" },
       0.3);
 
-    // Slight camera rotate (bounded sine, deterministic) — "caméra qui tourne légèrement"
-    const cam = { p: 0 };
-    tl.to(cam, {
-      p: Math.PI * 2 * 1.25,
-      duration: DURATION,
-      ease: "none",
-      onUpdate: () => { gsap.set(stage, { rotateY: Math.sin(cam.p) * 2.2 }); }
-    }, 0);
+    tl.fromTo(cardPro,
+      { y: 60, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" },
+      0.5);
 
-    // Counter-phase idle bob via bounded sine (no yoyo/repeat — seek-safe)
-    const bob = { p: 0 };
-    const BOB_START = 1.5;
-    const BOB_AMP = 5;
-    tl.to(bob, {
-      p: Math.PI * 2 * 3,
-      duration: DURATION - BOB_START,
-      ease: "none",
-      onUpdate: () => {
-        const s = Math.sin(bob.p);
-        gsap.set(leftCard, { y: -s * BOB_AMP });
-        gsap.set(rightCard, { y: s * BOB_AMP });
-      }
-    }, BOB_START);
+    tl.fromTo(cardMaster,
+      { x: 200, rotateY: -15, opacity: 0 },
+      { x: 0, rotateY: 0, opacity: 1, duration: 0.9, ease: "power3.out" },
+      0.7);
 
-    // ---- Scene 2 (2.6-6.4s): left card fills; right dims (depth-of-field-blur) ----
-    tl.fromTo(priceLeft, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 2.7);
-    tl.fromTo(lineLeft, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 3.1);
-    tl.to(rightCard, { "--dof": "9px", opacity: 0.5, duration: 0.8, ease: "power2.inOut" }, 3.2);
+    // Scene 3: Spotlight focus on Masterclass (3.0s - 8.0s)
+    tl.to(glow, { opacity: 1, scale: 1.05, duration: 1.2, ease: "power2.out" }, 2.5);
+    tl.to(badge, { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)" }, 3.0);
 
-    // ---- Scene 3 (6.4-10.4s): rack focus to Pro; sequential value lines; badge pop ----
-    // Rack: left blurs+dims, right sharpens (adjacent tweens on the same --dof channel).
-    tl.to(leftCard, { "--dof": "9px", opacity: 0.55, duration: 0.8, ease: "power2.inOut" }, 6.5);
-    tl.to(rightCard, { "--dof": "0px", opacity: 1, duration: 0.8, ease: "power2.inOut" }, 6.5);
-    tl.to(glow, { opacity: 1, scale: 1, duration: 1.0, ease: "power2.out" }, 6.5);
+    // Card subtle scale highlighting
+    tl.to(cardBasic, { opacity: 0.75, scale: 0.98, duration: 0.8, ease: "power2.inOut" }, 3.2);
+    tl.to(cardPro, { opacity: 0.85, scale: 0.98, duration: 0.8, ease: "power2.inOut" }, 3.2);
+    tl.to(cardMaster, { scale: 1.02, duration: 0.8, ease: "power2.inOut" }, 3.2);
 
-    tl.fromTo(priceRight, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 6.9);
-    // Three value lines revealed one per spoken item (dynamic-content-sequencing cadence).
-    tl.fromTo(proLines[0], { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 7.3);
-    tl.fromTo(proLines[1], { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 8.2);
-    tl.fromTo(proLines[2], { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 9.1);
+    // Scene 4: Mobile Money seal and final hold (9.0s - 13.4s)
+    tl.fromTo(rule, { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power2.out" }, 8.5);
+    tl.fromTo(seal, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 8.8);
 
-    // Badge spring-pop (the voltage) — gentle overshoot allowed on this one playful beat.
-    tl.fromTo(badge,
-      { scale: 0, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 0.55, ease: "back.out(1.6)" },
-      9.4);
-
-    // Glow breathe during the Pro hold (opacity only, bounded, deterministic).
-    const glowB = { p: 0 };
-    const GB_START = 8.0;
-    tl.to(glowB, {
-      p: Math.PI * 2 * 2,
-      duration: DURATION - GB_START,
-      ease: "none",
-      onUpdate: () => { glow.style.opacity = String(0.85 + Math.sin(glowB.p) * 0.1); }
-    }, GB_START);
-
-    // ---- Scene 4 (10.4-13.401s): both cards level & lit; seal line draws in; held ----
-    tl.to(leftCard, { rotateY: 0, duration: 0.9, ease: "power3.inOut" }, 10.4);
-    tl.to(rightCard, { rotateY: 0, duration: 0.9, ease: "power3.inOut" }, 10.4);
-    // Refocus the left card so both read lit.
-    tl.to(leftCard, { "--dof": "0px", opacity: 1, duration: 0.9, ease: "power2.inOut" }, 10.4);
-
-    tl.fromTo(rule, { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power2.out" }, 10.7);
-    tl.fromTo(seal, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 11.0);
+    // All cards back to 100% lit
+    tl.to([cardBasic, cardPro, cardMaster], { opacity: 1, scale: 1, duration: 0.8, ease: "power2.inOut" }, 9.5);
   </script>
 </template>
