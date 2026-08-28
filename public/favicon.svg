@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Favicon — badge "F" (Farid ADISSO), cohérent avec le logo du header :
-  carré arrondi en dégradé turquoise (accent-soft -> accent-strong de la charte),
-  lettre F blanche. SVG net à toute taille, fond transparent hors du badge.
--->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" width="140" height="140">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#7dd3fc"/>
-      <stop offset="1" stop-color="#0ea5e9"/>
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
     </linearGradient>
   </defs>
-  <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#g)"/>
-  <path d="M24 18h18v7H31v6h9v7h-9v11h-7z" fill="#030712"/>
+  <!-- Fond badge ambre cuivré -->
+  <rect width="140" height="140" rx="32" fill="url(#g)"/>
+
+  <!-- Lettre F géométrique avec nœuds neuronaux IA -->
+  <g fill="#0a0a0b">
+    <rect x="34" y="32" width="16" height="76" rx="4"/>
+    <rect x="34" y="32" width="50" height="16" rx="4"/>
+    <rect x="34" y="64" width="38" height="16" rx="4"/>
+  </g>
+  <path d="M90,40 Q112,56 78,72" stroke="#0a0a0b" stroke-width="3" fill="none" opacity="0.6" stroke-linecap="round"/>
+  <circle cx="90" cy="40" r="8" fill="#ffffff"/>
+  <circle cx="78" cy="72" r="6" fill="#ffffff"/>
 </svg>

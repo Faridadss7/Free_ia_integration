@@ -1,31 +1,22 @@
 import Reveal from './Reveal';
+import { IconBrandLogoFull } from './icons';
 import './Footer.css';
 
 /**
- * Footer — Bloc de clôture très sobre.
+ * Footer — Bloc de clôture officiel freeIA INTEGRATION.
  *
- * Contenu (piloté par le dictionnaire de traduction) :
- *  - Logo textuel (badge dégradé + nom)
- *  - Titre "AI Integration & Cloud Solutions"
- *  - Liens : GitHub, LinkedIn, Email, WhatsApp Business
- *  - Note de clôture sur la disponibilité
- *
- * @param {object}   props
- * @param {(key: string) => string} props.t  Fonction de traduction fournie par App.
+ * @param {object} props
+ * @param {(key: string) => string} props.t Fonction de traduction fournie par App.
  */
 export default function Footer({ t }) {
-  const year = 2026; // Année courante (statique : pas d'horloge runtime nécessaire ici).
+  const year = 2026;
 
   return (
     <footer className="footer">
       <Reveal className="footer__inner">
-        {/* --- Identité --- */}
+        {/* --- Identité Officielle freeIA INTEGRATION --- */}
         <div className="footer__brand">
-          <span className="footer__badge" aria-hidden="true">F</span>
-          <div className="footer__brand-text">
-            <span className="footer__name">Farid ADISSO</span>
-            <span className="footer__tagline">{t('footer.title')}</span>
-          </div>
+          <IconBrandLogoFull />
         </div>
 
         {/* --- Liens sociaux --- */}

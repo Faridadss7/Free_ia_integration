@@ -1,6 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { IconGitHub, IconLinkedIn, IconSun, IconMoon, IconMenu, IconClose } from "./icons";
+import {
+  IconGitHub,
+  IconLinkedIn,
+  IconSun,
+  IconMoon,
+  IconMenu,
+  IconClose,
+  IconBrandLogoFull,
+} from "./icons";
 
 /**
  * Header — En-tête sticky ultra-premium (style Linear / Vercel).
@@ -80,22 +88,13 @@ export default function Header({
       className="sticky top-0 z-50 border-b border-border bg-bg/80 backdrop-blur-xl backdrop-saturate-150 transition-colors"
     >
       <div className="mx-auto flex h-[var(--nav-height)] max-w-[var(--max-width)] items-center justify-between gap-4 px-6">
-        {/* --- Logo Dev/Tech : badge carré avec indicateur d'état + wordmark --- */}
+        {/* --- Logo Officiel freeIA INTEGRATION --- */}
         <button
           type="button"
           onClick={() => handleNavigate("main")}
-          className="group flex items-center gap-2.5 rounded-md outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+          className="group flex items-center rounded-md outline-none transition-transform active:scale-95 focus-visible:ring-2 focus-visible:ring-accent/60"
         >
-          <span
-            aria-hidden="true"
-            className="grid h-8 w-8 place-items-center rounded-md border border-border bg-surface-raised font-mono text-sm font-bold text-ink transition-all duration-150 group-hover:border-accent group-hover:text-accent"
-          >
-            F
-          </span>
-          <span className="hidden text-sm font-bold tracking-tight text-ink sm:block font-display">
-            Farid ADISSO{" "}
-            <span className="font-mono text-xs font-normal text-muted">/ local.ai</span>
-          </span>
+          <IconBrandLogoFull />
         </button>
 
         {/* --- Liens de section (centre, desktop) --- */}

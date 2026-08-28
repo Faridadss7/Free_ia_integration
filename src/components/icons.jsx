@@ -653,3 +653,65 @@ export function IconLogoOpenWebUI({ size = 20, className = "" }) {
     </svg>
   );
 }
+
+/* =============================================================================
+   Logo Officiel & Monogramme « freeIA INTEGRATION »
+   ============================================================================= */
+
+/**
+ * Monogramme Officiel F + Nœuds Neuronaux IA
+ */
+export function IconBrandMonogram({ size = 32, className = "" }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 140 140"
+      className={className}
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="brand-monogram-grad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#f59e0b" />
+          <stop offset="100%" stopColor="#d97706" />
+        </linearGradient>
+      </defs>
+      <rect width="140" height="140" rx="32" fill="url(#brand-monogram-grad)" />
+      <g fill="#0a0a0b">
+        <rect x="34" y="32" width="16" height="76" rx="4" />
+        <rect x="34" y="32" width="50" height="16" rx="4" />
+        <rect x="34" y="64" width="38" height="16" rx="4" />
+      </g>
+      <path
+        d="M90,40 Q112,56 78,72"
+        stroke="#0a0a0b"
+        strokeWidth="3.5"
+        fill="none"
+        opacity="0.65"
+        strokeLinecap="round"
+      />
+      <circle cx="90" cy="40" r="8" fill="#ffffff" />
+      <circle cx="78" cy="72" r="6" fill="#ffffff" />
+    </svg>
+  );
+}
+
+/**
+ * Logo Complet Vectoriel Officiel : Monogramme + freeIA + INTEGRATION
+ */
+export function IconBrandLogoFull({ className = "" }) {
+  return (
+    <div className={`flex items-center gap-3 ${className}`}>
+      <IconBrandMonogram size={34} />
+      <div className="flex flex-col text-left leading-none">
+        <div className="flex items-baseline font-display font-bold tracking-tight text-ink text-base sm:text-lg">
+          <span>free</span>
+          <span className="text-accent font-extrabold ml-0.5">IA</span>
+        </div>
+        <span className="font-mono text-[9px] tracking-[0.28em] text-muted uppercase font-semibold mt-0.5">
+          INTEGRATION
+        </span>
+      </div>
+    </div>
+  );
+}
