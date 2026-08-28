@@ -104,8 +104,8 @@
       </div>
 
       <div data-hf-id="hf-ab2x" class="modules-container">
-        <div data-hf-id="hf-3w6t" class="module-line" id="module-1">[ ] deepseek-r1 (128 t/s)</div>
-        <div data-hf-id="hf-71kl" class="module-line" id="module-2">[ ] claude-3.5-sonnet &amp; cursor</div>
+        <div data-hf-id="hf-3w6t" class="module-line" id="module-1">[ ] deepseek-v4 (168 t/s)</div>
+        <div data-hf-id="hf-71kl" class="module-line" id="module-2">[ ] claude-opus-5 &amp; gpt-5.6</div>
         <div data-hf-id="hf-wx07" class="module-line" id="module-3">[ ] cluster vibecoding (0€/mois)</div>
       </div>
 
@@ -183,9 +183,9 @@
 
     // Scene 2: Module checks (1.4–3.4s)
     const modules = [
-      { el: document.getElementById("module-1"), text: "<span class='check-mark'>✓</span> claude code", t: 1.5 },
-      { el: document.getElementById("module-2"), text: "<span class='check-mark'>✓</span> cursor", t: 2.1 },
-      { el: document.getElementById("module-3"), text: "<span class='check-mark'>✓</span> agentrouter", t: 2.7 }
+      { el: document.getElementById("module-1"), text: "<span class='check-mark'>✓</span> deepseek-v4 reasoning (168 t/s)", t: 1.5 },
+      { el: document.getElementById("module-2"), text: "<span class='check-mark'>✓</span> claude-opus-5 &amp; gpt-5.6 omni", t: 2.1 },
+      { el: document.getElementById("module-3"), text: "<span class='check-mark'>✓</span> glm-5.3 &amp; cluster vibecoding (0€)", t: 2.7 }
     ];
 
     modules.forEach((mod, i) => {
