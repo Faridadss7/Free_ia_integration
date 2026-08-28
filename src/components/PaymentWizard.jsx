@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { IconClose, IconCopy, IconCheck, IconUpload, IconArrowRight, IconSpinner } from "./icons";
 import { submitOrder } from "../lib/submitOrder";
+import { getWhatsAppUrl } from "../config/contact";
 
 /**
  * PaymentWizard — Modale plein écran floutée guidant la commande en 4 étapes.
@@ -120,9 +121,7 @@ export default function PaymentWizard({ t, lang, plan, onClose }) {
   };
 
   // Lien WhatsApp de secours, pré-rempli et localisé (numéro MTN par défaut).
-  const waMessage = encodeURIComponent(t("wizard.fallback.waMessage"));
-  const waNumber = "2290141822125"; // WhatsApp Business (contact, distinct des numéros de paiement)
-  const waLink = `https://wa.me/${waNumber}?text=${waMessage}`;
+  const waLink = getWhatsAppUrl(t("wizard.fallback.waMessage"));
 
   const operators = t("wizard.step2.operators");
   const activeOperator =

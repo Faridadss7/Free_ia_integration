@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-
-/** Numéro WhatsApp Business (identique au Footer et au PaymentWizard). */
-const WHATSAPP_NUMBER = "2290141822125";
+import { WHATSAPP_NUMBER } from "../config/contact";
 
 /**
  * FaqTerminal — FAQ immersive présentée comme une console Unix réaliste.

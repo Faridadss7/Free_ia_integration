@@ -6,9 +6,10 @@ import HeroCockpit from "./HeroCockpit";
 
 const HIGHLIGHT_WORDS = [
   "0€ de facture API",
-  "Claude Code CLI Illimité",
-  "DeepSeek R1 en Local",
-  "Cursor AI & Roo Code",
+  "Claude Opus 5 & Code CLI",
+  "DeepSeek V4 en Local (168 t/s)",
+  "GPT-5.6 & GLM-5.3 Omni",
+  "Cursor AI & Antigravity IDE",
 ];
 
 /**

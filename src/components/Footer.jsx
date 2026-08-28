@@ -1,5 +1,6 @@
 import Reveal from './Reveal';
 import { IconBrandLogoFull } from './icons';
+import { WHATSAPP_NUMBER } from '../config/contact';
 import './Footer.css';
 
 /**
@@ -32,7 +33,7 @@ export default function Footer({ t }) {
           </a>
           <a
             className="footer__link"
-            href={`https://wa.me/2290141822125?text=${encodeURIComponent(t('footer.whatsappPrefill'))}`}
+            href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t('footer.whatsappPrefill'))}`}
             target="_blank"
             rel="noreferrer noopener"
           >

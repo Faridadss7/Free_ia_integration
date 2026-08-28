@@ -2,18 +2,21 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import SectionHeading from "./SectionHeading";
 import BorderBeam from "./BorderBeam";
+import { getWhatsAppUrl } from "../config/contact";
 import {
   IconLogoClaude,
   IconLogoCursor,
   IconLogoDeepSeek,
   IconLogoQwen,
   IconLogoVSCode,
+  IconLogoTokensApi,
 } from "./icons";
 
 const MODELS = [
-  { id: "deepseek", name: "DeepSeek R1", speed: "128 t/s", latency: "18ms", cost: "0.00 €", badge: "Raisonnement Pur", icon: IconLogoDeepSeek },
-  { id: "claude", name: "Claude 3.5 Sonnet", speed: "Instantané", latency: "22ms", cost: "0.00 €", badge: "Agent CLI", icon: IconLogoClaude },
-  { id: "qwen", name: "Qwen 2.5 Coder", speed: "94 t/s", latency: "15ms", cost: "0.00 €", badge: "Code Spécialisé", icon: IconLogoQwen },
+  { id: "deepseek", name: "DeepSeek V4", speed: "168 t/s", latency: "14ms", cost: "0.00 €", badge: "Raisonnement & Code", icon: IconLogoDeepSeek },
+  { id: "claude", name: "Claude Opus 5", speed: "Instantané", latency: "20ms", cost: "0.00 €", badge: "Thinking VibeCoding", icon: IconLogoClaude },
+  { id: "gpt", name: "GPT-5.6 Omni", speed: "Stream", latency: "18ms", cost: "0.00 €", badge: "Multi-Modal", icon: IconLogoTokensApi },
+  { id: "glm", name: "GLM-5.3 Turbo", speed: "142 t/s", latency: "12ms", cost: "0.00 €", badge: "Flux Direct", icon: IconLogoQwen },
 ];
 
 const IDES = [
@@ -249,7 +252,7 @@ export default function InteractiveBento({ t }) {
                 <strong className="text-ink">WhatsApp & Google Meet</strong>
               </div>
               <a
-                href="https://wa.me/2290154849448?text=Bonjour%20Farid,%20je%20souhaite%20r%C3%A9server%20mon%20int%C3%A9gration%20IA"
+                href={getWhatsAppUrl("Bonjour Farid, je souhaite réserver mon intégration IA & Masterclass.")}
                 target="_blank"
                 rel="noreferrer noopener"
                 className="inline-flex items-center gap-1.5 rounded-md bg-accent hover:bg-accent-strong px-3.5 py-1.5 text-xs font-mono font-bold text-white transition-all border border-accent-soft/30 active:scale-95"

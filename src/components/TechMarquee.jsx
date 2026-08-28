@@ -12,15 +12,15 @@ import {
 } from "./icons";
 
 const TECH_ITEMS = [
-  { name: "Claude Code", category: "Agent CLI", highlight: "Illimité", icon: IconLogoClaude, color: "text-[#d97706]" },
+  { name: "Claude Opus 5", category: "Thinking CLI", highlight: "Illimité", icon: IconLogoClaude, color: "text-[#d97706]" },
+  { name: "DeepSeek V4", category: "Raisonnement Pur", highlight: "168 t/s / 0€", icon: IconLogoDeepSeek, color: "text-[#0ea5e9]" },
+  { name: "GPT-5.6", category: "Omni Multimodal", highlight: "Flux Direct", icon: IconLogoTokensApi, color: "text-[#10b981]" },
+  { name: "GLM-5.3", category: "Turbo Stream", highlight: "Instant", icon: IconLogoQwen, color: "text-[#f59e0b]" },
   { name: "Cursor AI", category: "IDE Next-Gen", highlight: "Pro Mode", icon: IconLogoCursor, color: "text-ink" },
   { name: "Roo Code", category: "Agent VS Code", highlight: "Autonome", icon: IconLogoRooCode, color: "text-[#3b82f6]" },
-  { name: "DeepSeek R1", category: "Raisonnement", highlight: "Local / 0€", icon: IconLogoDeepSeek, color: "text-[#0ea5e9]" },
-  { name: "VS Code", category: "Environnement", highlight: "Optimisé", icon: IconLogoVSCode, color: "text-[#007acc]" },
-  { name: "Ollama", category: "Moteur Local", highlight: "100% Hors-ligne", icon: IconLogoOllama, color: "text-ink" },
   { name: "Qwen 2.5 Coder", category: "Spécialisé Code", highlight: "Top Bench", icon: IconLogoQwen, color: "text-[#f59e0b]" },
+  { name: "Ollama", category: "Moteur Local", highlight: "100% Hors-ligne", icon: IconLogoOllama, color: "text-ink" },
   { name: "Open-WebUI", category: "Interface Web", highlight: "Multi-Modèles", icon: IconLogoOpenWebUI, color: "text-accent" },
-  { name: "LM Studio", category: "Exécution GPU", highlight: "Turbo Mode", icon: IconLogoTokensApi, color: "text-[#8b5cf6]" },
 ];
 
 /**

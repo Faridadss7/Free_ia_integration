@@ -19,8 +19,8 @@ const TABS = [
 const STREAM_LINES = [
   "> Analyzing project AST & dependencies...",
   "> Routing request via Local Free Proxy (0.00€)...",
-  "> [DeepSeek R1] Generating architecture refactor...",
-  "> 12 files patched with zero token billing. (128 tokens/s)",
+  "> [DeepSeek V4] Generating architecture refactor...",
+  "> 12 files patched with zero token billing. (168 tokens/s)",
 ];
 
 /**
@@ -223,7 +223,7 @@ export default function HeroCockpit({ t }) {
                   <span className="text-accent font-bold">⚡ PERFORMANCES & BENCHMARKS LOCAUX</span>
                 </div>
                 <div className="space-y-2">
-                  <BenchmarkRow label="DeepSeek R1 / Qwen 2.5 Coder" speed="64 tokens/sec" cost="0.00 €" bar="w-[96%] bg-accent" />
+                  <BenchmarkRow label="DeepSeek V4 / Claude Opus 5 & GPT-5.6" speed="168 tokens/sec" cost="0.00 €" bar="w-[96%] bg-accent" />
                   <BenchmarkRow label="Claude Code Local Tunnel" speed="Instantané" cost="0.00 €" bar="w-[92%] bg-accent-strong" />
                   <BenchmarkRow label="Abonnements Cloud Traditionnels" speed="Quotas bridés" cost="60$ - 200$/m" bar="w-[35%] bg-rose-500" isWarning />
                 </div>

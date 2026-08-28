@@ -243,12 +243,11 @@ export const translations = {
           tag: "Architecture & Routing",
           duration: "Module Pratique",
           description:
-            "Déployez Claude Code, Cursor, Cline, Roo Code et Trae connectés à AgentRouter, OpenRouter et APIs tierces. Utilisez Claude 3.7, DeepSeek R1/V3, Gemini 2.5 et GLM sans payer 20$/mois par outil.",
-          skills: [
-            "Configuration Claude Code CLI & Cursor",
-            "AgentRouter & variables d'environnement globales",
-            "Multi-modèles (DeepSeek R1, Claude 3.7, Gemini 2.5)",
-            "Scripts de démarrage automatisés en 1 clic",
+            "Déployez Claude Code, Cursor, Cline, Roo Code et Trae connectés à AgentRouter, OpenRouter et APIs tierces. Utilisez Claude Opus 5, DeepSeek V4, GPT-5.6 et GLM-5.3 sans payer 20$/mois par outil.",
+          highlights: [
+            "Configuration illimitée 0€",
+            "Multi-modèles (DeepSeek V4, Claude Opus 5, GPT-5.6, GLM-5.3)",
+            "Prompt engineering & VibeCoding",
           ],
         },
         {
@@ -856,11 +855,11 @@ export const translations = {
           tag: "Architecture & Routing",
           duration: "Hands-on Module",
           description:
-            "Deploy Claude Code, Cursor, Cline, Roo Code and Trae routed via AgentRouter, OpenRouter and third-party APIs. Access Claude 3.7, DeepSeek R1/V3, Gemini 2.5 and GLM without monthly subscriptions.",
+            "Deploy Claude Code, Cursor, Cline, Roo Code and Trae routed via AgentRouter, OpenRouter and third-party APIs. Access Claude Opus 5, DeepSeek V4, GPT-5.6 and GLM-5.3 without monthly subscriptions.",
           skills: [
             "Claude Code CLI & Cursor terminal setup",
             "AgentRouter & global environment variables",
-            "Multi-model routing (DeepSeek R1, Claude 3.7, Gemini 2.5)",
+            "Multi-model routing (DeepSeek V4, Claude Opus 5, GPT-5.6, GLM-5.3)",
             "1-click automated startup scripts (.bat / .sh)",
           ],
         },
